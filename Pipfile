@@ -8,6 +8,8 @@ sqlalchemy = "*"
 flask-bcrypt = "*"
 python-dotenv = "*"
 flask = "*"
+flask-migrate = "*"
+flask-restful = "*"
 
 [dev-packages]
 
