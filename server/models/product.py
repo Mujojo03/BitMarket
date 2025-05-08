@@ -26,11 +26,11 @@ class Product(db.Model, SerializerMixin):
 
     serialize_rules = ('-seller.products','-carts')
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True,index=True)
     seller_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(100))
     description = db.Column(db.Text)
-    category = db.Column(db.String(100))
+    category = db.Column(db.String(100), index=True)
     price_sats = db.Column(db.BigInteger)
     img_url = db.Column(db.String(255))
     stock_quantity = db.Column(db.Integer)
