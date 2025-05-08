@@ -23,12 +23,12 @@ class Order(db.Model, SerializerMixin):
     serialize_rules = ('-buyer.orders','-order_details.order')
 
     id = db.Column(db.Integer, primary_key=True)
-    buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    status = db.Column(db.String(50))
+    buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, index=True)
+    status = db.Column(db.String(50), nullable=False, default='pending', index=True)
     # created_at = db.Column(db.DateTime)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     buyer = db.relationship('User', back_populates='orders')
     escrow = db.relationship('Escrow', back_populates='order', uselist=False, cascade="all, delete-orphan")
     payments = db.relationship('Payment', back_populates='order', cascade="all, delete-orphan")
-    order_details = db.relationship('OrderDetail', back_populates='order', cascade="all, delete-orphan")
+    product_order = db.relationship('ProductOrder', back_populates='order', cascade="all, delete-orphan")
