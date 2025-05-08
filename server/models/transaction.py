@@ -23,7 +23,7 @@ class Transaction(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     payment_id = db.Column(db.Integer, db.ForeignKey('payments.id'))
     event_type = db.Column(db.String(100))  # e.g., invoice-generated, payment-sent, failed, settled
-    metadata = db.Column(db.Text)  # Optional JSON log or data from LN API
+    transaction_metadata = db.Column(db.Text)  # Optional JSON log or data from LN API
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     payment = db.relationship('Payment', back_populates='transactions')
