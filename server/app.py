@@ -25,7 +25,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bitmarket.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 CORS(app)
-# app.secret_key = 'your_secret_key'  # Replace with a strong secret key  # Initialize Bcrypt with the app
+# Initialize Bcrypt with the app
 bcrypt = Bcrypt(app)
 
 migrate = Migrate(app,db)
