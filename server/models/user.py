@@ -2,6 +2,7 @@ from models.db import db
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 from flask_bcrypt import Bcrypt
+from models.permission import ROLE_PERMISSIONS
 
 bcrypt = Bcrypt()
 
@@ -41,9 +42,6 @@ class User(db.Model,SerializerMixin):
     orders = db.relationship('Order', back_populates='buyer', cascade="all, delete-orphan")
     carts = db.relationship('Cart', back_populates='user', cascade="all, delete-orphan")
 
-    # orders = db.relationship('Order', back_populates = 'user')
-    # carts = db.relationship('Cart', back_populates = 'user')
-
     @hybrid_property
     def password(self):
         return self._password_hash
@@ -54,3 +52,30 @@ class User(db.Model,SerializerMixin):
 
     def check_password(self, password):
         return bcrypt.check_password_hash(self._password_hash, password)
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "roles": [ur.role.title for ur in self.roles]
+        }
+    
+    def has_permission(self, permission):
+        """
+            Check if user has a specific permission based on their assigned roles.
+
+            This method loops through the user's roles and checks if the given permission
+            is included in the role's allowed permissions defined in ROLE_PERMISSIONS.
+
+            Args:
+                permission (str): The name of the permission to check (e.g., 'edit_products').
+
+            Returns:
+                bool: True if the user has the permission, False otherwise.
+        """
+        user_roles = [user_role.role.title for user_role in self.roles]
+        for role in user_roles:
+            if permission in ROLE_PERMISSIONS.get(role, []):
+                return True
+        return False
