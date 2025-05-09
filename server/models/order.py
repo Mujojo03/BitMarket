@@ -16,11 +16,11 @@ class Order(db.Model, SerializerMixin):
         buyer (User): The user who placed the order.
         escrow (Escrow): Escrow record for this order (one-to-one).
         payments (List[Payment]): List of payments related to the order.
-        order_details (List[OrderDetail]): Detailed list of products in the order.
+        product_orders (List[ProductOrder]): Detailed list of products in the order.
     """
     __tablename__ = 'orders'
 
-    serialize_rules = ('-buyer.orders','-order_details.order')
+    serialize_rules = ('-buyer.orders','-product_orders.order')
 
     id = db.Column(db.Integer, primary_key=True)
     buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, index=True)
@@ -31,4 +31,4 @@ class Order(db.Model, SerializerMixin):
     buyer = db.relationship('User', back_populates='orders')
     escrow = db.relationship('Escrow', back_populates='order', uselist=False, cascade="all, delete-orphan")
     payments = db.relationship('Payment', back_populates='order', cascade="all, delete-orphan")
-    product_order = db.relationship('ProductOrder', back_populates='order', cascade="all, delete-orphan")
+    product_orders = db.relationship('ProductOrder', back_populates='order', cascade="all, delete-orphan")
