@@ -30,7 +30,6 @@ const handleSellClick = () => {
 
   return (
     <div>
-      {/* Navigation Bar */}
       <header className="navbar">
         <div className="container">
           <h1 className="logo">Bit Market</h1>
@@ -45,7 +44,7 @@ const handleSellClick = () => {
         </div>
       </header>
 
-      {/* Hero Section */}
+
       <section className="hero">
         <div className="container text-center">
           <div className="search-bar">

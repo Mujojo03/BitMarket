@@ -69,6 +69,11 @@ const CreateListing = () => (
       <input type="text" placeholder="Enter image URL" required />
 
       <button type="submit" className="create-btn">Create Listing</button>
+
+      <button className="connect-wallet-button">
+        Connect Wallet
+      </button>
+
     </form>
   </div>
 );
