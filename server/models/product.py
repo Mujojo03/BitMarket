@@ -20,7 +20,7 @@ class Product(db.Model, SerializerMixin):
     Relationships:
         seller: User who listed the product.
         carts: Carts that contain the product.
-        order_details: Orders that include this product.
+        product_orders: Orders that include this product.
     """
     __tablename__ = 'products'
 
@@ -38,4 +38,4 @@ class Product(db.Model, SerializerMixin):
 
     seller = db.relationship('User', back_populates='products')
     carts = db.relationship('Cart', back_populates='product', cascade="all, delete-orphan")
-    order_details = db.relationship('OrderDetail', back_populates='product', cascade="all, delete-orphan")
+    product_orders = db.relationship('ProductOrder', back_populates='product', cascade="all, delete-orphan")
