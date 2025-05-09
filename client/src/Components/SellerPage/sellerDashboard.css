@@ -75,13 +75,17 @@ input, textarea, select {
 }
   
 .create-btn {
-  background: linear-gradient(to right, #ef940c, #020324);
+  background: linear-gradient(135deg, #ef940c, #020324);
   color: #fff;
-  padding: 10px 20px;
+  padding: 0.75rem 1.5rem;
   border: none;
+  border-radius: 12px;
+  font-size: 1rem;
   font-weight: bold;
-  border-radius: 6px;
-  transition: background 0.3s;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(239, 148, 12, 0.3);
+  margin-top: 1.5rem;
 }
 .create-btn:hover {
   background: linear-gradient(to right, #020324, #ef940c);
@@ -165,3 +169,27 @@ button {
   cursor: pointer;
   padding: 0;
 }
+.connect-wallet-button {
+  background: linear-gradient(135deg, #ef940c, #020324);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(239, 148, 12, 0.3);
+  margin-top: 1.5rem;
+}
+
+.connect-wallet-button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(239, 148, 12, 0.4);
+}
+
+.connect-wallet-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 5px rgba(239, 148, 12, 0.2);
+}
+

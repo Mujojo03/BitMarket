@@ -16,9 +16,9 @@ const Purchase = () => {
 
   const handlePurchase = () => {
     if (selectedPayment === 'bitcoin') {
-      alert('Payment with Bitcoin initiated. (Mock transaction)');
+      alert('Payment with Bitcoin initiated.');
     } else {
-      alert(`Payment method ${selectedPayment} not supported yet.`);
+      alert(`Payment using ${selectedPayment} initiated`);
     }
   };
 
@@ -35,7 +35,7 @@ const Purchase = () => {
 
       <h3>Total: ${total.toFixed(2)}</h3>
 
-      <div style={{ marginTop: '2rem' }}>
+      <div style={{ marginTop: '2rem' }} className="payment-method-container">
         <h4>Select Payment Method:</h4>
         <label>
           <input
@@ -47,32 +47,24 @@ const Purchase = () => {
           Pay with Bitcoin
         </label>
         <br />
-        <label>
+        <label className="payment-option">
           <input
             type="radio"
             value="card"
             checked={selectedPayment === 'card'}
             onChange={(e) => setSelectedPayment(e.target.value)}
-            disabled
           />
-          Credit/Debit Card (Coming Soon)
+          Credit/Debit Card
         </label>
       </div>
 
-      <button
-        onClick={handlePurchase}
-        style={{
-          marginTop: '2rem',
-          padding: '12px 20px',
-          backgroundColor: '#28a745',
-          color: 'white',
-          border: 'none',
-          borderRadius: '6px',
-          fontSize: '1rem',
-          cursor: 'pointer',
-        }}
-      >
+      <button className="connect-wallet-button"
+        onClick={handlePurchase}>
         Confirm Purchase
+      </button>
+
+            <button className="connect-wallet-button">
+        Connect Wallet
       </button>
     </div>
   );
