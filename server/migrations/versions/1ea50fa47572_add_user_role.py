@@ -25,7 +25,7 @@ def upgrade():
     sa.UniqueConstraint('title')
     )
     op.create_table('user_roles',
-    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), nullable=False,autoincrement=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('role_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['role_id'], ['roles.id'], ),
