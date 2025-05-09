@@ -13,6 +13,8 @@ flask-restful = "*"
 flask-jwt-extended = "*"
 
 [dev-packages]
+black = "*"
+isort = "*"
 
 [requires]
 python_version = "3.10"
