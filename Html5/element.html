@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced HTML5 Elements and Forms</title>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Welcome to Our Page</h1>
+    <p>This page demonstrates advanced HTML5 elements and form features.</p>
+  </header>
+
+  <!-- Ordered List with Roman Numerals -->
+  <section>
+    <h2>Tasks to Complete</h2>
+    <ol type="I">
+      <li>Learn HTML5 Elements</li>
+      <li>Create Forms</li>
+      <li>Use Multimedia</li>
+    </ol>
+  </section>
+
+  <!-- External Image -->
+  <section>
+    <h2>Inspiration Image</h2>
+    <img src="img/land.JPG" alt="Beautiful Landscape" width="500">
+  </section>
+
+  <!-- Table of Contacts -->
+  <section>
+    <h2>Contact List</h2>
+    <table border="1" cellpadding="5" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Mobile</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Alice Kim</td>
+          <td>123 Valley Rd</td>
+          <td>0712345678</td>
+          <td>alice@example.com</td>
+        </tr>
+        <tr>
+          <td>Brian Lee</td>
+          <td>456 Hill St</td>
+          <td>0723456789</td>
+          <td>brian@example.com</td>
+        </tr>
+        <tr>
+          <td>Cheryl Owino</td>
+          <td>789 Lake Ave</td>
+          <td>0734567890</td>
+          <td>cheryl@example.com</td>
+        </tr>
+        <tr>
+          <td>David Mutua</td>
+          <td>321 River Blvd</td>
+          <td>0745678901</td>
+          <td>david@example.com</td>
+        </tr>
+        <tr>
+          <td>Eva Njeri</td>
+          <td>654 Garden Lane</td>
+          <td>0756789012</td>
+          <td>eva@example.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <!-- Multimedia Section -->
+<section>
+    <h2>Enjoy Multimedia</h2>
+  
+    <!-- Audio -->
+    <h3>Sample Audio</h3>
+    <audio controls>
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  
+    <!-- Video -->
+    <h3>Sample Video</h3>
+    <!-- YouTube Video Embed -->
+    <h2>Watch This Video</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/WEurGXf0grY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  
+  </section>
+  
+
+  <!-- Registration Form -->
+  <section>
+    <h2>User Registration Form</h2>
+    <form action="#" method="post">
+      <!-- Name -->
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter full name" required><br><br>
+
+      <!-- Email -->
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="example@mail.com" required><br><br>
+
+      <!-- Password -->
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" minlength="6" required placeholder="Minimum 6 characters"><br><br>
+
+      <!-- Date of Birth -->
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" required><br><br>
+
+      <!-- Dropdown -->
+      <label for="role">Select Role:</label>
+      <select id="role" name="role" required>
+        <option value="">--Choose an option--</option>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+        <option value="admin">Admin</option>
+      </select><br><br>
+
+      <!-- Radio Buttons -->
+      <p>Gender:</p>
+      <input type="radio" id="male" name="gender" value="male" required>
+      <label for="male">Male</label>
+      <input type="radio" id="female" name="gender" value="female">
+      <label for="female">Female</label>
+      <input type="radio" id="other" name="gender" value="other">
+      <label for="other">Other</label><br><br>
+
+      <!-- Checkboxes -->
+      <p>Interests:</p>
+      <input type="checkbox" id="coding" name="interests" value="coding">
+      <label for="coding">Coding</label>
+      <input type="checkbox" id="reading" name="interests" value="reading">
+      <label for="reading">Reading</label>
+      <input type="checkbox" id="traveling" name="interests" value="traveling">
+      <label for="traveling">Traveling</label><br><br>
+
+      <!-- Submit -->
+      <input type="submit" value="Register">
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Advanced HTML Practice</p>
+  </footer>
+</body>
+</html>
