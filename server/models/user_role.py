@@ -19,7 +19,6 @@ class UserRole(db.Model, SerializerMixin):
 
     serialize_rules = ('-user.roles', '-role.user_roles')
 
-    id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), primary_key=True)
     
