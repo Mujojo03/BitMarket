@@ -192,4 +192,41 @@ button {
   transform: scale(0.98);
   box-shadow: 0 2px 5px rgba(239, 148, 12, 0.2);
 }
+.listing-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin-top: 1rem;
+}
 
+.listing-item {
+  background: rgba(2, 3, 36, 0.9);
+  border: 1px solid #ef940c;
+  border-radius: 10px;
+  padding: 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+.listing-item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+.remove-btn {
+  margin-top: 8px;
+  padding: 6px 10px;
+  background-color: #ef940c;;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.remove-btn:hover {
+  background-color: #c0392b;
+}
