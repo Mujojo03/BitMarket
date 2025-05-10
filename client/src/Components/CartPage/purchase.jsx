@@ -37,7 +37,7 @@ const Purchase = () => {
 
       <div style={{ marginTop: '2rem' }} className="payment-method-container">
         <h4>Select Payment Method:</h4>
-        <label>
+        <label className="payment-option">
           <input
             type="radio"
             value="bitcoin"
