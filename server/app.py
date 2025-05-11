@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from flask_migrate import Migrate
 from flask_restful import Api
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
@@ -24,6 +25,7 @@ def create_app():
     CORS(app)
     bcrypt = Bcrypt(app)
     models.db.init_app(app)
+    migrate = Migrate(app, models.db)
     jwt = JWTManager(app)
     api = Api(app)
 

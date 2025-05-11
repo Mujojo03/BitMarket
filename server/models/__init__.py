@@ -1,5 +1,6 @@
 from .db import db
 from .cart import Cart
+from .category import Category
 from .order import Order
 from .transaction import Transaction
 from .wallet import Wallet
