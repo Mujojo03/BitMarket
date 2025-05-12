@@ -76,7 +76,7 @@ export const featuredProducts: Product[] = [
   },
   {
     id: "product4",
-    name: "Handmade Bitcoin Ceramic Mug",
+    name: " Ceramic Mug",
     description:
       "A beautiful handcrafted ceramic mug featuring a Bitcoin design. Each mug is unique and made with care by our artisan.",
     price: 45000, // in sats
