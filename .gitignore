@@ -1,0 +1,6 @@
+# Python virtual env
+venv/
+/node_modules/
+# Server-specific ignores
+__pycache__/
+/server/__pycache__/
