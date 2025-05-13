@@ -36,6 +36,7 @@ class Product(db.Model, SerializerMixin):
     img_url = db.Column(db.String(255))
     stock_quantity = db.Column(db.Integer)
     created_at = db.Column(db.DateTime)
+    deleted = db.Column(db.Boolean, default=False, nullable=False)
 
     seller = db.relationship('User', back_populates='products')
     category = db.relationship('Category', back_populates='products')
