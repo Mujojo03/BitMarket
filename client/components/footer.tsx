@@ -10,7 +10,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2">
               <Bitcoin className="h-6 w-6 text-bitcoin" />
               <span className="text-xl font-bold">
-                <span className="text-bitcoin">Bit</span>Merket
+                <span className="text-bitcoin">Bit</span>Market
               </span>
             </Link>
             <p className="text-sm text-gray-400 mt-2">
@@ -27,7 +27,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/sell" className="text-sm text-gray-400 hover:text-bitcoin transition-colors">
-                  Sell on Bit Merket
+                  Sell on Bit Market
                 </Link>
               </li>
               <li>
