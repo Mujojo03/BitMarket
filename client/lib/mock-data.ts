@@ -207,7 +207,7 @@ export const mockProducts: Product[] = [
     description:
       "A premium leather wallet with a subtle Bitcoin logo embossed on the front. Perfect for storing your cards and cash while showing your Bitcoin pride.",
     price: 150000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://i.etsystatic.com/16327480/r/il/6a7cc9/1698407422/il_794xN.1698407422_dxxl.jpg",
     categoryId: "cat6",
     sellerId: "seller1",
     isDigital: false,
@@ -220,11 +220,11 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product2",
-    name: "Bitcoin: A Peer-to-Peer Electronic Cash System (Signed Print)",
+    name: "Dell Laptop",
     description:
-      "A beautifully printed and framed copy of the original Bitcoin whitepaper, perfect for your home office or as a gift for a fellow Bitcoin enthusiast.",
+      "Dell Laptop Core i7 with 16GB RAM and 512GB SSD. Perfect for all your computing needs.",
     price: 75000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://th.bing.com/th/id/R.b17d02f723bc495a97bf5b746ddfc86e?rik=FovMcW3geTWOGw&riu=http%3a%2f%2f3.bp.blogspot.com%2f--6dQqPnxKPk%2fVbxF66JpObI%2fAAAAAAAAAPs%2fMpPdoHXGl0o%2fw1200-h630-p-k-no-nu%2fDell%25252BInspiron%25252B14%25252B3452-driver.jpg&ehk=bj6q6%2biToqRjnIga3cMfl8z6rF3zRd6d71KmjHEg9ds%3d&risl=&pid=ImgRaw&r=0",
     categoryId: "cat1",
     sellerId: "seller2",
     isDigital: false,
@@ -237,11 +237,11 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product3",
-    name: "Lightning Network Development Course",
+    name: "Singer Sewing Machine",
     description:
-      "A comprehensive digital course teaching you how to build applications on the Lightning Network. Includes code examples and practical projects.",
+      "Singer Sewing Machine, lightweight with multiple stitch patterns. Ideal for both beginners and experienced sewers, great for fashion and design.",
     price: 250000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://i5.walmartimages.com/asr/1581be17-cb9f-4b87-80da-1a0c4b0318cd_1.9ab78c356b41fd9f30e55cf9549b758c.jpeg",
     categoryId: "cat2",
     sellerId: "seller3",
     isDigital: true,
@@ -258,7 +258,7 @@ export const mockProducts: Product[] = [
     description:
       "A beautiful handcrafted ceramic mug featuring a Bitcoin design. Each mug is unique and made with care by our artisan.",
     price: 45000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://i.pinimg.com/originals/f7/41/9e/f7419ee8c5d6d597f84ebc363f11a084.jpg",
     categoryId: "cat5",
     sellerId: "seller4",
     isDigital: false,
@@ -271,10 +271,10 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product5",
-    name: "Bitcoin Node Hardware Kit",
-    description: "Everything you need to run your own Bitcoin node. Pre-configured for easy setup.",
+    name: "Car Tyres",
+    description: "High Quality car tyres for all vehicles.",
     price: 500000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://th.bing.com/th/id/OIP.e6u9VThsmXkJbNnVpB82oQHaE_?cb=iwp2&rs=1&pid=ImgDetMain",
     categoryId: "cat4",
     sellerId: "seller3",
     isDigital: false,
@@ -287,10 +287,10 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product6",
-    name: "Crypto Trading Strategy Guide",
-    description: "A comprehensive digital guide to trading Bitcoin and other cryptocurrencies.",
+    name: "Beauty Products",
+    description: "Make-up and Beauty product for all skin types.",
     price: 100000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://makeupobsessedmom.com/wp-content/uploads/2023/07/multitasking-beauty-products.png",
     categoryId: "cat2",
     sellerId: "seller2",
     isDigital: true,
@@ -306,7 +306,7 @@ export const mockProducts: Product[] = [
     name: "Bitcoin T-Shirt",
     description: "A comfortable cotton t-shirt featuring a stylish Bitcoin design.",
     price: 35000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://i.etsystatic.com/20884421/c/1739/1739/141/0/il/e25544/3417101588/il_600x600.3417101588_1clk.jpg",
     categoryId: "cat3",
     sellerId: "seller1",
     isDigital: false,
@@ -319,10 +319,10 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product8",
-    name: "Cryptocurrency Security Guide",
-    description: "Learn how to secure your Bitcoin and other cryptocurrencies with this comprehensive guide.",
+    name: "Baby Carriage",
+    description: "A stylish and comfortable baby carriage for your little one.",
     price: 80000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://api-beta-game.walmart.com/medias/Default-Product-Default-WF-null?context=bWFzdGVyfHByb2Nlc3NlZHwyMDAzNXxpbWFnZS9qcGVnfGgxYS9oZmYvMTI2MTEwNDM1OTAxNzQvRGVmYXVsdC1Qcm9kdWN0X0RlZmF1bHQtV0ZfbnVsbHxlYTlhNTMyM2M0ZDYxZTM5YzU2NjgzNjNmNjc5YmJmODllZDIxYjQ4MWNkODc3MWY2OWY4ZjczMzdlYjhhNjNm",
     categoryId: "cat2",
     sellerId: "seller4",
     isDigital: true,
