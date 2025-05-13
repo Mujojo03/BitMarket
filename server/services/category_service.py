@@ -2,10 +2,10 @@ from models import db
 from models.category import Category
 
 def get_all_categories():
-    return Category.query.all()
+    return Category.query.filter_by(deleted=False).all()
 
 def get_category_by_id(category_id):
-    return Category.query.get(category_id)
+    return Category.query.filter_by(id=category_id, deleted=False).first()
 
 def create_category(name):
     category = Category(name=name)
@@ -19,5 +19,6 @@ def update_category(category, name):
     return category
 
 def delete_category(category):
-    db.session.delete(category)
+    # Soft delete
+    category.deleted = True
     db.session.commit()
