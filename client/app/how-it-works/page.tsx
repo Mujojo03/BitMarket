@@ -231,13 +231,13 @@ export default function HowItWorksPage() {
             <h3 className="text-lg font-bold mb-2">Do I need a Bitcoin wallet?</h3>
             <p className="text-gray-400">
               Yes, you'll need a Lightning-compatible Bitcoin wallet to buy or sell on BitMarket. We recommend wallets
-              like Phoenix, Muun, or Breez.
+              like Bitnob, Phoenix, Muun, or Breez.
             </p>
           </div>
           <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
             <h3 className="text-lg font-bold mb-2">How much are the fees?</h3>
             <p className="text-gray-400">
-              Sellers pay a flat 5% fee on each sale. There are no listing fees or monthly charges. Lightning Network
+              Sellers pay a flat 3% fee on each sale. There are no listing fees or monthly charges. Lightning Network
               transaction fees are typically less than a cent.
             </p>
           </div>
