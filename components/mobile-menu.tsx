@@ -38,7 +38,7 @@ export function MobileMenu() {
             <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
               <Bitcoin className="h-6 w-6 text-[#F5A623]" />
               <span className="text-xl font-bold">
-                <span className="text-[#F5A623]">Bit</span>Merket
+                <span className="text-[#F5A623]">Bit</span>Market
               </span>
             </Link>
             <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>

@@ -18,7 +18,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [passwordError, setPasswordError] = useState("")
-  const { signUp, error, loading } = useAuth()
+  const { signUp, loading } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -38,12 +38,12 @@ export default function RegisterPage() {
         <CardHeader className="space-y-1 flex flex-col items-center">
           <Bitcoin className="h-12 w-12 text-bitcoin mb-2" />
           <CardTitle className="text-2xl font-bold">Create an Account</CardTitle>
-          <CardDescription>Enter your details to create a Bit Merket account</CardDescription>
+          <CardDescription>Enter your details to create a Bit Market account</CardDescription>
         </CardHeader>
         <CardContent>
-          {(error || passwordError) && (
+          {passwordError && (
             <Alert variant="destructive" className="mb-4 bg-red-900/20 border-red-900">
-              <AlertDescription>{error || passwordError}</AlertDescription>
+              <AlertDescription>{passwordError}</AlertDescription>
             </Alert>
           )}
           <form onSubmit={handleSubmit} className="space-y-4">

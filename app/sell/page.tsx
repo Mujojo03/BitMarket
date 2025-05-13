@@ -14,7 +14,7 @@ export default function SellPage() {
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Start Selling on <span className="text-bitcoin">Bit Merket</span>
+                  Start Selling on <span className="text-bitcoin">Bit Market</span>
                 </h1>
                 <p className="max-w-[600px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Open your shop and start earning Bitcoin. Reach customers worldwide with our low-fee, Bitcoin-native
@@ -55,7 +55,7 @@ export default function SellPage() {
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Why Sell on Bit Merket?</h2>
               <p className="max-w-[900px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Join thousands of sellers already earning Bitcoin on our marketplace.
+                Join other sellers already earning Bitcoin on our marketplace.
               </p>
             </div>
           </div>
@@ -102,7 +102,7 @@ export default function SellPage() {
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">How It Works</h2>
               <p className="max-w-[900px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Getting started as a seller on Bit Merket is simple.
+                Getting started as a seller on Bit Market is simple.
               </p>
             </div>
           </div>
@@ -122,7 +122,7 @@ export default function SellPage() {
               </div>
               <h3 className="text-xl font-bold">Create Your Listings</h3>
               <p className="mt-2 text-sm text-gray-400">
-                Add your products with descriptions, images, and prices in sats.
+                Add your products with descriptions, images, and prices in sats or $.
               </p>
               {/* Connector line */}
               <div className="absolute right-0 top-6 hidden h-0.5 w-1/2 translate-x-1/2 bg-bitcoin md:block"></div>
@@ -170,7 +170,7 @@ export default function SellPage() {
             <div className="rounded-lg border border-gray-800 p-6">
               <h3 className="text-lg font-medium">How much does it cost to sell?</h3>
               <p className="mt-2 text-sm text-gray-400">
-                We charge a flat 5% fee on each sale. There are no listing fees, monthly fees, or hidden charges.
+                We charge a flat 3% fee on each sale. There are no listing fees, monthly fees, or hidden charges.
               </p>
             </div>
             <div className="rounded-lg border border-gray-800 p-6">
