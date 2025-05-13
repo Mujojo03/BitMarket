@@ -9,7 +9,7 @@ These permissions are checked in methods like User.has_permission().
 """
 
 ROLE_PERMISSIONS = {
-    "admin": ["view_users","edit_users", "delete_users", "edit_products", "delete_orders","create_categories", "edit_categories", "delete_categories"],
+    "admin": ["view_users","edit_users", "delete_users", "edit_products", "delete_products" "delete_orders","create_categories", "edit_categories", "delete_categories"],
     "seller": ["create_products", "edit_own_products"],
     "buyer": ["place_orders", "view_own_orders"]
 }
