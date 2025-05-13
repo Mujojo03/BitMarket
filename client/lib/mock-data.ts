@@ -154,7 +154,7 @@ export const mockCategories: Category[] = [
     name: "Art & Collectibles",
     slug: "art-collectibles",
     description: "Unique art and collectible items",
-    imageUrl: "/placeholder.svg?height=200&width=200",
+    imageUrl: "https://th.bing.com/th/id/R.4396b2e5838e4ccf5d43b0d287e0b817?rik=9ho9p7owU63Tmg&riu=http%3a%2f%2fcuriosityafricanboutique.com%2fcdn%2fshop%2fcollections%2fCuriosity_African_Boutique_African_Curio_Shop_in_South_Africa_on_Zulu_Nyala_Heritage_Safari_Lodge_Artisinal_and_Handcrafted_African_Products_Decor_Crafts_and_Art-34.jpg%3fv%3d1702028485%26width%3d2048&ehk=0s3MGIDGnlNXkfXU4%2bEo02Sc72z1Q0vohlBKRQRb%2b70%3d&risl=&pid=ImgRaw&r=0",
     productCount: 156,
   },
   {
@@ -162,7 +162,7 @@ export const mockCategories: Category[] = [
     name: "Digital Products",
     slug: "digital-products",
     description: "Digital downloads and services",
-    imageUrl: "/placeholder.svg?height=200&width=200",
+    imageUrl: "https://static.wixstatic.com/media/eaa617_25aaa68361ed43328d6654f54ec9b67a~mv2_d_6000_4396_s_4_2.jpeg/v1/crop/x_295,y_0,w_5410,h_4396/fill/w_320,h_260,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/AdobeStock_237119664.jpeg",
     productCount: 243,
   },
   {
@@ -170,7 +170,7 @@ export const mockCategories: Category[] = [
     name: "Clothing",
     slug: "clothing",
     description: "Apparel and accessories",
-    imageUrl: "/placeholder.svg?height=200&width=200",
+    imageUrl: "https://static.fibre2fashion.com/newsresource/images/281/28708560-m_293184.jpg",
     productCount: 189,
   },
   {
@@ -178,7 +178,7 @@ export const mockCategories: Category[] = [
     name: "Electronics",
     slug: "electronics",
     description: "Gadgets and electronic items",
-    imageUrl: "/placeholder.svg?height=200&width=200",
+    imageUrl: "https://st3.depositphotos.com/1005404/13980/i/450/depositphotos_139809276-stock-photo-consumer-and-home-electronics.jpg",
     productCount: 112,
   },
   {
@@ -186,7 +186,7 @@ export const mockCategories: Category[] = [
     name: "Home & Living",
     slug: "home-living",
     description: "Items for your home",
-    imageUrl: "/placeholder.svg?height=200&width=200",
+    imageUrl: "https://img.freepik.com/premium-photo/natural-living-room-interior-home-mockup_1040334-2068.jpg",
     productCount: 178,
   },
   {
@@ -194,7 +194,7 @@ export const mockCategories: Category[] = [
     name: "Accessories",
     slug: "accessories",
     description: "Personal accessories",
-    imageUrl: "/placeholder.svg?height=200&width=200",
+    imageUrl: "https://www.nativeplanet.com/img/2015/10/05-1444030735-shoppinge.jpg",
     productCount: 203,
   },
 ]
@@ -333,6 +333,22 @@ export const mockProducts: Product[] = [
     createdAt: "2023-08-15T00:00:00Z",
     updatedAt: "2023-08-15T00:00:00Z",
   },
+    {
+    id: "product8",
+    name: "Wooden Chair",
+    description: "A stylish and comfortable Lounge chair for your living room.",
+    price: 80000, // in sats
+    imageUrl: "https://i.pinimg.com/474x/66/48/bf/6648bf2023b10cf8692549969e1fd677--wooden-chairs-wooden-furniture.jpg",
+    categoryId: "cat2",
+    sellerId: "seller4",
+    isDigital: true,
+    isFeatured: false,
+    stockQuantity: 999,
+    rating: 4.8,
+    reviewCount: 19,
+    createdAt: "2023-08-15T00:00:00Z",
+    updatedAt: "2023-08-15T00:00:00Z",
+  }
 ]
 
 // Mock reviews
