@@ -34,7 +34,7 @@ export default function AboutPage() {
         <div className="flex justify-center">
           <div className="relative h-[300px] w-[300px] md:h-[400px] md:w-[400px]">
             <Image
-              src="/placeholder.svg?height=400&width=400"
+              src="https://i0.wp.com/donorbox.org/nonprofit-blog/wp-content/uploads/2017/11/download.jpeg"
               alt="BitMarket mission illustration"
               fill
               className="object-contain"
@@ -88,7 +88,7 @@ export default function AboutPage() {
       </div>
 
       {/* Team Section */}
-      <div className="mb-16">
+      {/* <div className="mb-16">
         <h2 className="text-2xl font-bold mb-8 text-center">Our Team</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 flex flex-col items-center text-center">
@@ -122,7 +122,7 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Join Us Section */}
       <div className="bg-gray-800 border border-gray-700 rounded-lg p-8 text-center mb-16">
