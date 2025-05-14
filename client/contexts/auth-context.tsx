@@ -11,8 +11,9 @@ interface User {
   fullName: string
   isSeller: boolean
   sellerRating?: number
-  sellerSales?: number
+  sellerSales: number
   lightningAddress?: string
+  createdAt: string
 }
 
 interface AuthContextType {

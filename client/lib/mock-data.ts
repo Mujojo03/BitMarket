@@ -8,7 +8,7 @@ export interface User {
   bio?: string
   website?: string
   isSeller: boolean
-  sellerRating: number
+  sellerRating?: number
   sellerSales: number
   sellerSince?: string
   createdAt: string
