@@ -44,7 +44,7 @@ export default function Home() {
             <div className="flex items-center justify-center">
               <div className="relative h-[350px] w-[350px] md:h-[450px] md:w-[450px]">
                 <Image
-                  src="/placeholder.svg?height=450&width=450"
+                  src="https://media.easy.co.il/images/UserThumbs/10017264_1518742655427.png"
                   alt="Bitcoin marketplace illustration"
                   fill
                   className="object-contain"
