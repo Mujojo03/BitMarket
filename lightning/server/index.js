@@ -1,5 +1,5 @@
 const express = require('express');
-const { createInvoice, subscribeToInvoices } = require('./invoice');
+const { createInvoice, payInvoice, subscribeToInvoices } = require('./invoice');
 const cors = require('cors');
 require('dotenv').config();
 const WebSocket = require('ws');
@@ -38,6 +38,21 @@ app.post('/create-invoice', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).send('Error creating invoice');
+    }
+});
+
+// Pay Invoice endpoint (REST endpoint)
+app.post('/pay-invoice', async (req, res) => {
+    const { payment_request } = req.body;
+    if (!payment_request) {
+        return res.status(400).json({ error: 'payment_request is required' });
+    }
+    try {
+        const result = await payInvoice(payment_request);
+        res.status(200).json(result);
+    } catch (err) {
+        console.error('Payment error:', err);
+        res.status(500).json({ error: 'Payment failed', details: err.message });
     }
 });
 
