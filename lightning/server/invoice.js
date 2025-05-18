@@ -1,5 +1,7 @@
 const { Client } = require('@grpc/grpc-js');
 const lnd = require('./grpc');
+const bolt11 = require('bolt11');
+const bobLnd = require('./bobGrpc');
 
 // Create Invoice
 async function createInvoice(amountSats) {
@@ -18,7 +20,7 @@ async function createInvoice(amountSats) {
 
             //to return the payment request and r_hash
             resolve({
-                payment_request: response.payment_request,
+                payment_request: response.paymentRequest,
                 r_hash: response.rHash
                     ? Buffer.from(response.rHash).toString('hex')
                     : null
@@ -26,6 +28,41 @@ async function createInvoice(amountSats) {
         });
     });
 }
+
+async function payInvoice(payment_request) {
+  try {
+    const decoded = bolt11.decode(payment_request);
+    const memo = decoded.tags.find(tag => tag.tagName === 'description')?.data || 'No Memo';
+    const amount = decoded.satoshis ? parseInt(decoded.satoshis) : 0;
+    const paymentHashTag = decoded.tags.find(tag => tag.tagName === 'payment_hash');
+    const paymentHash = paymentHashTag?.data;
+
+    if (!paymentHash) {
+      throw new Error('Invalid invoice: missing payment hash');
+    }
+
+    const response = await new Promise((resolve, reject) => {
+      bobLnd.SendPaymentSync({ payment_request }, (err, response) => {
+        if (err) return reject(err);
+        if (response.payment_error) return reject(new Error(response.payment_error));
+        resolve(response);
+      });
+    });
+
+    const paidHash = response.payment_hash?.toString('hex') || paymentHash;
+
+    return {
+      message: 'Payment sent',
+      paymentHash: paidHash,
+      amount,
+      memo,
+    };
+  } catch (err) {
+    console.error('Payment error:', err);
+    throw err;
+  }
+}
+
 
 // Subscribe to Invoices
 function subscribeToInvoices() {
@@ -49,4 +86,4 @@ function subscribeToInvoices() {
     });
 }
 
-module.exports = { createInvoice, subscribeToInvoices };
+module.exports = { createInvoice, payInvoice, subscribeToInvoices };
