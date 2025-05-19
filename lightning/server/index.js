@@ -13,6 +13,22 @@ const PORT = 3000;
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+// Dummy order list (in real case, this would come from a database)
+const dummyOrders = [
+    { itemName: "Digital Art #1", amount: 500, r_hash: "replace_with_real_hash_1" },
+    { itemName: "Template Pack", amount: 700, r_hash: "replace_with_real_hash_2" },
+];
+
+// Seller API route to list orders
+app.get('/api/seller/orders', (req, res) => {
+    res.json(dummyOrders);
+});
+// Client map to keep track of connected clients
+const clients = new Map();
+// WebSocket connection to listen for invoice updates
+// This is where we would normally connect to the Lightning node
+// and listen for invoice updates. For now, we will simulate it.
+
 //websocket connection
 wss.on('connection', (ws) => {
     console.log('Client connected');
@@ -36,7 +52,7 @@ app.post('/create-invoice', async (req, res) => {
         const invoice = await createInvoice(amount);
         res.json(invoice);
     } catch (err) {
-        console.error(err);
+        console.error(err); 
         res.status(500).send('Error creating invoice');
     }
 });
