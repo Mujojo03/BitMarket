@@ -5,12 +5,35 @@ import "./login.css";
 function Login() {
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // TODO: Handle login logic (auth API, token, etc.)
-    alert("Login successful!");
-    navigate("/payment"); // Redirect to payment page
-  };
+  const handleLogin = async (e) => {
+  e.preventDefault();
+
+  const email = e.target.email.value;
+  const password = e.target.password.value;
+
+  try {
+    const response = await fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Login successful!");
+      // Save token if needed: localStorage.setItem("token", data.token);
+      navigate("/payment");
+    } else {
+      alert(`Login failed: ${data.message}`);
+    }
+  } catch (err) {
+    alert("An error occurred during login.");
+    console.error(err);
+  }
+};
 
   return (
     <section
