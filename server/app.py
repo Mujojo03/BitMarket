@@ -14,7 +14,7 @@ from routers.invoice_router import invoice_bp
 from dotenv import load_dotenv
 import models
 
-# Load environment variables from server/.env relative to this file
+# Load environment variables from .env relative to this file
 env_path = Path(__file__).parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
@@ -23,9 +23,8 @@ print("LND_CERT_PATH =", os.getenv("LND_CERT_PATH"))
 print("LND_MACAROON_PATH =", os.getenv("LND_MACAROON_PATH"))
 print("LND_HOST =", os.getenv("LND_HOST"))
 
-
-# Global SocketIO instance (initialized later with the app)
-socketio = SocketIO(cors_allowed_origins="*")  # Allow all origins, adjust if needed
+# Global SocketIO instance
+socketio = SocketIO(cors_allowed_origins="*")  # Allow all origins for now
 
 def create_app():
     app = Flask(__name__)
@@ -53,23 +52,27 @@ def create_app():
     # Initialize SocketIO with app
     socketio.init_app(app)
 
-
-    # ✅ Register blueprint route
-    app.register_blueprint(invoice_bp, url_prefix="/")  # or "/" if you want root
+    # Register blueprint route
+    app.register_blueprint(invoice_bp, url_prefix="/")
 
     return app
 
-# --------- Background: LND Invoice Streaming ---------
-from services.lnd_service import stream_invoices, mark_payment_settled # Adjust path if needed
+# --------- LND Service Invoice Streaming ---------
 
-def invoice_callback(invoice):
-    """Called when an invoice is settled; emits invoice event and updates payment."""
+from services.lnd_service import LNDService
+
+# Initialize LNDService dynamically, default to alice if no env var
+lnd_node = os.getenv("LND_NODE", "alice")
+lnd_service = LNDService(node=lnd_node)
+
+
+def invoice_callback(invoice, socketio=None):
+    """Callback for settled invoices."""
     payment_hash = invoice.r_hash.hex()
 
-    # Update payment status, wallet balance and notify clients
-    mark_payment_settled(payment_hash, socketio)
+    # Update payment status and notify clients
+    lnd_service.mark_payment_settled(payment_hash, socketio)
 
-    # Emit a general invoice settled event (optional additional info)
     socketio.emit("invoice_settled", {
         "payment_hash": payment_hash,
         "memo": invoice.memo,
@@ -79,7 +82,10 @@ def invoice_callback(invoice):
 
 def start_invoice_stream():
     """Start LND invoice subscription in a background thread."""
-    thread = threading.Thread(target=stream_invoices, args=(invoice_callback,socketio))
+    thread = threading.Thread(
+        target=lnd_service.stream_invoices,
+        kwargs={"callback": invoice_callback, "socketio": socketio}
+    )
     thread.daemon = True
     thread.start()
 
@@ -112,8 +118,10 @@ if __name__ == '__main__':
     start_invoice_stream()
     socketio.run(app, host='0.0.0.0', port=5000)
 
+
 # import os
 # import threading
+# from pathlib import Path
 # from flask import Flask
 # from flask_migrate import Migrate
 # from flask_restful import Api
@@ -127,11 +135,14 @@ if __name__ == '__main__':
 # from dotenv import load_dotenv
 # import models
 
-# # Load environment variables
-# load_dotenv(dotenv_path='server/.env')
-# # print("LND_CERT_PATH:", os.getenv("LND_CERT_PATH"))
-# # print("LND_MACAROON_PATH:", os.getenv("LND_MACAROON_PATH"))
-# # print("LND_HOST:", os.getenv("LND_HOST"))
+# # Load environment variables from server/.env relative to this file
+# env_path = Path(__file__).parent / '.env'
+# load_dotenv(dotenv_path=env_path)
+
+# print("Loaded env from:", env_path)
+# print("LND_CERT_PATH =", os.getenv("LND_CERT_PATH"))
+# print("LND_MACAROON_PATH =", os.getenv("LND_MACAROON_PATH"))
+# print("LND_HOST =", os.getenv("LND_HOST"))
 
 
 # # Global SocketIO instance (initialized later with the app)
@@ -163,9 +174,9 @@ if __name__ == '__main__':
 #     # Initialize SocketIO with app
 #     socketio.init_app(app)
 
+
 #     # ✅ Register blueprint route
 #     app.register_blueprint(invoice_bp, url_prefix="/")  # or "/" if you want root
-
 
 #     return app
 
