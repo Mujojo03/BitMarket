@@ -47,7 +47,7 @@ def create_app():
     return app
 
 # --------- Background: LND Invoice Streaming ---------
-from server.services.lnd_service import stream_invoices, mark_payment_settled # Adjust path if needed
+from services.lnd_service import stream_invoices, mark_payment_settled # Adjust path if needed
 
 def invoice_callback(invoice):
     """Called when an invoice is settled; emits invoice event and updates payment."""
