@@ -8,7 +8,7 @@ export interface User {
   bio?: string
   website?: string
   isSeller: boolean
-  sellerRating?: number
+  sellerRating: number
   sellerSales: number
   sellerSince?: string
   createdAt: string
@@ -194,7 +194,7 @@ export const mockCategories: Category[] = [
     name: "Accessories",
     slug: "accessories",
     description: "Personal accessories",
-    imageUrl: "https://www.nativeplanet.com/img/2015/10/05-1444030735-shoppinge.jpg",
+    imageUrl: "https://i.etsystatic.com/16327480/r/il/6a7cc9/1698407422/il_794xN.1698407422_dxxl.jpg",
     productCount: 203,
   },
 ]
@@ -225,7 +225,7 @@ export const mockProducts: Product[] = [
       "Dell Laptop Core i7 with 16GB RAM and 512GB SSD. Perfect for all your computing needs.",
     price: 75000, // in sats
     imageUrl: "https://th.bing.com/th/id/R.b17d02f723bc495a97bf5b746ddfc86e?rik=FovMcW3geTWOGw&riu=http%3a%2f%2f3.bp.blogspot.com%2f--6dQqPnxKPk%2fVbxF66JpObI%2fAAAAAAAAAPs%2fMpPdoHXGl0o%2fw1200-h630-p-k-no-nu%2fDell%25252BInspiron%25252B14%25252B3452-driver.jpg&ehk=bj6q6%2biToqRjnIga3cMfl8z6rF3zRd6d71KmjHEg9ds%3d&risl=&pid=ImgRaw&r=0",
-    categoryId: "cat1",
+    categoryId: "cat4",
     sellerId: "seller2",
     isDigital: false,
     isFeatured: true,
@@ -254,7 +254,7 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product4",
-    name: "Handmade Bitcoin Ceramic Mug",
+    name: "Handmade Ceramic Mug with Bitcoin Logo",
     description:
       "A beautiful handcrafted ceramic mug featuring a Bitcoin design. Each mug is unique and made with care by our artisan.",
     price: 45000, // in sats
@@ -275,7 +275,7 @@ export const mockProducts: Product[] = [
     description: "High Quality car tyres for all vehicles.",
     price: 500000, // in sats
     imageUrl: "https://th.bing.com/th/id/OIP.e6u9VThsmXkJbNnVpB82oQHaE_?cb=iwp2&rs=1&pid=ImgDetMain",
-    categoryId: "cat4",
+    categoryId: "cat2",
     sellerId: "seller3",
     isDigital: false,
     isFeatured: false,
@@ -291,7 +291,7 @@ export const mockProducts: Product[] = [
     description: "Make-up and Beauty product for all skin types.",
     price: 100000, // in sats
     imageUrl: "https://makeupobsessedmom.com/wp-content/uploads/2023/07/multitasking-beauty-products.png",
-    categoryId: "cat2",
+    categoryId: "cat6",
     sellerId: "seller2",
     isDigital: true,
     isFeatured: false,
@@ -303,8 +303,8 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product7",
-    name: "Bitcoin T-Shirt",
-    description: "A comfortable cotton t-shirt featuring a stylish Bitcoin design.",
+    name: "Black T-Shirt with Bitcoin Logo",
+    description: "A comfortable black cotton t-shirt featuring a stylish Bitcoin design.",
     price: 35000, // in sats
     imageUrl: "https://i.etsystatic.com/20884421/c/1739/1739/141/0/il/e25544/3417101588/il_600x600.3417101588_1clk.jpg",
     categoryId: "cat3",
@@ -333,6 +333,39 @@ export const mockProducts: Product[] = [
     createdAt: "2023-08-15T00:00:00Z",
     updatedAt: "2023-08-15T00:00:00Z",
   },
+    {
+    id: "product9",
+    name: "Wooden Chair",
+    description: "A stylish and comfortable Lounge chair for your living room.",
+    price: 80000, // in sats
+    imageUrl: "https://i.pinimg.com/474x/66/48/bf/6648bf2023b10cf8692549969e1fd677--wooden-chairs-wooden-furniture.jpg",
+    categoryId: "cat5",
+    sellerId: "seller4",
+    isDigital: true,
+    isFeatured: false,
+    stockQuantity: 999,
+    rating: 4.8,
+    reviewCount: 19,
+    createdAt: "2023-08-15T00:00:00Z",
+    updatedAt: "2023-08-15T00:00:00Z",
+  },
+
+    {
+    id: "product10",
+    name: "Canvas",
+    description: "Canvas for your art.",
+    price: 80000, // in sats
+    imageUrl: "https://assets.artandobject.co.nz/transforms/images/286592/MG_4937_9940f8f522c51b9d0f210cb5897b3675.jpg",
+    categoryId: "cat1",
+    sellerId: "seller4",
+    isDigital: true,
+    isFeatured: false,
+    stockQuantity: 999,
+    rating: 4.8,
+    reviewCount: 19,
+    createdAt: "2023-08-15T00:00:00Z",
+    updatedAt: "2023-08-15T00:00:00Z",
+  }
 ]
 
 // Mock reviews

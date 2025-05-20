@@ -10,31 +10,19 @@ import { ProductFilters } from "@/components/product-filters"
 import { productsApi, categoriesApi } from "@/lib/api-service"
 import type { Product, Category } from "@/lib/mock-data"
 
-type ExtendedProduct = Product & {
-  category: Category
-  seller: {
-    id: string
-    username: string
-    sellerRating?: number
-  }
-}
-
 export default function BrowsePage() {
   const searchParams = useSearchParams()
   const categoryParam = searchParams.get("category")
   const searchParam = searchParams.get("search")
   const [searchQuery, setSearchQuery] = useState<string | null>(searchParam)
 
-  const [products, setProducts] = useState<ExtendedProduct[]>([])
-
+  const [products, setProducts] = useState<(Product & { category: any; seller: any })[]>([])
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string | null>(categoryParam)
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000000])
   const [productType, setProductType] = useState<"all" | "physical" | "digital">("all")
-
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,8 +43,7 @@ export default function BrowsePage() {
         const fetchedProducts = await productsApi.getProducts(options)
 
         // Apply client-side filters
-        let filteredProducts: ExtendedProduct[] = fetchedProducts
-
+        let filteredProducts = fetchedProducts
 
         // Filter by search query
         if (searchQuery) {

@@ -19,18 +19,17 @@ import {
   type CartItem,
   type Order,
   type OrderItem,
-  mockUsers,
+  mockUsers, // Import mockUsers
 } from "@/lib/mock-data"
 
-// This file contains both mock API services and real API services
-// In a production app, these would typically be in separate files
+// This service simulates API calls to a backend
+// In a real app, these would be actual fetch calls to your Flask backend
 
-// ==================== MOCK API SERVICES ====================
 // Helper to simulate API delay
 const simulateDelay = (ms = 500) => new Promise((resolve) => setTimeout(resolve, ms))
 
-// Mock Products API
-export const mockProductsApi = {
+// Products API
+export const productsApi = {
   // Get all products
   async getProducts(options?: {
     categoryId?: string
@@ -137,8 +136,8 @@ export const mockProductsApi = {
   },
 }
 
-// Mock Categories API
-export const mockCategoriesApi = {
+// Categories API
+export const categoriesApi = {
   // Get all categories
   async getCategories() {
     await simulateDelay()
@@ -152,8 +151,8 @@ export const mockCategoriesApi = {
   },
 }
 
-// Mock Reviews API
-export const mockReviewsApi = {
+// Reviews API
+export const reviewsApi = {
   // Get reviews for product
   async getReviewsForProduct(productId: string) {
     await simulateDelay()
@@ -183,8 +182,8 @@ export const mockReviewsApi = {
   },
 }
 
-// Mock Cart API
-export const mockCartApi = {
+// Cart API
+export const cartApi = {
   // Get cart for user
   async getCartForUser(userId: string) {
     await simulateDelay()
@@ -269,8 +268,8 @@ export const mockCartApi = {
   },
 }
 
-// Mock Orders API
-export const mockOrdersApi = {
+// Orders API
+export const ordersApi = {
   // Get orders for user
   async getOrdersForUser(userId: string) {
     await simulateDelay()
@@ -335,7 +334,7 @@ export const mockOrdersApi = {
     }
 
     // Clear cart
-    await mockCartApi.clearCart(orderData.buyerId)
+    await cartApi.clearCart(orderData.buyerId)
 
     return {
       ...newOrder,
@@ -363,8 +362,8 @@ export const mockOrdersApi = {
   },
 }
 
-// Mock Users API
-export const mockUsersApi = {
+// Users API
+export const usersApi = {
   // Get user by ID
   async getUserById(id: string) {
     await simulateDelay()
@@ -417,390 +416,3 @@ export const mockUsersApi = {
     return mockUsers[userIndex]
   },
 }
-
-// ==================== REAL API SERVICES ====================
-// Base URL for API requests
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
-
-// Helper function to handle API responses
-const handleResponse = async (response: Response) => {
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'An error occurred');
-  }
-  return response.json();
-};
-
-// Get auth token from localStorage
-const getToken = () => {
-  if (typeof window !== 'undefined') {
-    return localStorage.getItem('bitmarket_token');
-  }
-  return null;
-};
-
-// Real Products API
-export const productsApi = {
-  // Get all products
-  async getProducts(options?: {
-    categoryId?: string;
-    featured?: boolean;
-    sellerId?: string;
-    limit?: number;
-  }) {
-    let url = `${API_BASE_URL}/products`;
-    
-    const params = new URLSearchParams();
-    if (options?.categoryId) params.append('categoryId', options.categoryId);
-    if (options?.featured) params.append('featured', 'true');
-    if (options?.sellerId) params.append('sellerId', options.sellerId);
-    if (options?.limit) params.append('limit', options.limit.toString());
-    
-    if (params.toString()) {
-      url += `?${params.toString()}`;
-    }
-    
-    const response = await fetch(url);
-    return handleResponse(response);
-  },
-
-  // Get product by ID
-  async getProductById(id: string) {
-    const response = await fetch(`${API_BASE_URL}/products/${id}`);
-    return handleResponse(response);
-  },
-
-  // Create product
-  async createProduct(productData: any) {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/products`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(productData)
-    });
-    
-    return handleResponse(response);
-  },
-
-  // Update product
-  async updateProduct(id: string, updates: any) {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/products/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(updates)
-    });
-    
-    return handleResponse(response);
-  },
-
-  // Delete product
-  async deleteProduct(id: string) {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/products/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    
-    return handleResponse(response);
-  }
-};
-
-// Real Categories API
-export const categoriesApi = {
-  // Get all categories
-  async getCategories() {
-    const response = await fetch(`${API_BASE_URL}/categories`);
-    return handleResponse(response);
-  }
-};
-
-// Real Reviews API
-export const reviewsApi = {
-  // Get reviews for product
-  async getReviewsForProduct(productId: string) {
-    const response = await fetch(`${API_BASE_URL}/products/${productId}/reviews`);
-    return handleResponse(response);
-  },
-  
-  // Create review
-  async createReview(reviewData: { productId: string; rating: number; comment?: string }) {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/products/${reviewData.productId}/reviews`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        rating: reviewData.rating,
-        comment: reviewData.comment
-      })
-    });
-    
-    return handleResponse(response);
-  }
-};
-
-// Real Orders API
-export const ordersApi = {
-  // Get orders for user
-  async getOrdersForUser() {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/orders`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    
-    return handleResponse(response);
-  },
-
-  // Get order by ID
-  async getOrderById(id: string) {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/orders/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    
-    return handleResponse(response);
-  },
-
-  // Create order
-  async createOrder(orderData: any) {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/orders`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(orderData)
-    });
-    
-    const result = await handleResponse(response);
-    
-    // Clear the cart after successful order creation
-    if (result && result.id) {
-      await cartApi.clearCart();
-    }
-    
-    return result;
-  },
-
-  // Update order status
-  async updateOrderStatus(id: string, status: string) {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/orders/${id}/status`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ status })
-    });
-    
-    return handleResponse(response);
-  }
-};
-
-// Real Cart API
-export const cartApi = {
-  // Get cart for user
-  async getCartForUser() {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/cart`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    
-    return handleResponse(response);
-  },
-
-  // Add item to cart
-  async addToCart(productId: string, quantity = 1) {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/cart`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ productId, quantity })
-    });
-    
-    return handleResponse(response);
-  },
-
-  // Update cart item
-  async updateCartItem(cartItemId: string, quantity: number) {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/cart/${cartItemId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ quantity })
-    });
-    
-    return handleResponse(response);
-  },
-
-  // Remove item from cart
-  async removeFromCart(cartItemId: string) {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/cart/${cartItemId}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    
-    return handleResponse(response);
-  },
-
-  // Clear cart
-  async clearCart() {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/cart/clear`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    
-    return handleResponse(response);
-  }
-};
-
-// Auth API
-export const authApi = {
-  // Register
-  async register(userData: { email: string; password: string; fullName: string }) {
-    const response = await fetch(`${API_BASE_URL}/auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    });
-    
-    const data = await handleResponse(response);
-    
-    // Save token to localStorage
-    if (data.token) {
-      localStorage.setItem('bitmarket_token', data.token);
-    }
-    
-    return data;
-  },
-
-  // Login
-  async login(credentials: { email: string; password: string }) {
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-    });
-    
-    const data = await handleResponse(response);
-    
-    // Save token to localStorage
-    if (data.token) {
-      localStorage.setItem('bitmarket_token', data.token);
-    }
-    
-    return data;
-  },
-
-  // Get current user
-  async getCurrentUser() {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/auth/me`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    
-    return handleResponse(response);
-  },
-
-  // Become a seller
-  async becomeSeller() {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/auth/become-seller`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    
-    return handleResponse(response);
-  },
-
-  // Update profile
-  async updateProfile(profileData: any) {
-    const token = getToken();
-    if (!token) throw new Error('Authentication required');
-    
-    const response = await fetch(`${API_BASE_URL}/auth/update-profile`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(profileData)
-    });
-    
-    return handleResponse(response);
-  },
-
-  // Logout
-  logout() {
-    localStorage.removeItem('bitmarket_token');
-  }
-};

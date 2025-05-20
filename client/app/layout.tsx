@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Bit Market - The Bitcoin Marketplace",
+  title: "Bit Merket - The Bitcoin Marketplace",
   description: "Buy and sell anything, anywhere in the world with Bitcoin and Lightning Network",
     generator: 'v0.dev'
 }
@@ -22,7 +22,6 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    // ✅ Suppress hydration warning in <html>
     <html lang="en" suppressHydrationWarning>
       {
         // ✅ Suppress hydration warning in <body> to avoid mismatch from className changes
