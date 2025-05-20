@@ -7,12 +7,35 @@ function Register() {
   const navigate = useNavigate();
   const cartItems = location.state?.cartItems || [];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // You can add form validation logic here
-    // After successful registration:
-    navigate("/payment");
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const name = e.target.form3Example1cg.value;
+  const email = e.target.form3Example3cg.value;
+  const password = e.target.form3Example4cg.value;
+
+  try {
+    const response = await fetch("http://localhost:5000/register/buyer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Registration successful!");
+      navigate("/payment");
+    } else {
+      alert(`Registration failed: ${data.message}`);
+    }
+  } catch (err) {
+    alert("An error occurred during registration.");
+    console.error(err);
+  }
+};
 
   return (
     <section
