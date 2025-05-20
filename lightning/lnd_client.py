@@ -1,7 +1,7 @@
 import grpc
 import os
-from lightning_stub import lightning_pb2 as ln
-from lightning_stub import lightning_pb2_grpc as lnrpc
+from . lightning_stub import lightning_pb2 as ln
+from . lightning_stub import lightning_pb2_grpc as lnrpc
 
 class LNDClient:
     def __init__(self, host, macaroon_filepath, cert_filepath):

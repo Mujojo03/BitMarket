@@ -1,9 +1,9 @@
 import os
 from datetime import datetime
-from server.models import db
-from server.models.wallet import Wallet
-from server.models.payment import Payment
-from server.models.transaction import Transaction
+from models.db import db
+from models.wallet import Wallet
+from models.payment import Payment
+from models.transaction import Transaction
 from lightning.lnd_client import LNDClient
 
 # Initialize LND client
