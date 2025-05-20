@@ -9,3 +9,5 @@ def initialize_routes(api):
     init_category_routes(api)
     init_product_routes(api)
     init_user_routes(api)
+    
+
