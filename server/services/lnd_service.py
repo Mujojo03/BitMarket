@@ -1,17 +1,31 @@
 import os
 from datetime import datetime
-from server.models import db
-from server.models.wallet import Wallet
-from server.models.payment import Payment
-from server.models.transaction import Transaction
+from models.db import db
+from models.wallet import Wallet
+from models.payment import Payment
+from models.transaction import Transaction
 from lightning.lnd_client import LNDClient
+from dotenv import load_dotenv
+from pathlib import Path
 
-# Initialize LND client
-lnd = LNDClient(
+env_path = Path(__file__).parent / '.env'
+load_dotenv(dotenv_path=env_path)
+
+# Initialize alice LND client
+lnd_alice = LNDClient(
     os.getenv("LND_HOST"),
     macaroon_filepath=os.getenv("LND_MACAROON_PATH"),
     cert_filepath=os.getenv("LND_CERT_PATH")
 )
+
+# Initialize bob LND client
+lnd_bob = LNDClient(
+    os.getenv("LND_HOST"),
+    macaroon_filepath=os.getenv("LND_MACAROON_PATH"),
+    cert_filepath=os.getenv("LND_CERT_PATH")
+)
+
+
 
 def create_invoice(amount, memo="Invoice", order_id=None, provider="lnd"):
     """
@@ -35,6 +49,33 @@ def create_invoice(amount, memo="Invoice", order_id=None, provider="lnd"):
         "payment_id": payment.id,
         "payment_hash": invoice.r_hash.hex()
     }
+
+def pay_invoice(payment_request):
+    """
+    Pay a Lightning invoice using Bob's LND node.
+
+    Args:
+        payment_request (str): The BOLT11 invoice string.
+
+    Returns:
+        dict: Payment result details.
+    """
+    try:
+        # Use Bob's LND client
+        response = lnd_bob.send_payment_sync(payment_request=payment_request)
+
+        if response.payment_error:
+            raise Exception(response.payment_error)
+
+        return {
+            "payment_hash": response.payment_hash.hex(),
+            "payment_preimage": response.payment_preimage.hex(),
+            "status": "paid"
+        }
+    except Exception as e:
+        raise Exception(f"Failed to pay invoice: {str(e)}")
+    
+    
 
 def mark_payment_settled(payment_hash: str, socketio):
     """
@@ -100,7 +141,7 @@ def mark_payment_settled(payment_hash: str, socketio):
 
     return payment
 
-def invoice_callback(invoice, socketio):
+def  socketio_invoice_callback(invoice, socketio):
     """
     Callback to handle invoice settlements from LND subscription.
 
