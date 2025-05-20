@@ -120,21 +120,21 @@ export function AccountOrders({ user }: AccountOrdersProps) {
                 <div key={item.id} className="flex flex-col sm:flex-row gap-4">
                   <div className="w-full sm:w-20 h-20 bg-gray-700 rounded-md overflow-hidden relative flex-shrink-0">
                     <img
-                      src={item.product.imageUrl || "/placeholder.svg"}
-                      alt={item.product.name}
+                      src={item.product?.imageUrl || "/placeholder.svg"}
+                      alt={item.product?.name || "Product image"}
                       className="object-cover w-full h-full"
                     />
                   </div>
                   <div className="flex-1">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                      <Link href={`/product/${item.product.id}`} className="font-medium hover:text-bitcoin">
-                        {item.product.name}
+                      <Link href={`/product/${item.product?.id ?? ""}`} className="font-medium hover:text-bitcoin">
+                        {item.product?.name ?? "Unknown Product"}
                       </Link>
                       <div className="text-bitcoin font-medium">{formatSats(item.price)} sats</div>
                     </div>
                     <div className="text-sm text-gray-400 mt-1">Quantity: {item.quantity}</div>
                     <div className="text-sm text-gray-400 mt-1">
-                      {item.product.isDigital ? "Digital Product" : "Physical Product"}
+                      {item.product?.isDigital ? "Digital Product" : "Physical Product"}
                     </div>
                   </div>
                 </div>

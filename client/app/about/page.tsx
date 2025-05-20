@@ -18,7 +18,7 @@ export default function AboutPage() {
         <div>
           <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
           <p className="text-gray-400 mb-4">
-            BitMarket was founded with a simple mission: to create a truly global marketplace where anyone can buy and
+            BitSoko was founded with a simple mission: to create a truly global marketplace where anyone can buy and
             sell without borders, gatekeepers, or excessive fees.
           </p>
           <p className="text-gray-400 mb-4">
@@ -34,7 +34,7 @@ export default function AboutPage() {
         <div className="flex justify-center">
           <div className="relative h-[300px] w-[300px] md:h-[400px] md:w-[400px]">
             <Image
-              src="/placeholder.svg?height=400&width=400"
+              src="https://i0.wp.com/donorbox.org/nonprofit-blog/wp-content/uploads/2017/11/download.jpeg"
               alt="BitMarket mission illustration"
               fill
               className="object-contain"
@@ -87,8 +87,8 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Team Section
-      <div className="mb-16">
+      {/* Team Section */}
+      {/* <div className="mb-16">
         <h2 className="text-2xl font-bold mb-8 text-center">Our Team</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 flex flex-col items-center text-center">
@@ -126,7 +126,7 @@ export default function AboutPage() {
 
       {/* Join Us Section */}
       <div className="bg-gray-800 border border-gray-700 rounded-lg p-8 text-center mb-16">
-        <h2 className="text-2xl font-bold mb-4">Join the BitMarket Community</h2>
+        <h2 className="text-2xl font-bold mb-4">Join the BitSoko Community</h2>
         <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
           Whether you're a buyer looking for unique products or a seller wanting to reach a global audience, BitMarket
           is the place for you.
@@ -149,7 +149,7 @@ export default function AboutPage() {
             Have questions or feedback? We'd love to hear from you. Reach out to our team at:
           </p>
           <div className="text-center">
-            <p className="text-bitcoin font-medium mb-2">support@bitmerket.com</p>
+            <p className="text-bitcoin font-medium mb-2">support@bitsoko.com</p>
             <p className="text-gray-400">We typically respond within 24 hours.</p>
           </div>
         </div>

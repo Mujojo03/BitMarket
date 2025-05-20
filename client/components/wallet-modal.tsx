@@ -78,7 +78,7 @@ export function WalletModal({ open, onOpenChange }: WalletModalProps) {
             <Bitcoin className="h-5 w-5 text-bitcoin" />
             Connect Your Wallet
           </DialogTitle>
-          <DialogDescription>Connect your Lightning wallet to start buying and selling on BitMarket.</DialogDescription>
+          <DialogDescription>Connect your Lightning wallet to start buying and selling on BitSoko.</DialogDescription>
         </DialogHeader>
 
         {connected ? (
