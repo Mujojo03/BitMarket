@@ -24,6 +24,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const data = await res.json()
       if (!res.ok) throw new Error(data.message || "Login failed")
 
+      console.log("Logging in with:", { email, password });
+      console.log("Response data:", data);
+
       // Optionally store token or user info
       localStorage.setItem("user", JSON.stringify(data.user))
       router.push("/")  // redirect to home/dashboard
