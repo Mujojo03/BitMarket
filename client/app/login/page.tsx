@@ -23,6 +23,8 @@ export default function LoginPage() {
   const searchParams = useSearchParams()
   const registered = searchParams.get("registered")
   const { toast } = useToast()
+  const [error, setError] = useState(null); // or some string
+
 
   useEffect(() => {
     if (registered) {
@@ -40,7 +42,6 @@ export default function LoginPage() {
     } catch (err: any) {
       setLocalError(err?.message || "Login failed")
     }
-  }
   }
 
   return (
@@ -116,3 +117,4 @@ export default function LoginPage() {
       </Card>
     </div>
   )
+}
