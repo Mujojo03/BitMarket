@@ -1,1 +1,3 @@
 p.txt
+.env
+__pycache__/
