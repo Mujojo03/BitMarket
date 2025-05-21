@@ -15,7 +15,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, fullName: string) => Promise<void>
   signOut: () => void
   becomeSeller: () => Promise<void>
-  refreshProfile: () => Promise<void>
+  refreshProfile: () => Promise<User>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -65,7 +65,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         description: `You've successfully signed in as ${foundUser.fullName || foundUser.email}`,
       })
 
-      return foundUser
+      // No return value to match AuthContextType
     } catch (error) {
       console.error("Error signing in:", error)
       toast({
@@ -109,7 +109,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         description: "Your account has been created successfully.",
       })
 
-      return newUser
+      // No return value to match AuthContextType
     } catch (error) {
       console.error("Error signing up:", error)
       toast({
@@ -145,7 +145,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(updatedUser)
       localStorage.setItem("bitmerket_user", JSON.stringify(updatedUser))
 
-      return updatedUser
+      // No return value to match AuthContextType
     } catch (error) {
       console.error("Error becoming seller:", error)
       toast({

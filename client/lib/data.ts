@@ -38,7 +38,7 @@ export const featuredProducts: Product[] = [
     description:
       "A premium leather wallet with a subtle Bitcoin logo embossed on the front. Perfect for storing your cards and cash while showing your Bitcoin pride.",
     price: 150000, // in sats
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://i.etsystatic.com/16327480/r/il/6a7cc9/1698407422/il_794xN.1698407422_dxxl.jpg",
     category: "accessories",
     seller: sellers[0],
     rating: 4.8,
@@ -95,7 +95,7 @@ export const categories: Category[] = [
     id: "cat1",
     name: "Art & Collectibles",
     slug: "art-collectibles",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "https://assets.artandobject.co.nz/transforms/images/286592/MG_4937_9940f8f522c51b9d0f210cb5897b3675.jpg",
     productCount: 156,
   },
   {

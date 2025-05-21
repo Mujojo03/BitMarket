@@ -10,7 +10,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2">
               <Bitcoin className="h-6 w-6 text-bitcoin" />
               <span className="text-xl font-bold">
-                <span className="text-bitcoin">Bit</span>Merket
+                <span className="text-bitcoin">Sat</span>Soko
               </span>
             </Link>
             <p className="text-sm text-gray-400 mt-2">
@@ -27,7 +27,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/sell" className="text-sm text-gray-400 hover:text-bitcoin transition-colors">
-                  Sell on Bit Merket
+                  Sell on SatSoko
                 </Link>
               </li>
               <li>
@@ -95,7 +95,7 @@ export function Footer() {
         </div>
         <div className="mt-12 border-t border-gray-800 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-sm text-gray-400">&copy; {new Date().getFullYear()} Bit Merket. All rights reserved.</p>
+            <p className="text-sm text-gray-400">&copy; {new Date().getFullYear()} SatSoko. All rights reserved.</p>
             <div className="flex items-center gap-4">
               <Link href="/terms" className="text-sm text-gray-400 hover:text-bitcoin transition-colors">
                 Terms

@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Bit Merket - The Bitcoin Marketplace",
+  title: "SatSoko - The Bitcoin Marketplace",
   description: "Buy and sell anything, anywhere in the world with Bitcoin and Lightning Network",
     generator: 'v0.dev'
 }
@@ -23,7 +23,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      {
+        // ✅ Suppress hydration warning in <body> to avoid mismatch from className changes
+      }
+      <body suppressHydrationWarning className={inter.className}>
+        {
+          // ✅ These providers should be Client Components
+          // Make sure `theme-provider.tsx`, `auth-context.tsx`, etc. have `'use client'` at the top
+        }
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <AuthProvider>
             <div className="relative flex min-h-screen flex-col">

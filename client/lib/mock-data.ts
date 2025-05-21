@@ -154,7 +154,7 @@ export const mockCategories: Category[] = [
     name: "Art & Collectibles",
     slug: "art-collectibles",
     description: "Unique art and collectible items",
-    imageUrl: "/placeholder.svg?height=200&width=200",
+    imageUrl: "https://th.bing.com/th/id/R.4396b2e5838e4ccf5d43b0d287e0b817?rik=9ho9p7owU63Tmg&riu=http%3a%2f%2fcuriosityafricanboutique.com%2fcdn%2fshop%2fcollections%2fCuriosity_African_Boutique_African_Curio_Shop_in_South_Africa_on_Zulu_Nyala_Heritage_Safari_Lodge_Artisinal_and_Handcrafted_African_Products_Decor_Crafts_and_Art-34.jpg%3fv%3d1702028485%26width%3d2048&ehk=0s3MGIDGnlNXkfXU4%2bEo02Sc72z1Q0vohlBKRQRb%2b70%3d&risl=&pid=ImgRaw&r=0",
     productCount: 156,
   },
   {
@@ -162,7 +162,7 @@ export const mockCategories: Category[] = [
     name: "Digital Products",
     slug: "digital-products",
     description: "Digital downloads and services",
-    imageUrl: "/placeholder.svg?height=200&width=200",
+    imageUrl: "https://static.wixstatic.com/media/eaa617_25aaa68361ed43328d6654f54ec9b67a~mv2_d_6000_4396_s_4_2.jpeg/v1/crop/x_295,y_0,w_5410,h_4396/fill/w_320,h_260,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/AdobeStock_237119664.jpeg",
     productCount: 243,
   },
   {
@@ -170,7 +170,7 @@ export const mockCategories: Category[] = [
     name: "Clothing",
     slug: "clothing",
     description: "Apparel and accessories",
-    imageUrl: "/placeholder.svg?height=200&width=200",
+    imageUrl: "https://static.fibre2fashion.com/newsresource/images/281/28708560-m_293184.jpg",
     productCount: 189,
   },
   {
@@ -178,7 +178,7 @@ export const mockCategories: Category[] = [
     name: "Electronics",
     slug: "electronics",
     description: "Gadgets and electronic items",
-    imageUrl: "/placeholder.svg?height=200&width=200",
+    imageUrl: "https://st3.depositphotos.com/1005404/13980/i/450/depositphotos_139809276-stock-photo-consumer-and-home-electronics.jpg",
     productCount: 112,
   },
   {
@@ -186,7 +186,7 @@ export const mockCategories: Category[] = [
     name: "Home & Living",
     slug: "home-living",
     description: "Items for your home",
-    imageUrl: "/placeholder.svg?height=200&width=200",
+    imageUrl: "https://img.freepik.com/premium-photo/natural-living-room-interior-home-mockup_1040334-2068.jpg",
     productCount: 178,
   },
   {
@@ -194,7 +194,7 @@ export const mockCategories: Category[] = [
     name: "Accessories",
     slug: "accessories",
     description: "Personal accessories",
-    imageUrl: "/placeholder.svg?height=200&width=200",
+    imageUrl: "https://i.etsystatic.com/16327480/r/il/6a7cc9/1698407422/il_794xN.1698407422_dxxl.jpg",
     productCount: 203,
   },
 ]
@@ -207,7 +207,7 @@ export const mockProducts: Product[] = [
     description:
       "A premium leather wallet with a subtle Bitcoin logo embossed on the front. Perfect for storing your cards and cash while showing your Bitcoin pride.",
     price: 150000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://i.etsystatic.com/16327480/r/il/6a7cc9/1698407422/il_794xN.1698407422_dxxl.jpg",
     categoryId: "cat6",
     sellerId: "seller1",
     isDigital: false,
@@ -220,12 +220,12 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product2",
-    name: "Bitcoin: A Peer-to-Peer Electronic Cash System (Signed Print)",
+    name: "Dell Laptop",
     description:
-      "A beautifully printed and framed copy of the original Bitcoin whitepaper, perfect for your home office or as a gift for a fellow Bitcoin enthusiast.",
+      "Dell Laptop Core i7 with 16GB RAM and 512GB SSD. Perfect for all your computing needs.",
     price: 75000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
-    categoryId: "cat1",
+    imageUrl: "https://th.bing.com/th/id/R.b17d02f723bc495a97bf5b746ddfc86e?rik=FovMcW3geTWOGw&riu=http%3a%2f%2f3.bp.blogspot.com%2f--6dQqPnxKPk%2fVbxF66JpObI%2fAAAAAAAAAPs%2fMpPdoHXGl0o%2fw1200-h630-p-k-no-nu%2fDell%25252BInspiron%25252B14%25252B3452-driver.jpg&ehk=bj6q6%2biToqRjnIga3cMfl8z6rF3zRd6d71KmjHEg9ds%3d&risl=&pid=ImgRaw&r=0",
+    categoryId: "cat4",
     sellerId: "seller2",
     isDigital: false,
     isFeatured: true,
@@ -237,11 +237,11 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product3",
-    name: "Lightning Network Development Course",
+    name: "Singer Sewing Machine",
     description:
-      "A comprehensive digital course teaching you how to build applications on the Lightning Network. Includes code examples and practical projects.",
+      "Singer Sewing Machine, lightweight with multiple stitch patterns. Ideal for both beginners and experienced sewers, great for fashion and design.",
     price: 250000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://i5.walmartimages.com/asr/1581be17-cb9f-4b87-80da-1a0c4b0318cd_1.9ab78c356b41fd9f30e55cf9549b758c.jpeg",
     categoryId: "cat2",
     sellerId: "seller3",
     isDigital: true,
@@ -254,11 +254,11 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product4",
-    name: "Handmade Bitcoin Ceramic Mug",
+    name: "Handmade Ceramic Mug with Bitcoin Logo",
     description:
       "A beautiful handcrafted ceramic mug featuring a Bitcoin design. Each mug is unique and made with care by our artisan.",
     price: 45000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://i.pinimg.com/originals/f7/41/9e/f7419ee8c5d6d597f84ebc363f11a084.jpg",
     categoryId: "cat5",
     sellerId: "seller4",
     isDigital: false,
@@ -271,11 +271,11 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product5",
-    name: "Bitcoin Node Hardware Kit",
-    description: "Everything you need to run your own Bitcoin node. Pre-configured for easy setup.",
+    name: "Car Tyres",
+    description: "High Quality car tyres for all vehicles.",
     price: 500000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
-    categoryId: "cat4",
+    imageUrl: "https://th.bing.com/th/id/OIP.e6u9VThsmXkJbNnVpB82oQHaE_?cb=iwp2&rs=1&pid=ImgDetMain",
+    categoryId: "cat2",
     sellerId: "seller3",
     isDigital: false,
     isFeatured: false,
@@ -287,11 +287,11 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product6",
-    name: "Crypto Trading Strategy Guide",
-    description: "A comprehensive digital guide to trading Bitcoin and other cryptocurrencies.",
+    name: "Beauty Products",
+    description: "Make-up and Beauty product for all skin types.",
     price: 100000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
-    categoryId: "cat2",
+    imageUrl: "https://makeupobsessedmom.com/wp-content/uploads/2023/07/multitasking-beauty-products.png",
+    categoryId: "cat6",
     sellerId: "seller2",
     isDigital: true,
     isFeatured: false,
@@ -303,10 +303,10 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product7",
-    name: "Bitcoin T-Shirt",
-    description: "A comfortable cotton t-shirt featuring a stylish Bitcoin design.",
+    name: "Black T-Shirt with Bitcoin Logo",
+    description: "A comfortable black cotton t-shirt featuring a stylish Bitcoin design.",
     price: 35000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://i.etsystatic.com/20884421/c/1739/1739/141/0/il/e25544/3417101588/il_600x600.3417101588_1clk.jpg",
     categoryId: "cat3",
     sellerId: "seller1",
     isDigital: false,
@@ -319,10 +319,10 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product8",
-    name: "Cryptocurrency Security Guide",
-    description: "Learn how to secure your Bitcoin and other cryptocurrencies with this comprehensive guide.",
+    name: "Baby Carriage",
+    description: "A stylish and comfortable baby carriage for your little one.",
     price: 80000, // in sats
-    imageUrl: "/placeholder.svg?height=300&width=300",
+    imageUrl: "https://api-beta-game.walmart.com/medias/Default-Product-Default-WF-null?context=bWFzdGVyfHByb2Nlc3NlZHwyMDAzNXxpbWFnZS9qcGVnfGgxYS9oZmYvMTI2MTEwNDM1OTAxNzQvRGVmYXVsdC1Qcm9kdWN0X0RlZmF1bHQtV0ZfbnVsbHxlYTlhNTMyM2M0ZDYxZTM5YzU2NjgzNjNmNjc5YmJmODllZDIxYjQ4MWNkODc3MWY2OWY4ZjczMzdlYjhhNjNm",
     categoryId: "cat2",
     sellerId: "seller4",
     isDigital: true,
@@ -333,6 +333,39 @@ export const mockProducts: Product[] = [
     createdAt: "2023-08-15T00:00:00Z",
     updatedAt: "2023-08-15T00:00:00Z",
   },
+    {
+    id: "product9",
+    name: "Wooden Chair",
+    description: "A stylish and comfortable Lounge chair for your living room.",
+    price: 80000, // in sats
+    imageUrl: "https://i.pinimg.com/474x/66/48/bf/6648bf2023b10cf8692549969e1fd677--wooden-chairs-wooden-furniture.jpg",
+    categoryId: "cat5",
+    sellerId: "seller4",
+    isDigital: true,
+    isFeatured: false,
+    stockQuantity: 999,
+    rating: 4.8,
+    reviewCount: 19,
+    createdAt: "2023-08-15T00:00:00Z",
+    updatedAt: "2023-08-15T00:00:00Z",
+  },
+
+    {
+    id: "product10",
+    name: "Canvas",
+    description: "Canvas for your art.",
+    price: 80000, // in sats
+    imageUrl: "https://assets.artandobject.co.nz/transforms/images/286592/MG_4937_9940f8f522c51b9d0f210cb5897b3675.jpg",
+    categoryId: "cat1",
+    sellerId: "seller4",
+    isDigital: true,
+    isFeatured: false,
+    stockQuantity: 999,
+    rating: 4.8,
+    reviewCount: 19,
+    createdAt: "2023-08-15T00:00:00Z",
+    updatedAt: "2023-08-15T00:00:00Z",
+  }
 ]
 
 // Mock reviews

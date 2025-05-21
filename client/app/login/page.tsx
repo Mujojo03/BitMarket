@@ -17,7 +17,8 @@ import { useToast } from "@/components/ui/use-toast"
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const { signIn, error, loading } = useAuth()
+  const { signIn, loading } = useAuth()
+  const [localError, setLocalError] = useState<string | null>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
   const registered = searchParams.get("registered")
@@ -31,26 +32,24 @@ export default function LoginPage() {
       })
     }
   }, [registered, toast])
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    await signIn(email, password)
+    setLocalError(null)
+    try {
+      await signIn(email, password)
+    } catch (err: any) {
+      setLocalError(err?.message || "Login failed")
+    }
   }
-
   return (
     <div className="container flex items-center justify-center min-h-[80vh] px-4 py-8">
       <Card className="w-full max-w-md bg-gray-800 border-gray-700">
-        <CardHeader className="space-y-1 flex flex-col items-center">
-          <Bitcoin className="h-12 w-12 text-bitcoin mb-2" />
-          <CardTitle className="text-2xl font-bold">Login to Bit Merket</CardTitle>
-          <CardDescription>Enter your email and password to login to your account</CardDescription>
-        </CardHeader>
-        <CardContent>
-          {error && (
+          {localError && (
             <Alert variant="destructive" className="mb-4 bg-red-900/20 border-red-900">
-              <AlertDescription>{error}</AlertDescription>
+              <AlertDescription>{localError}</AlertDescription>
             </Alert>
           )}
+        <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
@@ -109,5 +108,5 @@ export default function LoginPage() {
         </CardFooter>
       </Card>
     </div>
-  )
-}
+    )
+  }
