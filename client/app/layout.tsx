@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Bit Merket - The Bitcoin Marketplace",
+  title: "SatSoko - The Bitcoin Marketplace",
   description: "Buy and sell anything, anywhere in the world with Bitcoin and Lightning Network",
     generator: 'v0.dev'
 }

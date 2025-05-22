@@ -19,7 +19,7 @@ export function WalletModal({ open, onOpenChange }: WalletModalProps) {
   const [walletBalance, setWalletBalance] = useState<number | null>(null)
   const { toast } = useToast()
 
-  const mockLightningAddress = "user@bitmarket.com"
+  const mockLightningAddress = "user@satsoko.com"
 
   useEffect(() => {
     // Reset state when modal is opened
@@ -78,7 +78,7 @@ export function WalletModal({ open, onOpenChange }: WalletModalProps) {
             <Bitcoin className="h-5 w-5 text-bitcoin" />
             Connect Your Wallet
           </DialogTitle>
-          <DialogDescription>Connect your Lightning wallet to start buying and selling on BitSoko.</DialogDescription>
+          <DialogDescription>Connect your Lightning wallet to start buying and selling on SatSoko.</DialogDescription>
         </DialogHeader>
 
         {connected ? (

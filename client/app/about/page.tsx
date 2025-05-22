@@ -7,7 +7,7 @@ export default function AboutPage() {
   return (
     <div className="container px-4 py-8 md:px-6 md:py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">About BitMarket</h1>
+        <h1 className="text-4xl font-bold mb-4">About SatSoko</h1>
         <p className="text-gray-400 max-w-3xl mx-auto text-lg">
           The global marketplace powered by Bitcoin and the Lightning Network.
         </p>
@@ -18,7 +18,7 @@ export default function AboutPage() {
         <div>
           <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
           <p className="text-gray-400 mb-4">
-            BitSoko was founded with a simple mission: to create a truly global marketplace where anyone can buy and
+            SatSoko was founded with a simple mission: to create a truly global marketplace where anyone can buy and
             sell without borders, gatekeepers, or excessive fees.
           </p>
           <p className="text-gray-400 mb-4">
@@ -126,9 +126,9 @@ export default function AboutPage() {
 
       {/* Join Us Section */}
       <div className="bg-gray-800 border border-gray-700 rounded-lg p-8 text-center mb-16">
-        <h2 className="text-2xl font-bold mb-4">Join the BitSoko Community</h2>
+        <h2 className="text-2xl font-bold mb-4">Join the SatSoko Community</h2>
         <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-          Whether you're a buyer looking for unique products or a seller wanting to reach a global audience, BitMarket
+          Whether you're a buyer looking for unique products or a seller wanting to reach a global audience, SatSoko
           is the place for you.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -149,7 +149,7 @@ export default function AboutPage() {
             Have questions or feedback? We'd love to hear from you. Reach out to our team at:
           </p>
           <div className="text-center">
-            <p className="text-bitcoin font-medium mb-2">support@bitsoko.com</p>
+            <p className="text-bitcoin font-medium mb-2">support@satsoko.com</p>
             <p className="text-gray-400">We typically respond within 24 hours.</p>
           </div>
         </div>

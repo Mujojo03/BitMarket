@@ -68,6 +68,7 @@ export default function ProductPage({ params }: ProductPageProps) {
     fetchProductData()
   }, [params.id])
 
+  // Handle add to cart to be modified later
   const handleAddToCart = () => {
     if (!user) {
       toast({

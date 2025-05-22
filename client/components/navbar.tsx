@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { WalletModal } from "@/components/wallet-modal"
 import { useAuth } from "@/contexts/auth-context"
+import Image from "next/image";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,12 +29,21 @@ export function Navbar() {
       <header className="sticky top-0 z-50 w-full border-b border-gray-800 bg-dark">
         <div className="container flex h-16 items-center justify-between px-4 md:px-6">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <Bitcoin className="h-6 w-6 text-bitcoin" />
-            <span className="text-xl font-bold">
-              <span className="text-bitcoin">Bit</span>Soko
-            </span>
-          </Link>
+          <Link href="/" className="flex items-center gap-3">
+  <Image
+    src="/logosat.jpg"
+    alt="SatSoko Logo"
+    width={36}
+    height={36}
+    className="h-9 w-9 object-contain"
+  />
+  {/* <Bitcoin className="h-6 w-6 text-bitcoin" /> */}
+  <span className="text-xl font-bold">
+    <span className="text-bitcoin">Sat</span>Soko
+  </span>
+
+</Link>
+
 
           {/* Horizontal Navigation */}
           <nav className="flex items-center gap-6 ml-8">
@@ -138,7 +149,7 @@ export function Navbar() {
                     <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
                       <Bitcoin className="h-6 w-6 text-bitcoin" />
                       <span className="text-xl font-bold">
-                        <span className="text-bitcoin">Bit</span>Soko
+                        <span className="text-bitcoin">Sat</span>Soko
                       </span>
                     </Link>
                     <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)}>
