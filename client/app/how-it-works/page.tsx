@@ -8,9 +8,9 @@ export default function HowItWorksPage() {
   return (
     <div className="container px-4 py-8 md:px-6 md:py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">How BitSoko Works</h1>
+        <h1 className="text-4xl font-bold mb-4">How SatSoko Works</h1>
         <p className="text-gray-400 max-w-3xl mx-auto text-lg">
-          BitSoko is a Bitcoin-native marketplace that connects buyers and sellers worldwide through the Lightning
+          SatSoko is a Bitcoin-native marketplace that connects buyers and sellers worldwide through the Lightning
           Network.
         </p>
       </div>
@@ -242,7 +242,7 @@ export default function HowItWorksPage() {
             </p>
           </div>
           <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-            <h3 className="text-lg font-bold mb-2">What can I sell on BitSoko?</h3>
+            <h3 className="text-lg font-bold mb-2">What can I sell on SatSoko?</h3>
             <p className="text-gray-400">
               You can sell physical products, digital goods, and services as long as they comply with our terms of
               service. We do not allow illegal items or services.
@@ -252,7 +252,7 @@ export default function HowItWorksPage() {
             <h3 className="text-lg font-bold mb-2">How do I get started?</h3>
             <p className="text-gray-400">
               Create an account, connect your Lightning wallet, and you're ready to start buying or selling on
-              BitSoko.
+              SatSoko.
             </p>
           </div>
         </div>

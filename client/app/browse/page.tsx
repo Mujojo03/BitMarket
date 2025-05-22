@@ -21,7 +21,7 @@ export default function BrowsePage() {
   const [loading, setLoading] = useState(true)
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string | null>(categoryParam)
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000000])
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000])
   const [productType, setProductType] = useState<"all" | "physical" | "digital">("all")
 
   useEffect(() => {

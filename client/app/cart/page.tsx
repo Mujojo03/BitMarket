@@ -80,6 +80,7 @@ export default function CartPage() {
     }
   }
 
+  //modify this function to handle checkout
   const handleCheckout = async () => {
     try {
       setCheckingOut(true)

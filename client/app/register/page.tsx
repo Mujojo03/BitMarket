@@ -18,7 +18,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [passwordError, setPasswordError] = useState("")
-  const { signUp, error, loading } = useAuth()
+  const { signUp, loading } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -41,9 +41,9 @@ export default function RegisterPage() {
           <CardDescription>Enter your details to create a Bit Merket account</CardDescription>
         </CardHeader>
         <CardContent>
-          {(error || passwordError) && (
+          {passwordError && (
             <Alert variant="destructive" className="mb-4 bg-red-900/20 border-red-900">
-              <AlertDescription>{error || passwordError}</AlertDescription>
+              <AlertDescription>{passwordError}</AlertDescription>
             </Alert>
           )}
           <form onSubmit={handleSubmit} className="space-y-4">

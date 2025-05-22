@@ -1,5 +1,4 @@
 import Link from "next/link"
-import Image from "next/image"
 import { Bitcoin, ShieldCheck, Zap, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProductCard } from "@/components/product-card"
@@ -13,50 +12,38 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
+      {/* Hero Section - Enhanced */}
       <section className="relative overflow-hidden bg-dark py-20 md:py-32">
-        <div className="container px-4 md:px-6">
-          <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2">
-            <div className="flex flex-col justify-center space-y-4">
-              <div className="space-y-2">
-                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                  The Global Marketplace
-                  <br />
-                  <span className="text-bitcoin">Powered by Bitcoin</span>
-                </h1>
-                <p className="max-w-[600px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Buy and sell anything, anywhere in the world. Instant payments, low fees, no borders, no gatekeepers.
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link href="/cart">
-                  <Button className="bg-dark hover:bg-dark/90 text-white border border-gray-600 px-8 py-6 text-lg">
-                    Start Shopping
-                  </Button>
-                </Link>
-                <Link href="/seller/create">
-  <Button
-    className="bg-dark hover:bg-dark/90 text-white border border-gray-600 px-8 py-6 text-lg"
-  >
-    Become a Seller
-  </Button>
-</Link>
-
-                
-              </div>
-            </div>
-            <div className="flex items-center justify-center">
-              <div className="relative h-[350px] w-[350px] md:h-[450px] md:w-[450px]">
-                <Image
-                  src="https://media.easy.co.il/images/UserThumbs/10017264_1518742655427.png"
-                  alt="Bitcoin marketplace illustration"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-bitcoin/10 via-transparent to-transparent opacity-60" />
+        <div className="container relative px-4 md:px-6">
+          <div className="mx-auto max-w-3xl text-center">
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-6">
+              The Global Marketplace
+              <br />
+              <span className="text-bitcoin">Powered by Bitcoin</span>
+            </h1>
+            <p className="mx-auto max-w-[600px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mb-8">
+              Buy and sell anything, anywhere in the world. Instant payments, low fees, no borders, no gatekeepers.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link href="/cart">
+                <Button className="bg-dark hover:bg-bitcoin hover:text-black hover:border-bitcoin text-white border border-gray-600 px-8 py-6 text-lg w-full sm:w-auto transition-colors duration-300">
+                  Start Shopping
+                </Button>
+              </Link>
+              <Link href="/seller/create">
+                <Button className="bg-dark hover:bg-bitcoin hover:text-black hover:border-bitcoin text-white border border-gray-600 px-8 py-6 text-lg w-full sm:w-auto transition-colors duration-300">
+                  Become a Seller
+                </Button>
+              </Link>
             </div>
           </div>
+        </div>
+
+        {/* Decorative elements */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
+        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 transform">
+          <div className="h-16 w-[1px] bg-gradient-to-b from-gray-700 to-transparent"></div>
         </div>
       </section>
 
@@ -65,7 +52,7 @@ export default function Home() {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Why BitMarket?</h2>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Why SatSoko?</h2>
               <p className="max-w-[900px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 A marketplace built for the Bitcoin era, designed to empower sellers and buyers worldwide.
               </p>
@@ -155,7 +142,7 @@ export default function Home() {
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter text-black sm:text-4xl">Ready to Start Selling?</h2>
               <p className="max-w-[900px] text-black/80 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Join thousands of sellers already earning Bitcoin on BitMarket.
+                Join thousands of sellers already earning Bitcoin on SatSoko.
               </p>
             </div>
             <Link href="/seller/dashboard">
