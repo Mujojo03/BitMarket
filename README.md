@@ -1,6 +1,6 @@
-# ⚡ Lightning Marketplace
+# ⚡ SatSoko
 
-**Lightning Marketplace** is a secure, role-based e-commerce platform that enables users to buy and sell products using Bitcoin via the Lightning Network. It includes escrow protection for safe transactions, JWT-based authentication, and RESTful APIs for integration with web or mobile frontends.
+🛒SatSoko is a secure, role-based e-commerce platform that enables users to buy and sell products using Bitcoin via the Lightning Network. It includes escrow protection for safe transactions, JWT-based authentication, and RESTful APIs for integration with web or mobile frontends.
 
 ---
 
