@@ -38,7 +38,7 @@ export default function LoginPage() {
     e.preventDefault()
     setLocalError(null)
     try {
-      await signIn(email, password) //error here
+      await signIn(email, password)
     } catch (err: any) {
       setLocalError(err?.message || "Login failed")
     }

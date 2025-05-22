@@ -16,16 +16,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch(`${API_BASE}/login`, { //error here
+      const res = await fetch(`${API_BASE}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.message || "Login failed")
-
-      console.log("Logging in with:", { email, password });
-      console.log("Response data:", data);
 
       // Optionally store token or user info
       localStorage.setItem("user", JSON.stringify(data.user))
