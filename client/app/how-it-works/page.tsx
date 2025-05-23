@@ -8,9 +8,9 @@ export default function HowItWorksPage() {
   return (
     <div className="container px-4 py-8 md:px-6 md:py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">How BitMarket Works</h1>
+        <h1 className="text-4xl font-bold mb-4">How SatSoko Works</h1>
         <p className="text-gray-400 max-w-3xl mx-auto text-lg">
-          BitMarket is a Bitcoin-native marketplace that connects buyers and sellers worldwide through the Lightning
+          SatSoko is a Bitcoin-native marketplace that connects buyers and sellers worldwide through the Lightning
           Network.
         </p>
       </div>
@@ -31,7 +31,7 @@ export default function HowItWorksPage() {
                 </div>
                 <h3 className="text-xl font-bold mb-2">Connect Your Wallet</h3>
                 <p className="text-gray-400 mb-4">
-                  Connect your Lightning wallet to BitMarket to make instant Bitcoin payments.
+                  Connect your Lightning wallet to BitSoko to make instant Bitcoin payments.
                 </p>
                 <Image
                   src="https://cdn.vectorstock.com/i/preview-1x/73/73/connect-your-wallet-blue-gradient-concept-icon-vector-44547373.jpg"
@@ -173,7 +173,7 @@ export default function HowItWorksPage() {
           <div>
             <h3 className="text-xl font-bold mb-4">The Lightning Network</h3>
             <p className="text-gray-400 mb-4">
-              BitMarket uses the Lightning Network, a layer-2 solution built on top of Bitcoin, to enable instant,
+              BitSoko uses the Lightning Network, a layer-2 solution built on top of Bitcoin, to enable instant,
               low-fee transactions. This allows for:
             </p>
             <ul className="space-y-2 text-gray-400">
@@ -231,18 +231,18 @@ export default function HowItWorksPage() {
             <h3 className="text-lg font-bold mb-2">Do I need a Bitcoin wallet?</h3>
             <p className="text-gray-400">
               Yes, you'll need a Lightning-compatible Bitcoin wallet to buy or sell on BitMarket. We recommend wallets
-              like Bitnob, Phoenix, Muun, or Breez.
+              like Bitnob, Muun, or Breez.
             </p>
           </div>
           <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
             <h3 className="text-lg font-bold mb-2">How much are the fees?</h3>
             <p className="text-gray-400">
-              Sellers pay a flat 3% fee on each sale. There are no listing fees or monthly charges. Lightning Network
+              Sellers pay a flat 5% fee on each sale. There are no listing fees or monthly charges. Lightning Network
               transaction fees are typically less than a cent.
             </p>
           </div>
           <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-            <h3 className="text-lg font-bold mb-2">What can I sell on BitMarket?</h3>
+            <h3 className="text-lg font-bold mb-2">What can I sell on SatSoko?</h3>
             <p className="text-gray-400">
               You can sell physical products, digital goods, and services as long as they comply with our terms of
               service. We do not allow illegal items or services.
@@ -252,7 +252,7 @@ export default function HowItWorksPage() {
             <h3 className="text-lg font-bold mb-2">How do I get started?</h3>
             <p className="text-gray-400">
               Create an account, connect your Lightning wallet, and you're ready to start buying or selling on
-              BitMarket.
+              SatSoko.
             </p>
           </div>
         </div>
@@ -262,7 +262,7 @@ export default function HowItWorksPage() {
       <div className="mt-16 bg-bitcoin rounded-lg p-8 text-center">
         <h2 className="text-2xl font-bold text-black mb-4">Ready to join the Bitcoin economy?</h2>
         <p className="text-black/80 mb-6 max-w-2xl mx-auto">
-          Start buying and selling with Bitcoin today. Join thousands of users already using BitMarket.
+          Start buying and selling with Bitcoin today. Join thousands of users already using BitSoko.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/browse">

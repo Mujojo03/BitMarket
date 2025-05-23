@@ -24,7 +24,7 @@ export function AccountProfile({ user }: AccountProfileProps) {
 
       toast({
         title: "Success!",
-        description: "You are now a seller on Bit Merket.",
+        description: "You are now a seller on SatSoko.",
       })
     } catch (error) {
       console.error("Error becoming seller:", error)
@@ -77,7 +77,7 @@ export function AccountProfile({ user }: AccountProfileProps) {
         <Card className="bg-gray-800 border-gray-700">
           <CardHeader>
             <CardTitle>Become a Seller</CardTitle>
-            <CardDescription>Start selling your products on Bit Merket</CardDescription>
+            <CardDescription>Start selling your products on SatSoko</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-gray-400 mb-4">
