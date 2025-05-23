@@ -3,8 +3,8 @@ import { Bitcoin, ShieldCheck, Zap, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProductCard } from "@/components/product-card"
 import { CategoryCard } from "@/components/category-card"
-import { getFeaturedProducts } from "@/lib/mock-data"
-import { mockCategories } from "@/lib/mock-data"
+// import { getFeaturedProducts } from "@/lib/mock-data"
+// import { mockCategories } from "@/lib/mock-data"
 
 export default function Home() {
   const featuredProducts = getFeaturedProducts()
@@ -145,7 +145,7 @@ export default function Home() {
                 Join thousands of sellers already earning Bitcoin on SatSoko.
               </p>
             </div>
-            <Link href="/seller/dashboard">
+            <Link href="/seller/create">
               <Button className="bg-black hover:bg-black/90 text-white font-medium px-8 py-6 text-lg">
                 Open Your Shop
               </Button>

@@ -10,8 +10,8 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { useToast } from "@/components/ui/use-toast"
 import { useAuth } from "@/contexts/auth-context"
-import { cartApi } from "@/lib/api-service"
-import type { CartItem } from "@/lib/mock-data"
+// import { cartApi } from "@/lib/api-service"
+// import type { CartItem } from "@/lib/mock-data"
 
 export default function CartPage() {
   const { user } = useAuth()

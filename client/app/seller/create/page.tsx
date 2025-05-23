@@ -105,7 +105,7 @@ export default function SellerCreatePage() {
             <div className="flex flex-col items-center justify-center space-y-2">
               <p className="font-medium">What would you like to do next?</p>
               <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                <Link href="/seller/create-product">
+                <Link href="/product/product">
                   <Button className="bg-bitcoin hover:bg-bitcoin/90 text-black font-medium w-full">
                     Create Your First Product <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -214,7 +214,7 @@ export default function SellerCreatePage() {
           <div className="space-y-8">
             <div className="relative h-[350px] w-[350px] md:h-[450px] md:w-[450px] hidden lg:block">
               <Image
-                src="/placeholder.svg?height=450&width=450"
+                src="https://imgcdn.stablediffusionweb.com/2024/5/16/b58ae580-d409-447d-910a-4d90c0657778.jpg"
                 alt="Seller illustration"
                 fill
                 className="object-contain"

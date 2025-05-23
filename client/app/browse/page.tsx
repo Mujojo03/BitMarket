@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { ProductCard } from "@/components/product-card"
 import { ProductFilters } from "@/components/product-filters"
-import { productsApi, categoriesApi } from "@/lib/api-service"
-import type { Product, Category } from "@/lib/mock-data"
+// import { productsApi, categoriesApi } from "@/lib/api-service"
+// import type { Product, Category } from "@/lib/mock-data"
 
 export default function BrowsePage() {
   const searchParams = useSearchParams()
@@ -91,7 +91,7 @@ export default function BrowsePage() {
 
   const handleResetFilters = () => {
     setSelectedCategory(null)
-    setPriceRange([0, 1000000])
+    setPriceRange([0, 1000])
     setProductType("all")
   }
 

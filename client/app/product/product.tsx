@@ -9,10 +9,10 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ProductCard } from "@/components/product-card"
 import { formatSats } from "@/lib/utils"
-import { productsApi, reviewsApi } from "@/lib/api-service"
 import { useToast } from "@/components/ui/use-toast"
 import { useAuth } from "@/contexts/auth-context"
-import type { Product, Category, User, Review } from "@/lib/mock-data"
+// import { productsApi, reviewsApi } from "@/lib/api-service"
+// import type { Product, Category, User, Review } from "@/lib/mock-data"
 
 interface ProductPageProps {
   params: {
