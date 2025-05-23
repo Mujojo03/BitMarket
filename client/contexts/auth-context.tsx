@@ -5,8 +5,8 @@ import type React from "react"
 import { createContext, useContext, useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
-import { mockUsers, type User } from "@/lib/mock-data"
-import { usersApi } from "@/lib/api-service"
+// import { mockUsers, type User } from "@/lib/mock-data"
+// import { usersApi } from "@/lib/api-service"
 
 interface AuthContextType {
   user: User | null

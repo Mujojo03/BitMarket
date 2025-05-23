@@ -87,43 +87,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Team Section */}
-      {/* <div className="mb-16">
-        <h2 className="text-2xl font-bold mb-8 text-center">Our Team</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 flex flex-col items-center text-center">
-            <div className="relative h-32 w-32 rounded-full overflow-hidden mb-4">
-              <Image src="/placeholder.svg?height=128&width=128" alt="Team member" fill className="object-cover" />
-            </div>
-            <h3 className="text-xl font-bold">Alex Satoshi</h3>
-            <p className="text-bitcoin mb-2">Founder & CEO</p>
-            <p className="text-gray-400 text-sm">
-              Bitcoin enthusiast and entrepreneur with a background in e-commerce and fintech.
-            </p>
-          </div>
-          <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 flex flex-col items-center text-center">
-            <div className="relative h-32 w-32 rounded-full overflow-hidden mb-4">
-              <Image src="/placeholder.svg?height=128&width=128" alt="Team member" fill className="object-cover" />
-            </div>
-            <h3 className="text-xl font-bold">Maria Lightning</h3>
-            <p className="text-bitcoin mb-2">CTO</p>
-            <p className="text-gray-400 text-sm">
-              Lightning Network developer and open-source contributor with expertise in Bitcoin infrastructure.
-            </p>
-          </div>
-          <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 flex flex-col items-center text-center">
-            <div className="relative h-32 w-32 rounded-full overflow-hidden mb-4">
-              <Image src="/placeholder.svg?height=128&width=128" alt="Team member" fill className="object-cover" />
-            </div>
-            <h3 className="text-xl font-bold">David Block</h3>
-            <p className="text-bitcoin mb-2">Head of Operations</p>
-            <p className="text-gray-400 text-sm">
-              Experienced in marketplace operations and community building for decentralized platforms.
-            </p>
-          </div>
-        </div>
-      </div> */}
-
       {/* Join Us Section */}
       <div className="bg-gray-800 border border-gray-700 rounded-lg p-8 text-center mb-16">
         <h2 className="text-2xl font-bold mb-4">Join the SatSoko Community</h2>
