@@ -20,7 +20,7 @@ class Order(db.Model, SerializerMixin):
     """
     __tablename__ = 'orders'
 
-    serialize_rules = ('-buyer.orders','-product_orders.order')
+    serialize_rules = ('-buyer.orders','-product_orders.order','-payments.order')
 
     id = db.Column(db.Integer, primary_key=True)
     buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, index=True)
@@ -32,3 +32,7 @@ class Order(db.Model, SerializerMixin):
     escrow = db.relationship('Escrow', back_populates='order', uselist=False, cascade="all, delete-orphan")
     payments = db.relationship('Payment', back_populates='order', cascade="all, delete-orphan")
     product_orders = db.relationship('ProductOrder', back_populates='order', cascade="all, delete-orphan")
+
+    @property
+    def total_amount(self):
+        return sum(po.subtotal for po in self.product_orders)
