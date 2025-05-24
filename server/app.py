@@ -124,6 +124,10 @@ if __name__ == '__main__':
     app = create_app()
     # start_invoice_stream()
     socketio.run(app, host='0.0.0.0', port=5000)
+else:
+    # For gunicorn: expose the app
+    app = create_app()
+
 
 
 
