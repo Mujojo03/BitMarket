@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { WalletModal } from "@/components/wallet-modal"
 import { useAuth } from "@/contexts/auth-context"
+import Image from "next/image";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,13 +28,25 @@ export function Navbar() {
     <>
       <header className="sticky top-0 z-50 w-full border-b border-gray-800 bg-dark">
         <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <Bitcoin className="h-6 w-6 text-bitcoin" />
-            <span className="text-xl font-bold">
-              <span className="text-bitcoin">Bit</span>Market
-            </span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3">
+  <Image
+    src="/logosat.jpg"
+    alt="SatSoko Logo"
+    width={36}
+    height={36}
+    className="h-9 w-9 object-contain"
+  />
+  {/* <Bitcoin className="h-6 w-6 text-bitcoin" /> */}
+  <span className="text-xl font-bold">
+    <span className="text-bitcoin">Sat</span>Soko
+  </span>
+
+</Link>
+
+
+          {/* Horizontal Navigation */}
+          <nav className="flex items-center gap-6 ml-8">
             <Link href="/browse" className="text-sm font-medium hover:text-bitcoin transition-colors">
               Browse
             </Link>
@@ -48,12 +62,16 @@ export function Navbar() {
             <Link href="/contact" className="text-sm font-medium hover:text-bitcoin transition-colors">
               Contact
             </Link>
-            <SearchBar />
+            <div className="ml-4">
+              <SearchBar />
+            </div>
           </nav>
-          <div className="flex items-center gap-4">
+
+          {/* Right Side Buttons */}
+          <div className="flex items-center gap-4 ml-4">
             <Link
               href="/cart"
-              className="hidden md:flex items-center text-sm font-medium hover:text-bitcoin transition-colors"
+              className="flex items-center text-sm font-medium hover:text-bitcoin transition-colors"
             >
               <ShoppingCart className="h-5 w-5 mr-1" />
               <span className="sr-only md:not-sr-only">Cart</span>
@@ -98,18 +116,26 @@ export function Navbar() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Link href="/login" className="hidden md:flex items-center gap-1 hover:text-bitcoin transition-colors">
-                <User className="h-5 w-5" />
-                <span className="font-medium">Login</span>
+              <Link href="/login">
+                <Button
+                  size="sm"
+                  className="flex items-center border border-white bg-transparent text-white hover:bg-white hover:text-bitcoin font-medium rounded-md px-4 py-2 transition-colors"
+                  style={{ boxShadow: "none" }}
+                >
+                  <User className="h-4 w-4 mr-2" />
+                  Login
+                </Button>
               </Link>
             )}
 
             <Button
-              className="bg-bitcoin hover:bg-bitcoin/90 text-black font-medium"
+              className="bg-bitcoin hover:bg-bitcoin/90 text-black font-medium px-4 py-2 rounded-md"
               onClick={() => setIsWalletModalOpen(true)}
             >
               Connect Wallet
             </Button>
+
+            {/* Mobile menu trigger, hidden on desktop */}
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon" className="md:hidden">
@@ -123,7 +149,7 @@ export function Navbar() {
                     <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
                       <Bitcoin className="h-6 w-6 text-bitcoin" />
                       <span className="text-xl font-bold">
-                        <span className="text-bitcoin">Bit</span>Market
+                        <span className="text-bitcoin">Sat</span>Soko
                       </span>
                     </Link>
                     <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)}>

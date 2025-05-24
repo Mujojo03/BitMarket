@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useToast } from "@/components/ui/use-toast"
 import { ProductForm } from "@/components/account/product-form"
 import { useAuth } from "@/contexts/auth-context"
-import { productsApi } from "@/lib/api-service"
+// import { productsApi } from "@/lib/api-service"
 
 export default function CreateProductPage() {
   const { user, loading } = useAuth()

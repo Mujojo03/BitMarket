@@ -14,7 +14,7 @@ export default function SellPage() {
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Start Selling on <span className="text-bitcoin">Bit Merket</span>
+                  Start Selling on <span className="text-bitcoin">SatSoko</span>
                 </h1>
                 <p className="max-w-[600px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Open your shop and start earning Bitcoin. Reach customers worldwide with our low-fee, Bitcoin-native
@@ -37,7 +37,7 @@ export default function SellPage() {
             <div className="flex items-center justify-center">
               <div className="relative h-[350px] w-[350px] md:h-[450px] md:w-[450px]">
                 <Image
-                  src="/placeholder.svg?height=450&width=450"
+                  src="https://www.picpedia.org/chalkboard/images/sell.jpg"
                   alt="Seller illustration"
                   fill
                   className="object-contain"
@@ -53,7 +53,7 @@ export default function SellPage() {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Why Sell on Bit Merket?</h2>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Why Sell on SatSoko?</h2>
               <p className="max-w-[900px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Join thousands of sellers already earning Bitcoin on our marketplace.
               </p>
@@ -102,7 +102,7 @@ export default function SellPage() {
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">How It Works</h2>
               <p className="max-w-[900px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Getting started as a seller on Bit Market is simple.
+                Getting started as a seller on SatSoko is simple.
               </p>
             </div>
           </div>
@@ -139,7 +139,7 @@ export default function SellPage() {
             </div>
           </div>
           <div className="flex justify-center mt-8">
-            <Link href="/sell/register">
+            <Link href="/seller/create">
               <Button className="bg-bitcoin hover:bg-bitcoin/90 text-black font-medium px-8 py-6 text-lg">
                 Get Started Now
               </Button>
@@ -161,7 +161,7 @@ export default function SellPage() {
           </div>
           <div className="mx-auto max-w-3xl space-y-4 py-12">
             <div className="rounded-lg border border-gray-800 p-6">
-              <h3 className="text-lg font-medium">What can I sell on Bit Merket?</h3>
+              <h3 className="text-lg font-medium">What can I sell on SatSoko?</h3>
               <p className="mt-2 text-sm text-gray-400">
                 You can sell physical products, digital goods, services, and more. We welcome a wide range of products
                 as long as they comply with our terms of service.
@@ -183,7 +183,7 @@ export default function SellPage() {
             <div className="rounded-lg border border-gray-800 p-6">
               <h3 className="text-lg font-medium">What if I don't have a Lightning wallet?</h3>
               <p className="mt-2 text-sm text-gray-400">
-                We recommend several user-friendly Lightning wallets like Phoenix, Muun, or Breez. Check our guide in
+                We recommend several user-friendly Lightning wallets like Phoenix, Bitnob, or Breez. Check our guide in
                 the Help section for detailed setup instructions.
               </p>
             </div>

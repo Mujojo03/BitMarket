@@ -54,7 +54,7 @@ export default function SellerCreatePage() {
 
       toast({
         title: "Success!",
-        description: "You are now a seller on BitMarket.",
+        description: "You are now a seller on SatSoko.",
       })
 
       // Move to next step
@@ -95,17 +95,17 @@ export default function SellerCreatePage() {
               <CheckCircle className="h-8 w-8 text-green-500" />
             </div>
             <CardTitle className="text-2xl">Congratulations!</CardTitle>
-            <CardDescription>You are now a seller on BitMarket</CardDescription>
+            <CardDescription>You are now a seller on SatSoko</CardDescription>
           </CardHeader>
           <CardContent className="text-center space-y-4">
             <p>
               Your seller account has been created successfully. You can now start listing products and earning Bitcoin
-              on BitMarket.
+              on SatSoko.
             </p>
             <div className="flex flex-col items-center justify-center space-y-2">
               <p className="font-medium">What would you like to do next?</p>
               <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                <Link href="/seller/create-product">
+                <Link href="/product/product">
                   <Button className="bg-bitcoin hover:bg-bitcoin/90 text-black font-medium w-full">
                     Create Your First Product <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -129,7 +129,7 @@ export default function SellerCreatePage() {
         <div className="flex flex-col justify-center space-y-4">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-              Become a <span className="text-bitcoin">BitMarket</span> Seller
+              Become a <span className="text-bitcoin">SatSoko</span> Seller
             </h1>
             <p className="text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               Start selling your products and earn Bitcoin from customers worldwide.
@@ -153,7 +153,7 @@ export default function SellerCreatePage() {
                     required
                     className="bg-gray-700 border-gray-600"
                   />
-                  <p className="text-xs text-gray-400">This will be your seller handle on BitMarket.</p>
+                  <p className="text-xs text-gray-400">This will be your seller handle on SatSoko.</p>
                 </div>
 
                 <div className="space-y-2">
@@ -214,7 +214,7 @@ export default function SellerCreatePage() {
           <div className="space-y-8">
             <div className="relative h-[350px] w-[350px] md:h-[450px] md:w-[450px] hidden lg:block">
               <Image
-                src="/placeholder.svg?height=450&width=450"
+                src="https://imgcdn.stablediffusionweb.com/2024/5/16/b58ae580-d409-447d-910a-4d90c0657778.jpg"
                 alt="Seller illustration"
                 fill
                 className="object-contain"
