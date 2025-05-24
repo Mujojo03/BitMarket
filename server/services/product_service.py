@@ -1,5 +1,6 @@
 import datetime
-from models import Product, db
+from models.product import Product
+from models.db import db
 
 def create_product(seller_id, category_id, name, description, price_sats, img_url, stock_quantity):
     try:

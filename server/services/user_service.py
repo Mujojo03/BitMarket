@@ -1,4 +1,5 @@
-from models import db, User
+from models.user import  User
+from models.db import db
 
 def get_user_by_id(user_id):
     """Fetch a user by ID."""
