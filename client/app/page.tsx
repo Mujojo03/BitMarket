@@ -1,5 +1,4 @@
 import Link from "next/link"
-import Image from "next/image"
 import { Bitcoin, ShieldCheck, Zap, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProductCard } from "@/components/product-card"
@@ -16,41 +15,28 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-dark py-20 md:py-32">
         <div className="container px-4 md:px-6">
-          <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2">
-            <div className="flex flex-col justify-center space-y-4">
-              <div className="space-y-2">
-                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                  The Global Marketplace
-                  <br />
-                  <span className="text-bitcoin">Powered by Bitcoin</span>
-                </h1>
-                <p className="max-w-[600px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Buy and sell anything, anywhere in the world. Instant payments, low fees, no borders, no gatekeepers.
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link href="/cart">
-                  <Button className="bg-bitcoin hover:bg-bitcoin/90 text-black font-medium px-8 py-6 text-lg">
-                    Start Shopping
-                  </Button>
-                </Link>
-                <Link href="/seller/create">
-                  <Button variant="outline" className="border-gray-600 hover:bg-gray-800 px-8 py-6 text-lg">
-                    Become a Seller
-                  </Button>
-                </Link>
-              </div>
+          <div className="flex flex-col justify-center space-y-4">
+            <div className="space-y-2">
+              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+                The Global Marketplace
+                <br />
+                <span className="text-bitcoin">Powered by Bitcoin</span>
+              </h1>
+              <p className="max-w-[600px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                Buy and sell anything, anywhere in the world. Instant payments, low fees, no borders, no gatekeepers.
+              </p>
             </div>
-            <div className="flex items-center justify-center">
-              <div className="relative h-[350px] w-[350px] md:h-[450px] md:w-[450px]">
-                <Image
-                  src="/placeholder.svg?height=450&width=450"
-                  alt="Bitcoin marketplace illustration"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
+            <div className="flex flex-col gap-2 min-[400px]:flex-row">
+              <Link href="/cart">
+                <Button className="bg-bitcoin hover:bg-bitcoin/90 text-black font-medium px-8 py-6 text-lg">
+                  Start Shopping
+                </Button>
+              </Link>
+              <Link href="/seller/create">
+                <Button className="bg-dark hover:bg-dark/90 text-white border border-gray-600 px-8 py-6 text-lg">
+                  Become a Seller
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

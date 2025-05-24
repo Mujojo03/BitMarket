@@ -34,7 +34,7 @@ export default function HowItWorksPage() {
                   Connect your Lightning wallet to BitMarket to make instant Bitcoin payments.
                 </p>
                 <Image
-                  src="/placeholder.svg?height=150&width=200"
+                  src="https://cdn.vectorstock.com/i/preview-1x/73/73/connect-your-wallet-blue-gradient-concept-icon-vector-44547373.jpg"
                   alt="Connect wallet illustration"
                   width={200}
                   height={150}
@@ -55,7 +55,7 @@ export default function HowItWorksPage() {
                   Browse products from sellers worldwide and make purchases with Bitcoin.
                 </p>
                 <Image
-                  src="/placeholder.svg?height=150&width=200"
+                  src="https://thereistalent.com/wp-content/uploads/2022/03/Blog-7.png.webp"
                   alt="Browse products illustration"
                   width={200}
                   height={150}
@@ -76,7 +76,7 @@ export default function HowItWorksPage() {
                   Receive physical items via shipping or instant access to digital products.
                 </p>
                 <Image
-                  src="/placeholder.svg?height=150&width=200"
+                  src="https://msautomacao.com.br/wp-content/uploads/2021/08/Gestao-preco-produtos-digitais-automacao-comercial-blumenau-600x400.jpg"
                   alt="Receive items illustration"
                   width={200}
                   height={150}
@@ -231,13 +231,13 @@ export default function HowItWorksPage() {
             <h3 className="text-lg font-bold mb-2">Do I need a Bitcoin wallet?</h3>
             <p className="text-gray-400">
               Yes, you'll need a Lightning-compatible Bitcoin wallet to buy or sell on BitMarket. We recommend wallets
-              like Phoenix, Muun, or Breez.
+              like Bitnob, Phoenix, Muun, or Breez.
             </p>
           </div>
           <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
             <h3 className="text-lg font-bold mb-2">How much are the fees?</h3>
             <p className="text-gray-400">
-              Sellers pay a flat 5% fee on each sale. There are no listing fees or monthly charges. Lightning Network
+              Sellers pay a flat 3% fee on each sale. There are no listing fees or monthly charges. Lightning Network
               transaction fees are typically less than a cent.
             </p>
           </div>

@@ -102,7 +102,7 @@ export default function SellPage() {
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">How It Works</h2>
               <p className="max-w-[900px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Getting started as a seller on Bit Merket is simple.
+                Getting started as a seller on Bit Market is simple.
               </p>
             </div>
           </div>

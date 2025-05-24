@@ -98,11 +98,9 @@ export function Navbar() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Link href="/login">
-                <Button variant="outline" size="sm" className="hidden md:flex">
-                  <User className="h-4 w-4 mr-2" />
-                  Login
-                </Button>
+              <Link href="/login" className="hidden md:flex items-center gap-1 hover:text-bitcoin transition-colors">
+                <User className="h-5 w-5" />
+                <span className="font-medium">Login</span>
               </Link>
             )}
 
