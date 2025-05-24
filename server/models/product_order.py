@@ -31,3 +31,14 @@ class ProductOrder(db.Model, SerializerMixin):
 
     order = db.relationship('Order', back_populates='product_orders')
     product = db.relationship('Product', back_populates='product_orders')
+
+
+    def calculate_subtotal(self):
+        """
+        Calculates and sets the subtotal based on the product price and quantity.
+        Assumes `product.price_sats` exists and is in satoshis.
+        """
+        if self.product and self.quantity:
+            self.subtotal = self.product.price_sats * self.quantity
+        else:
+            self.subtotal = 0
