@@ -42,3 +42,6 @@ class Product(db.Model, SerializerMixin):
     category = db.relationship('Category', back_populates='products')
     carts = db.relationship('Cart', back_populates='product', cascade="all, delete-orphan")
     product_orders = db.relationship('ProductOrder', back_populates='product', cascade="all, delete-orphan")
+
+
+    
