@@ -1,12 +1,20 @@
 "use client"
 
-import type React from "react"
-
 import { createContext, useContext, useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
-import { mockUsers, type User } from "@/lib/mock-data"
-import { usersApi } from "@/lib/api-service"
+import { authApi } from "@/lib/api-service"
+
+interface User {
+  id: string
+  email: string
+  fullName: string
+  isSeller: boolean
+  sellerRating?: number
+  sellerSales: number
+  lightningAddress?: string
+  createdAt: string
+}
 
 interface AuthContextType {
   user: User | null
@@ -15,6 +23,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, fullName: string) => Promise<void>
   signOut: () => void
   becomeSeller: () => Promise<void>
+  updateProfile: (data: Partial<User>) => Promise<void>
   refreshProfile: () => Promise<void>
 }
 
@@ -30,13 +39,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const storedUser = localStorage.getItem("bitmerket_user")
-        if (storedUser) {
-          const parsedUser = JSON.parse(storedUser)
-          setUser(parsedUser)
+        // Check if we have a token
+        const token = localStorage.getItem('bitmarket_token')
+        
+        if (token) {
+          // Get current user data
+          const { user } = await authApi.getCurrentUser()
+          setUser(user)
         }
       } catch (error) {
         console.error("Error checking session:", error)
+        // Clear invalid token
+        localStorage.removeItem('bitmarket_token')
       } finally {
         setLoading(false)
       }
@@ -47,25 +61,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     try {
-      // For demo purposes, we'll just find a user with matching email
-      const foundUser = mockUsers.find((u) => u.email.toLowerCase() === email.toLowerCase())
-
-      if (!foundUser) {
-        throw new Error("Invalid email or password")
-      }
-
-      // In a real app, we would verify the password here
-
-      // Set user in state and localStorage
-      setUser(foundUser)
-      localStorage.setItem("bitmerket_user", JSON.stringify(foundUser))
-
+      const { user } = await authApi.login({ email, password })
+      
+      setUser(user)
+      
       toast({
         title: "Welcome back!",
-        description: `You've successfully signed in as ${foundUser.fullName || foundUser.email}`,
+        description: `You've successfully signed in as ${user.fullName || user.email}`,
       })
-
-      return foundUser
+      
+      return user
     } catch (error) {
       console.error("Error signing in:", error)
       toast({
@@ -79,37 +84,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signUp = async (email: string, password: string, fullName: string) => {
     try {
-      // Check if user already exists
-      const existingUser = mockUsers.find((u) => u.email.toLowerCase() === email.toLowerCase())
-
-      if (existingUser) {
-        throw new Error("User with this email already exists")
-      }
-
-      // Create new user
-      const newUser: User = {
-        id: `user${Date.now()}`,
-        email,
-        fullName,
-        isSeller: false,
-        sellerRating: 0,
-        sellerSales: 0,
-        createdAt: new Date().toISOString(),
-      }
-
-      // Add to mock users (in a real app, this would be a database operation)
-      mockUsers.push(newUser)
-
-      // Set user in state and localStorage
-      setUser(newUser)
-      localStorage.setItem("bitmerket_user", JSON.stringify(newUser))
-
+      const { user } = await authApi.register({ email, password, fullName })
+      
+      setUser(user)
+      
       toast({
         title: "Account created!",
         description: "Your account has been created successfully.",
       })
-
-      return newUser
+      
+      return user
     } catch (error) {
       console.error("Error signing up:", error)
       toast({
@@ -122,10 +106,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   const signOut = () => {
+    authApi.logout()
     setUser(null)
-    localStorage.removeItem("bitmerket_user")
     router.push("/")
-
+    
     toast({
       title: "Signed out",
       description: "You've been signed out successfully.",
@@ -134,17 +118,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const becomeSeller = async () => {
     try {
-      if (!user) {
-        throw new Error("You must be logged in to become a seller")
-      }
-
-      // Update user to become a seller
-      const updatedUser = await usersApi.becomeSeller(user.id)
-
-      // Update user in state and localStorage
+      const { user: updatedUser } = await authApi.becomeSeller()
+      
       setUser(updatedUser)
-      localStorage.setItem("bitmerket_user", JSON.stringify(updatedUser))
-
+      
       return updatedUser
     } catch (error) {
       console.error("Error becoming seller:", error)
@@ -157,23 +134,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  const updateProfile = async (data: Partial<User>) => {
+    try {
+      const { user: updatedUser } = await authApi.updateProfile(data)
+      
+      setUser(updatedUser)
+      
+      return updatedUser
+    } catch (error) {
+      console.error("Error updating profile:", error)
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to update profile. Please try again.",
+      })
+      throw error
+    }
+  }
+
   const refreshProfile = async () => {
     try {
-      if (!user) {
-        throw new Error("No user logged in")
-      }
-
-      // Get updated user profile
-      const updatedUser = await usersApi.getUserById(user.id)
-
-      if (!updatedUser) {
-        throw new Error("User not found")
-      }
-
-      // Update user in state and localStorage
+      const { user: updatedUser } = await authApi.getCurrentUser()
+      
       setUser(updatedUser)
-      localStorage.setItem("bitmerket_user", JSON.stringify(updatedUser))
-
+      
       return updatedUser
     } catch (error) {
       console.error("Error refreshing profile:", error)
@@ -190,6 +174,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         signUp,
         signOut,
         becomeSeller,
+        updateProfile,
         refreshProfile,
       }}
     >

@@ -87,7 +87,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Team Section */}
+      {/* Team Section
       <div className="mb-16">
         <h2 className="text-2xl font-bold mb-8 text-center">Our Team</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -122,7 +122,7 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Join Us Section */}
       <div className="bg-gray-800 border border-gray-700 rounded-lg p-8 text-center mb-16">

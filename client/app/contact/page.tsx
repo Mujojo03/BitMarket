@@ -79,8 +79,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-medium">Phone</h3>
-                  <p className="text-gray-400">+1 (555) 123-4567</p>
-                  <p className="text-sm text-gray-500 mt-1">Monday-Friday, 9AM-5PM EST</p>
+                  <p className="text-gray-400">+254 113325992</p>
+                  <p className="text-sm text-gray-500 mt-1">Monday-Friday, 9AM-5PM EAT</p>
                 </div>
               </div>
 
@@ -90,8 +90,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-medium">Office</h3>
-                  <p className="text-gray-400">123 Bitcoin Street</p>
-                  <p className="text-gray-400">San Francisco, CA 94103</p>
+                  <p className="text-gray-400">Bitcoin Dada</p>
+                  <p className="text-gray-400">Nairobi, Kenya3</p>
                 </div>
               </div>
 
