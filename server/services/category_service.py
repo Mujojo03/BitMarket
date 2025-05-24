@@ -1,4 +1,4 @@
-from models import db
+from models.db import db
 from models.category import Category
 
 def get_all_categories():
@@ -16,7 +16,6 @@ def create_category(name):
 def update_category(category, name):
     category.name = name
     db.session.commit()
-    return category
 
 def delete_category(category):
     # Soft delete
