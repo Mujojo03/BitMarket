@@ -22,7 +22,22 @@ print("LND_HOST =", os.getenv("LND_HOST"))
 from config.config import DevelopmentConfig, ProductionConfig
 from routers import initialize_routes
 from routers.invoice_router import invoice_bp
-import models
+
+import models 
+# from models.db import db
+# from models.cart import Cart
+# from models.category import Category
+# from models.order import Order
+# from models.transaction import Transaction
+# from models.wallet import Wallet
+# from models.product_order import ProductOrder
+# from models.payment import Payment
+# from models.escrow import Escrow
+# from models.user_role import UserRole
+# from models.permission import ROLE_PERMISSIONS
+# from models.product import Product
+# from models.role import Role
+# from models.user import User
 
 
 
