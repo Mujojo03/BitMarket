@@ -3,28 +3,28 @@ import type { Product, Category, Seller } from "./types"
 export const sellers: Seller[] = [
   {
     id: "seller1",
-    name: "BitcoinArtisan",
+    name: "Hiking Gear",
     rating: 4.8,
     sales: 243,
     joinedDate: "2023-01-15",
   },
   {
     id: "seller2",
-    name: "SatoshiCrafts",
+    name: "Dada Crafts",
     rating: 4.9,
     sales: 189,
     joinedDate: "2023-03-22",
   },
   {
     id: "seller3",
-    name: "LightningStore",
+    name: "Electronics Hub",
     rating: 4.7,
     sales: 312,
     joinedDate: "2022-11-05",
   },
   {
     id: "seller4",
-    name: "BlockchainGoods",
+    name: "Makeup by Sharon",
     rating: 4.6,
     sales: 156,
     joinedDate: "2023-05-18",
@@ -34,7 +34,7 @@ export const sellers: Seller[] = [
 export const featuredProducts: Product[] = [
   {
     id: "product1",
-    name: "Handcrafted Bitcoin Leather Wallet",
+    name: "Handcrafted Leather Wallet with a bitcoin logo",
     description:
       "A premium leather wallet with a subtle Bitcoin logo embossed on the front. Perfect for storing your cards and cash while showing your Bitcoin pride.",
     price: 150000, // in sats

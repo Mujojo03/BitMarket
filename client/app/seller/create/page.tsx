@@ -27,6 +27,7 @@ export default function SellerCreatePage() {
   const [step, setStep] = useState(1)
 
   useEffect(() => {
+    console.log("User:", user, "Loading:", loading)
     if (!loading && !user) {
       router.push("/login?redirect=/seller/create")
       return
@@ -214,7 +215,7 @@ export default function SellerCreatePage() {
           <div className="space-y-8">
             <div className="relative h-[350px] w-[350px] md:h-[450px] md:w-[450px] hidden lg:block">
               <Image
-                src="/placeholder.svg?height=450&width=450"
+                src="https://imgcdn.stablediffusionweb.com/2024/5/16/b58ae580-d409-447d-910a-4d90c0657778.jpg"
                 alt="Seller illustration"
                 fill
                 className="object-contain"

@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function ContactPage() {
   return (
@@ -115,6 +116,8 @@ export default function ContactPage() {
                     </svg>
                     <span className="sr-only">Facebook</span>
                   </Button>
+
+                  <Link href="https://twitter.com/satsoko" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon" className="rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -132,16 +135,19 @@ export default function ContactPage() {
                     </svg>
                     <span className="sr-only">Twitter</span>
                   </Button>
-                  <Button variant="outline" size="icon" className="rounded-full">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
+                  </Link>
+
+                  <Link href="https://www.instagram.com/sat_soko/" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="icon" className="rounded-full">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
                       strokeLinejoin="round"
                       className="h-5 w-5"
                     >
@@ -151,6 +157,9 @@ export default function ContactPage() {
                     </svg>
                     <span className="sr-only">Instagram</span>
                   </Button>
+                  </Link>
+
+                  <Link href="https://www.linkedin.com/company/satsoko" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon" className="rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -170,6 +179,8 @@ export default function ContactPage() {
                     </svg>
                     <span className="sr-only">LinkedIn</span>
                   </Button>
+                  </Link>
+
                 </div>
               </div>
             </CardContent>

@@ -22,7 +22,7 @@ export default function SellPage() {
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link href="/sell/register">
+                <Link href="/seller/create">
                   <Button className="bg-bitcoin hover:bg-bitcoin/90 text-black font-medium px-8 py-6 text-lg">
                     Open Your Shop
                   </Button>
@@ -139,7 +139,7 @@ export default function SellPage() {
             </div>
           </div>
           <div className="flex justify-center mt-8">
-            <Link href="/sell/register">
+            <Link href="/seller/create">
               <Button className="bg-bitcoin hover:bg-bitcoin/90 text-black font-medium px-8 py-6 text-lg">
                 Get Started Now
               </Button>
@@ -201,7 +201,7 @@ export default function SellPage() {
                 Join the Bitcoin economy and start earning today.
               </p>
             </div>
-            <Link href="/sell/register">
+            <Link href="/seller/create">
               <Button className="bg-black hover:bg-black/90 text-white font-medium px-8 py-6 text-lg">
                 Open Your Shop
               </Button>

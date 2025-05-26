@@ -16,6 +16,7 @@ interface AuthContextType {
   signOut: () => void
   becomeSeller: () => Promise<void>
   refreshProfile: () => Promise<User>
+  error: string | null
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -25,6 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
   const router = useRouter()
   const { toast } = useToast()
+  const [error, setError] = useState<string | null>(null)
 
   // Check for existing session on mount
   useEffect(() => {
@@ -191,6 +193,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         signOut,
         becomeSeller,
         refreshProfile,
+        error,
       }}
     >
       {children}
