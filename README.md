@@ -1,140 +1,176 @@
-# ⚡ SatSoko
+#SatSoko Marketplace
 
-🛒SatSoko is a secure, role-based e-commerce platform that enables users to buy and sell products using Bitcoin via the Lightning Network. It includes escrow protection for safe transactions, JWT-based authentication, and RESTful APIs for integration with web or mobile frontends.
+SatSoko is a global, Bitcoin-powered marketplace built on top of the Lightning Network, enabling borderless peer-to-peer commerce without intermediaries. This project is inspired by BitMarket and provides a seamless experience for both buyers and sellers, leveraging the power of Bitcoin for instant, low-fee transactions.
 
----
+Table of Contents
+Features
 
-## 📚 Table of Contents
+Technologies Used
 
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Setup Instructions](#️-setup-instructions)
-- [API Endpoints](#-api-endpoints)
-- [Folder Structure](#-folder-structure)
-- [Contributors](#-contributors)
-- [License](#-license)
+Getting Started
 
----
+Project Structure
 
-## ✅ Features
+User Workflow
 
-| Feature                        | Description                                                                 |
-|-------------------------------|-----------------------------------------------------------------------------|
-| **User Registration/Login**   | Secure user onboarding for buyers, sellers, and admins.                    |
-| **JWT Authentication**        | Token-based access to protect backend routes.                             |
-| **Role-Based Access Control** | Different permissions for buyers, sellers, and admins.                    |
-| **Product Management**        | Sellers can create, read, update, and delete products.                    |
-| **Cart System**               | Users can add multiple items before checkout.                             |
-| **Order Placement + Escrow**  | Escrow logic ensures both parties are protected during transactions.      |
-| **Lightning Payment**         | Bitcoin payments handled via LND (Lightning Network Daemon).              |
-| **RESTful API Resources**     | Clean and scalable API for frontend/mobile consumption.                   |
-| **Admin Panel (Optional)**    | Manage users, view transactions, and oversee activity.                    |
+Buyer Journey
 
----
+Seller Journey
 
-## 🛠 Tech Stack
+Dual Role (Buyer & Seller)
 
-- **Backend:** Python + Flask
-- **Authentication:** JWT (Flask-JWT-Extended)
-- **Database:** PostgreSQL / SQLite (based on config)
-- **Payments:** Lightning Network (via LND gRPC)
-- **Frontend (optional):** React / Vue.js / Jinja
-- **Dev Tools:** Docker (optional), Postman, Git
+Lightning Network Integration
 
----
+Example User Journey
 
-## ⚙️ Setup Instructions
+Backend Integration
 
-### 1. Clone the Repository
+Contributing
 
-```bash
-git clone https://github.com/your-username/lightning-marketplace.git
-cd lightning-marketplace
-2. Create a Virtual Environment & Install Dependencies
+License
+
+Features
+User authentication (login/register)
+
+Product browsing, search, and filtering
+
+Shopping cart functionality
+
+Seller dashboard with analytics
+
+Product management (add, edit, delete)
+
+Order tracking for buyers and sellers
+
+Lightning wallet integration for instant Bitcoin payments
+
+Responsive design for all devices
+
+Technologies Used
+Frontend: Next.js 14, React, TypeScript
+
+Styling: Tailwind CSS, shadcn/ui components
+
+State Management: React Context API
+
+Authentication: Custom authentication with local storage (for demo purposes)
+
+Routing: Next.js App Router
+
+Getting Started
+Prerequisites
+Node.js 18.17.0 or later
+
+npm or yarn
+
+Installation
+Clone the repository:
+
 bash
-Copy
-Edit
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-3. Configure Environment Variables
+git clone https://github.com/Mujojo03/BitMarket.git
+cd BitMarket
+Install dependencies:
+
 bash
-Copy
-Edit
-cp .env.example .env
-# Then edit .env with your database URI, JWT_SECRET_KEY, and LND config
-4. Run Migrations
+npm install
+# or
+yarn install
+Run the development server:
+
 bash
-Copy
-Edit
-flask db init
-flask db migrate -m "Initial migration"
-flask db upgrade
-5. Start the Development Server
+npm run dev
+# or
+yarn dev
+Open your browser:
+
+Visit http://localhost:3000
+
+Project Structure
+text
+/app        - Next.js App Router pages and layouts
+/components - Reusable React components
+/contexts   - React Context providers
+/lib        - Utility functions, types, and mock data
+/public     - Static assets (images, icons, etc.)
+User Workflow
+Buyer Journey
+Account Creation
+
+Buyers must register (email, password, name) to purchase and track orders.
+
+Email verification is required; no KYC for basic buying.
+
+Wallet Connection
+
+Lightning wallet connection required at checkout or via settings.
+
+Supports QR code, Lightning address, or LNURL authentication.
+
+Shopping
+
+Browse products, add to cart, checkout, pay via Lightning, and track orders.
+
+Seller Journey
+Becoming a Seller
+
+Any user can become a seller by completing a seller profile.
+
+Must provide a Lightning address for payments.
+
+Seller Dashboard
+
+Manage products, orders, and view analytics.
+
+Receive payments instantly to the Lightning address.
+
+Dual Role (Buyer & Seller)
+Users can buy and sell with a single account.
+
+Switch between buyer and seller dashboards easily.
+
+Unified reputation and ability to use earnings for purchases.
+
+Lightning Network Integration
+All payments are processed via the Lightning Network for speed and low fees.
+
+Sellers must set a Lightning address to receive funds.
+
+Buyers connect wallets via QR, address, or LNURL.
+
+Example User Journey
+Alice registers, connects her Muun wallet, buys a product, and then becomes a seller by adding her Lightning address and listing handmade items—all with the same account. She manages both buying and selling activities seamlessly.
+
+Backend Integration
+This frontend is designed to connect to a Flask backend. The API service functions in /lib/api-service.ts are structured for easy adaptation to your backend.
+
+Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+License
+MIT
+
+Pushing to GitHub
+Initialize git repository (if not already done):
+
 bash
-Copy
-Edit
-flask run
-🔌 API Endpoints
-🔐 Authentication
-POST /api/auth/login
-Login and receive JWT token.
+git init
+Add all files to staging:
 
-Request:
+bash
+git add .
+Commit changes:
 
-json
-Copy
-Edit
-{
-  "email": "user@example.com",
-  "password": "yourPassword"
-}
-Response:
+bash
+git commit -m "Initial commit: SatSoko frontend"
+Add remote repository:
 
-json
-Copy
-Edit
-{
-  "token": "your-jwt-token"
-}
-📦 Products
-GET /api/products
-Get all products.
+bash
+git remote add origin https://github.com/Mujojo03/BitMarket.git
+Create and switch to the frontend-nextjs branch:
 
-POST /api/products (Seller Only)
-Create a new product.
+bash
+git checkout -b frontend-nextjs
+Push to GitHub:
 
-Body:
-
-json
-Copy
-Edit
-{
-  "name": "Product Name",
-  "price": 5000,
-  "description": "Nice product"
-}
-🗂 Folder Structure
-arduino
-Copy
-Edit
-lightning-marketplace/
-│
-├── app/
-│   ├── __init__.py
-│   ├── models/
-│   ├── routes/
-│   ├── auth/
-│   ├── payments/
-│
-├── migrations/
-├── .env.example
-├── requirements.txt
-├── run.py
-└── README.md
-👥 Contributors
-Grace Ayuma — Documentation Lead
-
-📄 License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
+bash
+git push -u origin frontend-nextjs
