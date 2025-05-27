@@ -13,7 +13,7 @@ const SellerDashboard = () => {
     const [isLoading, setIsLoading] = useState(true);
   // Fetch existing orders (from your backend later)
   useEffect(() => {
-    fetch('http://localhost:3000/api/seller/orders')
+    fetch('http://localhost:5000/register/seller')
       .then(res => res.json())
       .then(data => setOrders(data))
       .catch(err => console.error("Failed to fetch orders:", err));

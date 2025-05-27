@@ -25,6 +25,7 @@ from routers.invoice_router import invoice_bp
 
 import models 
 
+
 # Global SocketIO instance
 socketio = SocketIO(cors_allowed_origins="*")  # Allow all origins for now
 
@@ -45,7 +46,12 @@ def create_app():
 
 
     # Initialize extensions
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": ["http://localhost:3000"]}})
+
+    # origins = ["http://localhost:3000"]
+    # CORS(app, resources={r"/*": {"origins": origins}})
+    
+    
     Bcrypt(app)
     models.db.init_app(app)
     Migrate(app, models.db)

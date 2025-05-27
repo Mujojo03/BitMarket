@@ -5,6 +5,9 @@ import Cart from './components/cart/cart';
 import Register from './components/register/register';
 import Login from './components/login/login';
 import Payment from './components/payments/payment';
+import OrderManager from './components/orders/orderManager';
+import ProductManager from './components/products/productManager';
+import { Transaction } from 'bitcoinjs-lib';
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
         <Route path="/payment" element={<Payment />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/seller" element={<sellerDashboard />} />
+        <Route path="/transaction" element={<Transaction />} />
+        <Route path="/product" element={<ProductManager />} />
+        <Route path="/order" element={<OrderManager />} />
       </Routes>
     </Router>
   );

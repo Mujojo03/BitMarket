@@ -1,0 +1,334 @@
+/* Container
+div {
+    font-family: Arial, sans-serif;
+    color: #222;
+    background: #f9f9f9;
+  }
+  
+  /* Main container */
+  /* div[style*="maxWidth: 900px"] {
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+    padding: 20px 30px;
+    margin-top: 30px;
+  } */
+  
+  /* Headings */
+  /* h1, h2, h3 {
+    color: #333;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 4px;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+    margin-top: 20px;
+  }
+   */
+  /* Buttons */
+  /* button {
+    background-color: #3a86ff;
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+  }
+   */
+  /* button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+  }
+  
+  button:hover:not(:disabled) {
+    background-color: #265dff;
+  }
+   */
+  /* Inputs */
+  /* input[type="number"] {
+    padding: 6px 8px;
+    font-size: 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 4px;
+    width: 120px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+  } */
+  
+  /* input[type="number"]:focus {
+    border-color: #3a86ff;
+    outline: none;
+  }
+   */
+  /* Error states */
+  /* input[type="number"][style*="border-color: red"] {
+    border-color: #e63946 !important;
+  }
+  
+  div[style*="color: red"] {
+    font-size: 0.85rem;
+    margin-top: 2px;
+  }
+  
+  Order list */
+  /* ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  ul li {
+    padding: 10px 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  ul li strong {
+    flex-grow: 1;
+  }
+   */ */
+   
+  /* Product inputs row */
+  div[style*="marginBottom: 8px"] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  div[style*="marginBottom: 8px"] button {
+    background-color: #e63946;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+  
+  div[style*="marginBottom: 8px"] button:hover {
+    background-color: #ba2d3b;
+  }
+  
+  /* Order detail box */
+  div[style*="border: 1px solid #ccc"] {
+    background: #f4f7fb;
+    border-radius: 6px;
+    padding: 15px 20px;
+    margin-top: 25px;
+    box-shadow: inset 0 0 5px rgb(0 0 0 / 0.03);
+  }
+  
+  /* Spacing for buttons inside detail */
+  div[style*="border: 1px solid #ccc"] button {
+    margin-top: 15px;
+    padding: 8px 16px;
+  }
+  
+  div[style*="border: 1px solid #ccc"] button + button {
+    margin-left: 12px;
+  }
+  
+  /* Error message box */
+  div[style*="color: red"][style*="marginBottom: 10px"] {
+    background-color: #fdecea;
+    padding: 10px 15px;
+    border: 1px solid #f5c2c0;
+    border-radius: 5px;
+  }
+  
+  /* Responsive tweak */
+  @media (max-width: 600px) {
+    input[type="number"] {
+      width: 100%;
+    }
+  
+    div[style*="marginBottom: 8px"] {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    div[style*="marginBottom: 8px"] button {
+      width: 100%;
+    }
+  
+    ul li {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    ul li button {
+      margin-top: 5px;
+    }
+  }
+
+  /* Container */
+div {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+  background: #fafafa;
+}
+
+/* Center and padding */
+#root > div {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  color: #333;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: background-color 0.25s ease;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+  opacity: 0.85;
+}
+
+/* Primary button */
+button[type="submit"],
+button.primary {
+  background-color: #007bff;
+  color: white;
+}
+
+button.primary:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* Danger button */
+button.danger,
+button[style*="background-color: #e74c3c"] {
+  background-color: #e74c3c;
+  color: white;
+}
+
+button.danger:hover:not(:disabled) {
+  background-color: #c0392b;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="number"] {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  width: 180px;
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Labels */
+label {
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 6px;
+  margin-top: 8px;
+}
+
+/* Form product line */
+form > div > div {
+  margin-bottom: 10px;
+}
+
+/* List styles */
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+/* Order details box */
+div[style*="border: 1px solid #ccc"] {
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+/* Error messages */
+div[style*="color: red"] {
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+/* Product order form product lines */
+form > div > div {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 6px;
+  background: #fafafa;
+  margin-bottom: 12px;
+}
+
+/* Spacing for inline inputs */
+label input {
+  margin-left: 10px;
+}
+
+/* Add Product and Remove buttons style override */
+button[type="button"] {
+  background-color: #28a745;
+  color: white;
+  margin-top: 8px;
+}
+
+button[type="button"]:hover {
+  background-color: #218838;
+}
+
+/* Remove button inside product lines */
+form button[style*="background-color: #e74c3c"] {
+  margin-top: 5px;
+  padding: 5px 10px;
+  font-weight: 600;
+}
+
+/* Scrollable area if needed */
+ul {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 6px;
+  background: white;
+}
+
+  

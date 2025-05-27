@@ -1,190 +1,398 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './cart.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import QRCode from "qrcode.react";
+import $ from "jquery";
+import "./cart.css";
 
 const Cart = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [cartItems, setCartItems] = useState([]);
+  const [invoice, setInvoice] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-    const cartItems = [
-        {
-            id: 1,
-            name: 'Cotton T-shirt',
-            category: 'Shirt',
-            price: 44.0,
-            image: 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp',
-        },
-        {
-            id: 2,
-            name: 'Cotton T-shirt',
-            category: 'Shirt',
-            price: 44.0,
-            image: 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img6.webp',
-        },
-        {
-            id: 3,
-            name: 'Cotton T-shirt',
-            category: 'Shirt',
-            price: 44.0,
-            image: 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img7.webp',
-        },
-    ];
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cart_items")) || [];
+    setCartItems(savedCart);
+  }, []);
 
-    const [quantities, setQuantities] = useState(cartItems.map(() => 1));
+  useEffect(() => {
+    localStorage.setItem("cart_items", JSON.stringify(cartItems));
+  }, [cartItems]);
 
-    const handleQuantityChange = (index, delta) => {
-        setQuantities(prev => {
-            const updated = [...prev];
-            updated[index] = Math.max(0, updated[index] + delta);
-            return updated;
-        });
-    };
+  // Sync a single cart item quantity to backend with jQuery AJAX
+  const syncCartItemToBackend = (item) => {
+    const token = localStorage.getItem("access_token");
+    if (!token) return;
 
-    const handleRegister = () => {
-        const cartData = cartItems.map((item, index) => ({
-            ...item,
-            quantity: quantities[index],
-        }));
+    $.ajax({
+      url: "http://localhost:5000/cart/add",
+      method: "POST",
+      contentType: "application/json",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: JSON.stringify({
+        product_id: item.id,
+        quantity: item.quantity || 1,
+      }),
+    }).fail((jqXHR) => {
+      const errMsg = jqXHR.responseJSON?.message || "Failed to sync cart item";
+      console.error("Sync cart item error:", errMsg);
+    });
+  };
 
-        console.log("Registering cart:", cartData);
+  const handleQuantityChange = (index, delta) => {
+    const updated = [...cartItems];
+    updated[index].quantity = Math.max(1, (updated[index].quantity || 1) + delta);
+    setCartItems(updated);
+    syncCartItemToBackend(updated[index]);
+  };
 
-        // You can send this data to an API or navigate to a confirmation page
-        // For now, just simulate navigation
-        navigate('/register', { state: { cart: cartData } });
-    };
+  const handleRemoveItem = (index) => {
+    const updated = [...cartItems];
+    const removedItem = updated.splice(index, 1)[0];
+    setCartItems(updated);
+    if (removedItem) {
+      syncCartItemToBackend({ ...removedItem, quantity: 0 });
+    }
+  };
 
+  // Generate payment invoice for a single item ("Buy Now")
+  const handleBuyNow = (item) => {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      alert("Please log in to proceed with purchase.");
+      navigate("/login");
+      return;
+    }
 
-    const handleRemoveItem = index => {
-        const updatedQuantities = [...quantities];
-        updatedQuantities.splice(index, 1);
-        const updatedItems = [...cartItems];
-        updatedItems.splice(index, 1);
-        setQuantities(updatedQuantities);
-        // You could use state for cartItems too if making it dynamic
-    };
+    $.ajax({
+      url: "http://localhost:5000/cart/buy_now",
+      method: "POST",
+      contentType: "application/json",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: JSON.stringify({
+        product_id: item.id,
+        quantity: item.quantity || 1,
+      }),
+      success: (data) => {
+        setInvoice(data);
+      },
+      error: (jqXHR) => {
+        const errMsg = jqXHR.responseJSON?.message || "Failed to generate invoice";
+        console.error("Buy Now error:", errMsg);
+        alert("Failed to generate invoice.");
+      },
+    });
+  };
 
-    const totalPrice = cartItems.reduce(
-        (acc, item, index) => acc + item.price * quantities[index],
-        0
-    );
+  // Complete checkout for whole cart
+  const handleCheckout = () => {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      alert("Please log in to proceed with checkout.");
+      navigate("/login");
+      return;
+    }
 
-    return (
-        <section className="h-100 h-custom" style={{ backgroundColor: '#d2c9ff' }}>
-            <div className="container py-5 h-100">
-                <div className="row d-flex justify-content-center align-items-center h-100">
-                    <div className="col-12">
-                        <div className="card card-registration card-registration-2" style={{ borderRadius: '15px' }}>
-                            <div className="card-body p-0">
-                                <div className="row g-0">
-                                    {/* Cart Items */}
-                                    <div className="col-lg-8">
-                                        <div className="p-5">
-                                            <div className="d-flex justify-content-between align-items-center mb-5">
-                                                <h1 className="fw-bold mb-0">Shopping Cart</h1>
-                                                <h6 className="mb-0 text-muted">{cartItems.length} items</h6>
-                                            </div>
-                                            <hr className="my-4" />
+    setLoading(true);
 
-                                            {cartItems.map((item, index) => (
-                                                <div key={item.id}>
-                                                    <div className="row mb-4 d-flex justify-content-between align-items-center">
-                                                        <div className="col-md-2">
-                                                            <img src={item.image} className="img-fluid rounded-3" alt={item.name} />
-                                                        </div>
-                                                        <div className="col-md-3">
-                                                            <h6 className="text-muted">{item.category}</h6>
-                                                            <h6 className="mb-0">{item.name}</h6>
-                                                        </div>
-                                                        <div className="col-md-3 d-flex">
-                                                            <button className="btn btn-link px-2" onClick={() => handleQuantityChange(index, -1)}>
-                                                                <i className="fas fa-minus"></i>
-                                                            </button>
-                                                            <input
-                                                                min="0"
-                                                                type="number"
-                                                                className="form-control form-control-sm"
-                                                                value={quantities[index]}
-                                                                readOnly
-                                                            />
-                                                            <button className="btn btn-link px-2" onClick={() => handleQuantityChange(index, 1)}>
-                                                                <i className="fas fa-plus"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div className="col-md-2">
-                                                            <h6 className="mb-0">€ {(item.price * quantities[index]).toFixed(2)}</h6>
-                                                        </div>
-                                                        <div className="col-md-1 text-end">
-                                                            <a href="#!" onClick={() => handleRemoveItem(index)} className="text-muted">
-                                                                <i className="fas fa-times"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <hr className="my-4" />
-                                                </div>
-                                            ))}
+    $.ajax({
+      url: "http://localhost:5000/cart/checkout_complete",
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      success: () => {
+        alert("Checkout complete!");
+        setInvoice(null);
+        setCartItems([]);
+        localStorage.removeItem("cart_items");
+      },
+      error: (jqXHR) => {
+        const errMsg = jqXHR.responseJSON?.message || "Checkout failed";
+        console.error("Checkout error:", errMsg);
+        alert("Checkout failed.");
+      },
+      complete: () => {
+        setLoading(false);
+      },
+    });
+  };
 
-                                            <div className="pt-5">
-                                                <h6 className="mb-0">
-                                                    <a href="/" className="text-body">
-                                                        <i className="fas fa-long-arrow-alt-left me-2"></i>Back to shop
-                                                    </a>
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div>
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + item.price * (item.quantity || 1),
+    0
+  );
 
-                                    {/* Summary Section */}
-                                    <div className="col-lg-4 bg-body-tertiary">
-                                        <div className="p-5">
-                                            <h3 className="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-                                            <hr className="my-4" />
+  const copyInvoice = () => {
+    if (invoice?.payment_request) {
+      navigator.clipboard.writeText(invoice.payment_request);
+      alert("Invoice copied to clipboard!");
+    }
+  };
 
-                                            <div className="d-flex justify-content-between mb-4">
-                                                <h5 className="text-uppercase">Items ({cartItems.length})</h5>
-                                                <h5>€ {totalPrice.toFixed(2)}</h5>
-                                            </div>
+  return (
+    <div className="cart-container">
+      <h2>Your Cart</h2>
+      {cartItems.length === 0 && <p>Your cart is empty.</p>}
 
-                                            <h5 className="text-uppercase mb-3">Shipping</h5>
-                                            <div className="mb-4 pb-2">
-                                                <select className="form-select">
-                                                    <option value="1">Standard Delivery - €5.00</option>
-                                                    <option value="2">Express - €10.00</option>
-                                                    <option value="3">Overnight - €20.00</option>
-                                                </select>
-                                            </div>
-
-                                            <h5 className="text-uppercase mb-3">Give code</h5>
-                                            <div className="mb-5">
-                                                <div className="form-outline">
-                                                    <input type="text" id="form3Examplea2" className="form-control form-control-lg" />
-                                                    <label className="form-label" htmlFor="form3Examplea2">Enter your code</label>
-                                                </div>
-                                            </div>
-
-                                            <hr className="my-4" />
-
-                                            <div className="d-flex justify-content-between mb-5">
-                                                <h5 className="text-uppercase">Total price</h5>
-                                                <h5>€ {(totalPrice + 5).toFixed(2)}</h5>
-                                            </div>
-
-                                            <button
-                                                type="button"
-                                                className="btn btn-dark btn-block btn-lg"
-                                                onClick={handleRegister}
-                                            >
-                                                Checkout
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      {cartItems.map((item, index) => (
+        <div key={item.id} className="cart-item">
+          <div className="item-info">
+            <h3>{item.name}</h3>
+            <p>Price: ${item.price.toFixed(2)}</p>
+            <div className="quantity-control">
+              <button onClick={() => handleQuantityChange(index, -1)}>-</button>
+              <span>{item.quantity || 1}</span>
+              <button onClick={() => handleQuantityChange(index, 1)}>+</button>
             </div>
-        </section>
-    );
+            <button
+              className="remove-btn"
+              onClick={() => handleRemoveItem(index)}
+              aria-label={`Remove ${item.name} from cart`}
+            >
+              Remove
+            </button>
+          </div>
+          <div className="buy-now">
+            <button onClick={() => handleBuyNow(item)}>Buy Now</button>
+          </div>
+        </div>
+      ))}
+
+      {cartItems.length > 0 && (
+        <div className="cart-summary">
+          <p>Total Price: ${totalPrice.toFixed(2)}</p>
+          <button onClick={handleCheckout} disabled={loading}>
+            {loading ? "Processing..." : "Checkout"}
+          </button>
+        </div>
+      )}
+
+      {invoice && (
+        <div className="invoice-section">
+          <h3>Payment Invoice</h3>
+          <QRCode value={invoice.payment_request} size={256} />
+          <textarea
+            readOnly
+            value={invoice.payment_request}
+            rows={4}
+            cols={50}
+            style={{ marginTop: "10px" }}
+          />
+          <br />
+          <button onClick={copyInvoice}>Copy Invoice</button>
+
+          {/* Navigate to Payment.jsx to complete payment */}
+          <button onClick={() => navigate("/payment", { state: { invoice } })}>
+            Proceed to Payment
+          </button>
+
+          <button onClick={() => setInvoice(null)}>Close</button>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Cart;
-// Note: The above code is a simplified version of a shopping cart component.
+
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import QRCode from "qrcode.react";
+// import $ from "jquery";
+// import "./cart.css";
+
+// const Cart = () => {
+//   const navigate = useNavigate();
+//   const [cartItems, setCartItems] = useState([]);
+//   const [invoice, setInvoice] = useState(null);
+//   const [loading, setLoading] = useState(false);
+
+//   useEffect(() => {
+//     const savedCart = JSON.parse(localStorage.getItem("cart_items")) || [];
+//     setCartItems(savedCart);
+//   }, []);
+
+//   useEffect(() => {
+//     localStorage.setItem("cart_items", JSON.stringify(cartItems));
+//   }, [cartItems]);
+
+//   // Sync a single cart item quantity to backend with jQuery AJAX
+//   const syncCartItemToBackend = (item) => {
+//     const token = localStorage.getItem("access_token");
+//     if (!token) return;
+
+//     $.ajax({
+//       url: "http://localhost:5000/cart/add",
+//       method: "POST",
+//       contentType: "application/json",
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//       data: JSON.stringify({
+//         product_id: item.id,
+//         quantity: item.quantity || 1,
+//       }),
+//     }).fail((jqXHR) => {
+//       const errMsg = jqXHR.responseJSON?.message || "Failed to sync cart item";
+//       console.error("Sync cart item error:", errMsg);
+//     });
+//   };
+
+//   const handleQuantityChange = (index, delta) => {
+//     const updated = [...cartItems];
+//     updated[index].quantity = Math.max(1, (updated[index].quantity || 1) + delta);
+//     setCartItems(updated);
+//     syncCartItemToBackend(updated[index]);
+//   };
+
+//   const handleRemoveItem = (index) => {
+//     const updated = [...cartItems];
+//     const removedItem = updated.splice(index, 1)[0];
+//     setCartItems(updated);
+//     if (removedItem) {
+//       syncCartItemToBackend({ ...removedItem, quantity: 0 });
+//     }
+//   };
+
+//   // Generate payment invoice for a single item ("Buy Now")
+//   const handleBuyNow = (item) => {
+//     const token = localStorage.getItem("access_token");
+//     if (!token) {
+//       alert("Please log in to proceed with purchase.");
+//       navigate("/login");
+//       return;
+//     }
+
+//     $.ajax({
+//       url: "http://localhost:5000/cart/buy_now",
+//       method: "POST",
+//       contentType: "application/json",
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//       data: JSON.stringify({
+//         product_id: item.id,
+//         quantity: item.quantity || 1,
+//       }),
+//       success: (data) => {
+//         setInvoice(data);
+//       },
+//       error: (jqXHR) => {
+//         const errMsg = jqXHR.responseJSON?.message || "Failed to generate invoice";
+//         console.error("Buy Now error:", errMsg);
+//         alert("Failed to generate invoice.");
+//       },
+//     });
+//   };
+
+//   // Complete checkout for whole cart
+//   const handleCheckout = () => {
+//     const token = localStorage.getItem("access_token");
+//     if (!token) {
+//       alert("Please log in to proceed with checkout.");
+//       navigate("/login");
+//       return;
+//     }
+
+//     setLoading(true);
+
+//     $.ajax({
+//       url: "http://localhost:5000/cart/checkout_complete",
+//       method: "POST",
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//       success: () => {
+//         alert("Checkout complete!");
+//         setInvoice(null);
+//         setCartItems([]);
+//         localStorage.removeItem("cart_items");
+//       },
+//       error: (jqXHR) => {
+//         const errMsg = jqXHR.responseJSON?.message || "Checkout failed";
+//         console.error("Checkout error:", errMsg);
+//         alert("Checkout failed.");
+//       },
+//       complete: () => {
+//         setLoading(false);
+//       },
+//     });
+//   };
+
+//   const totalPrice = cartItems.reduce(
+//     (sum, item) => sum + item.price * (item.quantity || 1),
+//     0
+//   );
+
+//   const copyInvoice = () => {
+//     if (invoice?.payment_request) {
+//       navigator.clipboard.writeText(invoice.payment_request);
+//       alert("Invoice copied to clipboard!");
+//     }
+//   };
+
+//   return (
+//     <div className="cart-container">
+//       <h2>Your Cart</h2>
+//       {cartItems.length === 0 && <p>Your cart is empty.</p>}
+
+//       {cartItems.map((item, index) => (
+//         <div key={item.id} className="cart-item">
+//           <div className="item-info">
+//             <h3>{item.name}</h3>
+//             <p>Price: ${item.price.toFixed(2)}</p>
+//             <div className="quantity-control">
+//               <button onClick={() => handleQuantityChange(index, -1)}>-</button>
+//               <span>{item.quantity || 1}</span>
+//               <button onClick={() => handleQuantityChange(index, 1)}>+</button>
+//             </div>
+//             <button
+//               className="remove-btn"
+//               onClick={() => handleRemoveItem(index)}
+//               aria-label={`Remove ${item.name} from cart`}
+//             >
+//               Remove
+//             </button>
+//           </div>
+//           <div className="buy-now">
+//             <button onClick={() => handleBuyNow(item)}>Buy Now</button>
+//           </div>
+//         </div>
+//       ))}
+
+//       {cartItems.length > 0 && (
+//         <div className="cart-summary">
+//           <p>Total Price: ${totalPrice.toFixed(2)}</p>
+//           <button onClick={handleCheckout} disabled={loading}>
+//             {loading ? "Processing..." : "Checkout"}
+//           </button>
+//         </div>
+//       )}
+
+//       {invoice && (
+//         <div className="invoice-section">
+//           <h3>Payment Invoice</h3>
+//           <QRCode value={invoice.payment_request} size={256} />
+//           <textarea
+//             readOnly
+//             value={invoice.payment_request}
+//             rows={4}
+//             cols={50}
+//             style={{ marginTop: "10px" }}
+//           />
+//           <br />
+//           <button onClick={copyInvoice}>Copy Invoice</button>
+//           <button onClick={() => setInvoice(null)}>Close</button>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Cart;
+
