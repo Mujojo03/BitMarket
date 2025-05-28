@@ -25,6 +25,9 @@ export default function SellerCreatePage() {
   const [website, setWebsite] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [step, setStep] = useState(1)
+  const [paymentMethod, setPaymentMethod] = useState("bitcoin") // default to bitcoin
+  const [tillNumber, setTillNumber] = useState("")
+
 
   useEffect(() => {
     console.log("User:", user, "Loading:", loading)
@@ -191,6 +194,32 @@ export default function SellerCreatePage() {
                     className="bg-gray-700 border-gray-600"
                   />
                 </div>
+                <div className="space-y-2">
+                  <Label htmlFor="paymentMethod">Preferred Payment Method</Label>
+                  <select
+                    id="paymentMethod"
+                    value={paymentMethod}
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                    className="bg-gray-700 border-gray-600 rounded-md p-2 w-full text-white"
+                  >
+                    <option value="bitcoin">Bitcoin (Lightning)</option>
+                    <option value="mpesa">M-Pesa</option>
+                  </select>
+                </div>
+
+                {paymentMethod === "mpesa" && (
+                  <div className="space-y-2">
+                    <Label htmlFor="tillNumber">M-Pesa Till Number</Label>
+                    <Input
+                      id="tillNumber"
+                      value={tillNumber}
+                      onChange={(e) => setTillNumber(e.target.value)}
+                      placeholder="Enter your M-Pesa Till Number"
+                      required
+                      className="bg-gray-700 border-gray-600"
+                    />
+                  </div>
+                )}
 
                 <Button
                   type="submit"
