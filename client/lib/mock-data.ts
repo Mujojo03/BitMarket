@@ -87,8 +87,8 @@ export interface OrderItem {
 export const mockUsers: User[] = [
   {
     id: "user1",
-    email: "jane@example.com",
-    fullName: "Jane",
+    email: "jane@gmail.com",
+    fullName: "jane",
     username: "jane",
     isSeller: false,
     sellerRating: 0,
@@ -97,8 +97,8 @@ export const mockUsers: User[] = [
   },
   {
     id: "user2",
-    email: "sharonk@example.com",
-    fullName: "Sharon",
+    email: "sharonk@gmail.com",
+    fullName: "sharonk",
     username: "sharon",
     isSeller: false,
     sellerRating: 0,
@@ -107,8 +107,8 @@ export const mockUsers: User[] = [
   },
   {
     id: "user3",
-    email: "busayo@example.com",
-    fullName: "Busayo",
+    email: "busayo@gmail.com",
+    fullName: "busayo",
     username: "busayo",
     isSeller: false,
     sellerRating: 0,
@@ -117,9 +117,9 @@ export const mockUsers: User[] = [
   },
   {
     id: "user4",
-    email: "nkatha@example.com",
-    fullName: "Nkatha",
-    username: "nkatha",
+    email: "sharonN@gmail.com",
+    fullName: "sharonN",
+    username: "sharonN",
     isSeller: false,
     sellerRating: 0,
     sellerSales: 0,
@@ -127,7 +127,7 @@ export const mockUsers: User[] = [
   },
   {
     id: "seller1",
-    email: "rose@example.com",
+    email: "rose@gmail.com",
     fullName: "Hiking Gear",
     username: "gearbyrose",
     avatarUrl: "https://imgcdn.stablediffusionweb.com/2024/5/16/b58ae580-d409-447d-910a-4d90c0657778.jpg",
@@ -141,7 +141,7 @@ export const mockUsers: User[] = [
   },
   {
     id: "seller2",
-    email: "dada@example.com",
+    email: "dada@gmail.com",
     fullName: "Dada Crafts",
     username: "Dadacrafts",
     avatarUrl: "https://img.freepik.com/premium-vector/black-african-american-woman-avatar-face-icon-flat-style_768258-1056.jpg",
@@ -153,7 +153,7 @@ export const mockUsers: User[] = [
   },
   {
     id: "seller3",
-    email: "kahira@example.com",
+    email: "kahira@gmail.com",
     fullName: "Electronics Hub",
     username: "kahiraElectronics",
     avatarUrl: "https://img.freepik.com/premium-vector/black-african-american-mulatto-hispanic-beautiful-woman-head-face-portrait-hairstyle_768258-3453.jpg",
@@ -165,9 +165,9 @@ export const mockUsers: User[] = [
   },
   {
     id: "seller4",
-    email: "sharonN@example.com",
-    fullName: "Makeup by Sharon",
-    username: "sharonMakeup",
+    email: "nkatha@gmail.com",
+    fullName: "Makeup by Nkatha",
+    username: "nkathaMakeup",
     avatarUrl: "https://img.freepik.com/premium-vector/face-young-beautiful-black-african-american-mulatto-hispanic-woman-avatar-icon-flat-style_768258-3451.jpg",
     isSeller: true,
     sellerRating: 4.6,
@@ -236,7 +236,7 @@ export const mockProducts: Product[] = [
     name: "Handcrafted Leather Wallet with a bitcoin logo",
     description:
       "A premium leather wallet with a subtle Bitcoin logo embossed on the front. Perfect for storing your cards and cash while showing your Bitcoin pride.",
-    price: 150000, // in sats
+    price: 15000, // in sats
     imageUrl: "https://i.etsystatic.com/16327480/r/il/6a7cc9/1698407422/il_794xN.1698407422_dxxl.jpg",
     categoryId: "cat6",
     sellerId: "seller1",
@@ -253,7 +253,7 @@ export const mockProducts: Product[] = [
     name: "Dell Laptop",
     description:
       "Dell Laptop Core i7 with 16GB RAM and 512GB SSD. Perfect for all your computing needs.",
-    price: 75000, // in sats
+    price: 95000, // in sats
     imageUrl: "https://th.bing.com/th/id/R.b17d02f723bc495a97bf5b746ddfc86e?rik=FovMcW3geTWOGw&riu=http%3a%2f%2f3.bp.blogspot.com%2f--6dQqPnxKPk%2fVbxF66JpObI%2fAAAAAAAAAPs%2fMpPdoHXGl0o%2fw1200-h630-p-k-no-nu%2fDell%25252BInspiron%25252B14%25252B3452-driver.jpg&ehk=bj6q6%2biToqRjnIga3cMfl8z6rF3zRd6d71KmjHEg9ds%3d&risl=&pid=ImgRaw&r=0",
     categoryId: "cat4",
     sellerId: "seller2",
@@ -270,7 +270,7 @@ export const mockProducts: Product[] = [
     name: "Singer Sewing Machine",
     description:
       "Singer Sewing Machine, lightweight with multiple stitch patterns. Ideal for both beginners and experienced sewers, great for fashion and design.",
-    price: 250000, // in sats
+    price: 85000, // in sats
     imageUrl: "https://i5.walmartimages.com/asr/1581be17-cb9f-4b87-80da-1a0c4b0318cd_1.9ab78c356b41fd9f30e55cf9549b758c.jpeg",
     categoryId: "cat2",
     sellerId: "seller3",
@@ -284,7 +284,7 @@ export const mockProducts: Product[] = [
   },
   {
     id: "product4",
-    name: "Handmade Ceramic Mug with Bitcoin Logo",
+    name: "Ceramic Mug with Bitcoin Logo",
     description:
       "A beautiful handcrafted ceramic mug featuring a Bitcoin design. Each mug is unique and made with care by our artisan.",
     price: 45000, // in sats
@@ -303,7 +303,7 @@ export const mockProducts: Product[] = [
     id: "product5",
     name: "Car Tyres",
     description: "High Quality car tyres for all vehicles.",
-    price: 500000, // in sats
+    price: 50000, // in sats
     imageUrl: "https://th.bing.com/th/id/OIP.e6u9VThsmXkJbNnVpB82oQHaE_?cb=iwp2&rs=1&pid=ImgDetMain",
     categoryId: "cat2",
     sellerId: "seller3",
@@ -319,7 +319,7 @@ export const mockProducts: Product[] = [
     id: "product6",
     name: "Beauty Products",
     description: "Make-up and Beauty product for all skin types.",
-    price: 100000, // in sats
+    price: 10000, // in sats
     imageUrl: "https://makeupobsessedmom.com/wp-content/uploads/2023/07/multitasking-beauty-products.png",
     categoryId: "cat6",
     sellerId: "seller2",
@@ -458,7 +458,7 @@ export const mockOrders: Order[] = [
     id: "order1",
     buyerId: "user1",
     status: "completed",
-    totalAmount: 150000,
+    totalAmount: 15000,
     lightningInvoice: "lnbc1500u1p3hkzm2pp...",
     shippingAddress: {
       name: "Test User",
@@ -497,7 +497,7 @@ export const mockOrderItems: OrderItem[] = [
     orderId: "order1",
     productId: "product1",
     quantity: 1,
-    price: 150000,
+    price: 15000,
     createdAt: "2023-08-10T00:00:00Z",
   },
   {

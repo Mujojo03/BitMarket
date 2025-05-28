@@ -12,6 +12,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { useAuth } from "@/contexts/auth-context"
 import { cartApi } from "@/lib/api-service"
 import type { CartItem } from "@/lib/mock-data"
+import { QrCode } from "lucide-react"
 
 export default function CartPage() {
   const { user } = useAuth()
@@ -19,6 +20,8 @@ export default function CartPage() {
   const [cartItems, setCartItems] = useState<(CartItem & { product: any })[]>([])
   const [loading, setLoading] = useState(true)
   const [checkingOut, setCheckingOut] = useState(false)
+  const [qrCodeValue, setQRCodeValue] = useState<string | null>(null)
+  const [showQRCode, setShowQRCode] = useState(false)
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -82,29 +85,42 @@ export default function CartPage() {
 
   //modify this function to handle checkout
   const handleCheckout = async () => {
-    try {
-      setCheckingOut(true)
-      // Simulate checkout process
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      toast({
-        title: "Order placed!",
-        description: "Your order has been placed successfully.",
-      })
-      // Clear cart after successful checkout
-      const userId = user?.id || "user1" // For demo purposes
-      await cartApi.clearCart(userId)
-      setCartItems([])
-    } catch (error) {
-      console.error("Error during checkout:", error)
-      toast({
-        variant: "destructive",
-        title: "Checkout failed",
-        description: "There was an error processing your order. Please try again.",
-      })
-    } finally {
-      setCheckingOut(false)
-    }
+  try {
+    setCheckingOut(true)
+
+    // Step 1: Generate payment URL (you'll use real invoice URL here)
+    const paymentUrl = `https://your-payment-provider.com/pay/invoice123`
+    setQRCodeValue(paymentUrl)
+    setShowQRCode(true)
+
+    // Step 2: PAUSE here — wait until payment is confirmed manually or via websocket
+    // So we do NOT proceed to success toast or cart clearing yet.
+
+    // toast({
+    //   title: "Checkout initiated",
+    //   description: "Please complete the payment in your wallet app.",
+    //   action: {
+    //     label: "View QR Code",
+    //     onClick: () => setShowQRCode(true),
+    //   },
+    // })
+    // setTimeout(() => {
+    //   setShowQRCode(false)
+    // }, 10000) // Hide QR code after 10 seconds
+    
+    // The function ends here — once payment is confirmed, call a separate function:
+    // completeCheckout()
+  } catch (error) {
+    console.error("Error during checkout:", error)
+    toast({
+      variant: "destructive",
+      title: "Checkout failed",
+      description: "There was an error processing your order. Please try again.",
+    })
+    setCheckingOut(false)
   }
+}
+
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0)
@@ -278,6 +294,11 @@ export default function CartPage() {
                   )}
                 </Button>
               </CardFooter>
+              {showQRCode && qrCodeValue && (
+                <div className="flex justify-center mt-4">
+                  <QrCode values={qrCodeValue} size={180} />
+                </div>
+              )}
             </Card>
           </div>
         </div>

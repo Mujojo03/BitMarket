@@ -32,25 +32,83 @@ export interface Product {
 const users: User[] = [
   {
     id: "user1",
-    email: "user@example.com",
-    name: "Test User",
-    password: "password123", // In a real app, this would be hashed
+    email: "jane@gmail.com",
+    name: "jane",
+    password: "jane123", // In a real app, this would be hashed
     role: "user",
     createdAt: new Date().toISOString(),
   },
   {
+    id: "user2",
+    email: "sharonk@gmail.com",
+    name: "sharonk",
+    password: "sharonk123", // In a real app, this would be hashed
+    role: "user",
+    createdAt: new Date().toISOString(),
+  },
+    {
+    id: "user3",
+    email: "busayo@gmail.com",
+    name: "busayo",
+    password: "busayo123", // In a real app, this would be hashed
+    role: "user",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "user4",
+    email: "sharonN@gmail.com",
+    name: "sharonN",
+    password: "sharonN123", // In a real app, this would be hashed
+    role: "user",
+    createdAt: new Date().toISOString(),
+  },
+
+  {
     id: "seller1",
-    email: "seller@example.com",
-    name: "Test Seller",
-    password: "password123", // In a real app, this would be hashed
+    email: "rose@gmail.com",
+    name: "rose",
+    password: "rose123", // In a real app, this would be hashed
     role: "seller",
     createdAt: new Date().toISOString(),
   },
   {
+    id: "seller2",
+    email: "dada@gmail.com",
+    name: "dada",
+    password: "dada123", // In a real app, this would be hashed
+    role: "seller",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "seller3",
+    email: "kahira@gmail.com",
+    name: "kahira",
+    password: "kahira123", // In a real app, this would be hashed
+    role: "seller",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "seller4",
+    email: "nkatha@gmail.com",
+    name: "nkatha",
+    password: "nkatha123", // In a real app, this would be hashed
+    role: "seller",
+    createdAt: new Date().toISOString(),
+  },
+
+  {
     id: "admin1",
-    email: "admin@example.com",
-    name: "Test Admin",
-    password: "password123", // In a real app, this would be hashed
+    email: "admin@gmail.com",
+    name: "Test Admin1",
+    password: "admin1-123", // In a real app, this would be hashed
+    role: "admin",
+    createdAt: new Date().toISOString(),
+  },
+    {
+    id: "admin2",
+    email: "admin@gmail.com",
+    name: "Test Admin2",
+    password: "admin2-123", // In a real app, this would be hashed
     role: "admin",
     createdAt: new Date().toISOString(),
   },

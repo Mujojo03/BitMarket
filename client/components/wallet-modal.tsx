@@ -118,7 +118,7 @@ export function WalletModal({ open, onOpenChange }: WalletModalProps) {
                   <QrCode className="h-48 w-48 text-black" />
                 </div>
                 <p className="text-sm text-gray-400 text-center mb-4">
-                  Scan this QR code with your Lightning wallet to connect
+                  Scan this QR code to connect your Lightning wallet
                 </p>
                 <Button
                   className="w-full bg-bitcoin hover:bg-bitcoin/90 text-black font-medium"

@@ -20,4 +20,3 @@ async function createInvoiceHandler(req, res) {
 module.exports = {
   createInvoiceHandler,
 };
-
