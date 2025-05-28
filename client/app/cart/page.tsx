@@ -378,51 +378,68 @@ export default function CartPage() {
                 </Button>
               </CardFooter>
 
-              {checkingOut && !paymentMethod && (
-                <div className="mt-4 p-4 bg-white shadow-md rounded-xl space-y-2">
-                  <p className="text-center font-medium">Select Payment Method</p>
-                  <Button onClick={() => setPaymentMethod("mpesa")} className="w-full">
-                    Pay with Mpesa
-                  </Button>
-                  <Button onClick={() => handleLightning()} className="w-full">
-                    Pay with Lightning
-                  </Button>
-                </div>
-              )}
-              {/* QR code view */}
-              {showQRCode && paymentMethod === "lightning" && (
-                <div className="mt-4 flex flex-col items-center space-y-2">
-                  <QrCode values={qrCodeValue ?? undefined} size={180} />
-                  {/* <Button onClick={completeCheckout} className="mt-2">
+              {checkingOut && (
+                <div className="mt-4 p-4 bg-black shadow-md rounded-xl space-y-4">
+                  <p className="text-center font-semibold">Choose Payment Method:</p>
+                  <div className="flex gap-2">
+                    <Button
+                      variant={paymentMethod === "mpesa" ? "default" : "outline"}
+                      onClick={() => {
+                        setPaymentMethod("mpesa")
+                        setShowQRCode(false)
+                      }}
+                      className="w-full"
+                    >
+                      Mpesa
+                    </Button>
+                    <Button
+                      variant={paymentMethod === "lightning" ? "default" : "outline"}
+                      onClick={() => {
+                        setPaymentMethod("lightning")
+                        handleLightning()
+                      }}
+                      className="w-full"
+                    >
+                      Lightning
+                    </Button>
+                  </div>
+
+                  {/* QR code view */}
+                  {showQRCode && paymentMethod === "lightning" && (
+                    <div className="mt-4 flex flex-col items-center space-y-2">
+                      <QrCode values={qrCodeValue ?? undefined} size={180} />
+                      {/* <Button onClick={completeCheckout} className="mt-2">
                     I've Paid – Complete Order
                   </Button> */}
-                </div>
-              )}
-              {paymentMethod === "mpesa" && (
-                <div className="mt-4 p-4 bg-white shadow-md rounded-xl space-y-2">
-                  <label className="font-medium">Enter Phone Number:</label>
-                  <input
-                    type="tel"
-                    className="border rounded px-3 py-2 w-full"
-                    placeholder="e.g. 07XXXXXXXX"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                  />
-                  <Button
-                    className="w-full mt-2"
-                    onClick={handleMpesaPayment}
-                    disabled={!phoneNumber}
-                  >
-                    Pay with Mpesa
-                  </Button>
-                </div>
-              )}
+                    </div>
+                  )}
+                  {paymentMethod === "mpesa" && (
+                    <div className="mt-4 p-4 bg-white shadow-md rounded-xl space-y-2">
+                      <label className="font-medium">Enter Phone Number:</label>
+                      <input
+                        type="tel"
+                        className="border rounded px-3 py-2 w-full"
+                        placeholder="e.g. 07XXXXXXXX"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                      />
+                      <Button
+                        className="w-full mt-2"
+                        onClick={handleMpesaPayment}
+                        disabled={!phoneNumber}
+                      >
+                        Pay with Mpesa
+                      </Button>
+                    </div>
+                  )}
 
-              {/* {showQRCode && qrCodeValue && (
+                  {/* {showQRCode && qrCodeValue && (
                 <div className="flex justify-center mt-4">
                   <QrCode values={qrCodeValue} size={180} />
                 </div>
               )} */}
+                </div>
+              )}
             </Card>
           </div>
         </div>
