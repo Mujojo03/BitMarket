@@ -22,6 +22,9 @@ export default function CartPage() {
   const [checkingOut, setCheckingOut] = useState(false)
   const [qrCodeValue, setQRCodeValue] = useState<string | null>(null)
   const [showQRCode, setShowQRCode] = useState(false)
+  const [showPaymentOptions, setShowPaymentOptions] = useState(false)
+  const [phoneNumber, setPhoneNumber] = useState("")
+  const [paymentMethod, setPaymentMethod] = useState<"mpesa" | "lightning" | null>(null)
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -85,41 +88,121 @@ export default function CartPage() {
 
   //modify this function to handle checkout
   const handleCheckout = async () => {
-  try {
+    setShowPaymentOptions(true)
+    try {
+      setCheckingOut(true)
+
+      // Step 1: Generate payment URL (you'll use real invoice URL here)
+      const paymentUrl = `https://your-payment-provider.com/pay/invoice123`
+      setQRCodeValue(paymentUrl)
+      setShowQRCode(true)
+
+      // Step 2: PAUSE here — wait until payment is confirmed manually or via websocket
+      // So we do NOT proceed to success toast or cart clearing yet.
+
+      // toast({
+      //   title: "Checkout initiated",
+      //   description: "Please complete the payment in your wallet app.",
+      //   action: {
+      //     label: "View QR Code",
+      //     onClick: () => setShowQRCode(true),
+      //   },
+      // })
+      // setTimeout(() => {
+      //   setShowQRCode(false)
+      // }, 10000) // Hide QR code after 10 seconds
+
+      // The function ends here — once payment is confirmed, call a separate function:
+      // completeCheckout()
+    } catch (error) {
+      console.error("Error during checkout:", error)
+      toast({
+        variant: "destructive",
+        title: "Checkout failed",
+        description: "There was an error processing your order. Please try again.",
+      })
+      setCheckingOut(false)
+    }
+  }
+
+  const handlePaymentMethodSelect = async (method: "lightning" | "mpesa") => {
+    setShowPaymentOptions(false)
     setCheckingOut(true)
 
-    // Step 1: Generate payment URL (you'll use real invoice URL here)
-    const paymentUrl = `https://your-payment-provider.com/pay/invoice123`
-    setQRCodeValue(paymentUrl)
-    setShowQRCode(true)
+    try {
+      if (method === "lightning") {
+        // Simulate invoice creation (replace with actual API call)
+        const paymentUrl = `https://your-payment-provider.com/pay/invoice123`
+        setQRCodeValue(paymentUrl)
+        setShowQRCode(true)
+      } else if (method === "mpesa") {
+        // Replace with actual Mpesa STK push logic or redirection
+        toast({
+          title: "Mpesa Selected",
+          description: "Initiating Mpesa payment...",
+        })
 
-    // Step 2: PAUSE here — wait until payment is confirmed manually or via websocket
-    // So we do NOT proceed to success toast or cart clearing yet.
-
-    // toast({
-    //   title: "Checkout initiated",
-    //   description: "Please complete the payment in your wallet app.",
-    //   action: {
-    //     label: "View QR Code",
-    //     onClick: () => setShowQRCode(true),
-    //   },
-    // })
-    // setTimeout(() => {
-    //   setShowQRCode(false)
-    // }, 10000) // Hide QR code after 10 seconds
-    
-    // The function ends here — once payment is confirmed, call a separate function:
-    // completeCheckout()
-  } catch (error) {
-    console.error("Error during checkout:", error)
-    toast({
-      variant: "destructive",
-      title: "Checkout failed",
-      description: "There was an error processing your order. Please try again.",
-    })
-    setCheckingOut(false)
+        // Simulate Mpesa delay then complete checkout
+        await new Promise((r) => setTimeout(r, 2000))
+        await completeCheckout()
+      }
+    } catch (err) {
+      console.error(err)
+      toast({
+        variant: "destructive",
+        title: "Payment Failed",
+        description: "Something went wrong. Try again.",
+      })
+      setCheckingOut(false)
+    }
   }
-}
+
+  const handleMpesaPayment = async () => {
+    try {
+      toast({ title: "Processing Mpesa...", description: `Sending STK push to ${phoneNumber}` })
+
+      // Replace with real Mpesa API call
+      await new Promise((r) => setTimeout(r, 2000))
+
+      // On success
+      await completeCheckout()
+    } catch (error) {
+      console.error(error)
+      toast({
+        variant: "destructive",
+        title: "Mpesa Failed",
+        description: "Could not complete Mpesa payment.",
+      })
+      setCheckingOut(false)
+    }
+  }
+
+  const completeCheckout = async () => {
+    try {
+      const userId = user?.id || "user1"
+      await cartApi.clearCart(userId)
+      setCartItems([])
+      toast({
+        title: "Order placed!",
+        description: "Your order has been placed successfully.",
+      })
+    } catch (err) {
+      console.error(err)
+      toast({
+        variant: "destructive",
+        title: "Finalization Error",
+        description: "Something went wrong after payment.",
+      })
+    } finally {
+      // Reset everything
+      setCheckingOut(false)
+      setPaymentMethod(null)
+      setQRCodeValue("")
+      setPhoneNumber("")
+      setShowQRCode(false)
+    }
+  }
+
 
 
   const calculateTotal = () => {
@@ -136,6 +219,15 @@ export default function CartPage() {
       </div>
     )
   }
+
+  const handleLightning = async () => {
+    setPaymentMethod("lightning")
+    // Replace with real invoice generation logic
+    const paymentUrl = `https://your-payment-provider.com/pay/invoice123`
+    setQRCodeValue(paymentUrl)
+    setShowQRCode(true)
+  }
+
 
   return (
     <div className="container px-4 py-8 md:px-6 md:py-12">
@@ -279,26 +371,58 @@ export default function CartPage() {
               <CardFooter>
                 <Button
                   className="w-full bg-bitcoin hover:bg-bitcoin/90 text-black font-medium"
-                  onClick={handleCheckout}
+                  onClick={() => setCheckingOut(true)}
                   disabled={checkingOut}
                 >
-                  {checkingOut ? (
-                    <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-black mr-2"></div>
-                      Processing...
-                    </>
-                  ) : (
-                    <>
-                      Checkout <ArrowRight className="ml-2 h-4 w-4" />
-                    </>
-                  )}
+                  Checkout <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </CardFooter>
-              {showQRCode && qrCodeValue && (
+
+              {checkingOut && !paymentMethod && (
+                <div className="mt-4 p-4 bg-white shadow-md rounded-xl space-y-2">
+                  <p className="text-center font-medium">Select Payment Method</p>
+                  <Button onClick={() => setPaymentMethod("mpesa")} className="w-full">
+                    Pay with Mpesa
+                  </Button>
+                  <Button onClick={() => handleLightning()} className="w-full">
+                    Pay with Lightning
+                  </Button>
+                </div>
+              )}
+              {/* QR code view */}
+              {showQRCode && paymentMethod === "lightning" && (
+                <div className="mt-4 flex flex-col items-center space-y-2">
+                  <QrCode values={qrCodeValue ?? undefined} size={180} />
+                  {/* <Button onClick={completeCheckout} className="mt-2">
+                    I've Paid – Complete Order
+                  </Button> */}
+                </div>
+              )}
+              {paymentMethod === "mpesa" && (
+                <div className="mt-4 p-4 bg-white shadow-md rounded-xl space-y-2">
+                  <label className="font-medium">Enter Phone Number:</label>
+                  <input
+                    type="tel"
+                    className="border rounded px-3 py-2 w-full"
+                    placeholder="e.g. 07XXXXXXXX"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                  />
+                  <Button
+                    className="w-full mt-2"
+                    onClick={handleMpesaPayment}
+                    disabled={!phoneNumber}
+                  >
+                    Pay with Mpesa
+                  </Button>
+                </div>
+              )}
+
+              {/* {showQRCode && qrCodeValue && (
                 <div className="flex justify-center mt-4">
                   <QrCode values={qrCodeValue} size={180} />
                 </div>
-              )}
+              )} */}
             </Card>
           </div>
         </div>
@@ -306,3 +430,11 @@ export default function CartPage() {
     </div>
   )
 }
+function setShowPaymentOptions(arg0: boolean) {
+  throw new Error("Function not implemented.")
+}
+
+function completeCheckout() {
+  throw new Error("Function not implemented.")
+}
+
