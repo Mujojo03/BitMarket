@@ -10,8 +10,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useToast } from "@/components/ui/use-toast"
 import { useAuth } from "@/contexts/auth-context"
-import { productsApi, ordersApi } from "@/lib/api-service"
-import type { Product, Order } from "@/lib/mock-data"
+// import { productsApi, ordersApi } from "@/lib/api-service"
+// import type { Product, Order } from "@/lib/mock-data"
 
 export default function SellerDashboardPage() {
   const { user, loading } = useAuth()

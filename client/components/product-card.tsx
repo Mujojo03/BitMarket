@@ -4,7 +4,8 @@ import { Bitcoin } from "lucide-react"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { formatSats } from "@/lib/utils"
-import type { Product, Category, User } from "@/lib/mock-data"
+import type { Product, Category, User } from "@/lib/types"
+// import type { Product, Category, User } from "@/lib/mock-data"
 
 interface ProductCardProps {
   product: Product & { category: Category; seller: User }
@@ -16,7 +17,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <Link href={`/product/${product.id}`}>
         <div className="relative aspect-square overflow-hidden">
           <Image
-            src={product.imageUrl || "/placeholder.svg"}
+            src={product.imgUrl || "/placeholder.svg"}
             alt={product.name}
             fill
             className="object-cover transition-transform hover:scale-105"
@@ -35,12 +36,12 @@ export function ProductCard({ product }: ProductCardProps) {
           </Link>
           <div className="flex items-center text-sm text-gray-400">
             <Link href={`/seller/${product.seller.id}`} className="hover:text-bitcoin hover:underline">
-              {product.seller.fullName}
+              {product.seller.username}
             </Link>
           </div>
           <div className="flex items-center gap-1 text-bitcoin font-medium">
             <Bitcoin className="h-4 w-4" />
-            <span>{formatSats(product.price)}</span>
+            <span>{formatSats(product.priceSats)}</span>
             <span className="text-xs text-gray-400 ml-1">sats</span>
           </div>
         </div>
