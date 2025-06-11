@@ -198,11 +198,11 @@ const SignupPage = () => {
               />
               <span className="text-sm text-gray-600">
                 I agree to SatSoko's{" "}
-                <Link to="/terms" className="text-[#FF8C1A] hover:underline">
+                <Link to="/auth/terms" className="text-[#FF8C1A] hover:underline">
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link to="/privacy" className="text-[#FF8C1A] hover:underline">
+                <Link to="/auth/privacy" className="text-[#FF8C1A] hover:underline">
                   Privacy Policy
                 </Link>
               </span>
