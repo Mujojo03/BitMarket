@@ -19,6 +19,9 @@ def register_user(data, role_title):
     db.session.add(new_user)
     db.session.commit()
 
+    # DEBUG: Print the registered user's email
+    print("✅ REGISTERED USER:", new_user.email)
+
     # Assign the specified role (buyer or seller)
     role = Role.query.filter_by(title=role_title).first()
     if role:
@@ -36,7 +39,23 @@ def register_user(data, role_title):
     }
 
 def login_user(data):
+    # DEBUG: Print what was sent from frontend
+    print("LOGIN DEBUG:", data['email'], data['password'])
+
+    # Fetch the user by email
     user = User.query.filter_by(email=data['email']).first()
+    
+    # DEBUG: Check if the user was found
+    print("USER FOUND:", user.email if user else None)
+    
+    # DEBUG: Check password match
+    print("PASSWORD CHECK:", user.check_password(data['password']) if user else None)
+
+    # Validate login
+    if not user or not user.check_password(data['password']):
+        return {"message": "Invalid email or password"}, 401
+
+    # user = User.query.filter_by(email=data['email']).first()
     if not user or not user.check_password(data['password']):
         return {"message": "Invalid email or password"}, 401
 
