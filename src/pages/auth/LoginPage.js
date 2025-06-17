@@ -3,20 +3,37 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Eye, EyeOff, Zap, Mail, Phone, Lock, ArrowRight, AlertCircle } from "lucide-react"
+import { useNavigate } from "react-router-dom"
+import { login } from '../../api/auth';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false)
   const [loginMethod, setLoginMethod] = useState("email")
   const [formData, setFormData] = useState({
     email: "",
-    phone: "",
+    // phone: "",
     password: "",
     rememberMe: false,
   })
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    alert("🔐 Login functionality coming soon! Welcome back to SatSoko!")
+  const handleSubmit = async (e) => {
+    const creds = {
+      email:  loginMethod === "email" ? formData.email  : undefined,
+      // phone:  loginMethod === "phone" ? formData.phone  : undefined,
+      password: formData.password
+    };
+    const { ok, data } = await login(creds);
+    if (ok) {
+      localStorage.setItem("token", data.access_token);
+      localStorage.setItem("user",  JSON.stringify(data.user));
+      navigate("/dashboard");
+    } else {
+      // Handle login error, e.g., show error message
+      // console.error("Login failed:", data);
+      // alert("Login failed. Please check your credentials.");
+      alert(data.msg || "Login failed");
+    }
   }
 
   const handleInputChange = (field, value) => {

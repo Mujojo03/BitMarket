@@ -2,9 +2,12 @@
 
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { signup } from '../../api/auth';
 import { Eye, EyeOff, Zap, User, Mail, Phone, Lock, ArrowRight, CheckCircle } from "lucide-react"
 
 const SignupPage = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false)
   const [userType, setUserType] = useState("buyer")
   const [formData, setFormData] = useState({
@@ -16,9 +19,30 @@ const SignupPage = () => {
     contactMethod: "email",
   })
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    alert(`🎉 Welcome to SatSoko! Account creation for ${userType}s coming soon!`)
+    // const payload = {
+    //   fullName: formData.fullName,
+    //   email:    formData.email,
+    //   phone:    formData.phone,
+    //   password: formData.password,
+    //   lightningAddress: formData.lightningAddress || undefined,
+    // };
+    const payload = {
+      username:  formData.fullName,   // backend needs 'username'
+      email:     formData.email,      // **never leave blank**
+      password:  formData.password,
+      phone:     formData.phone || undefined  // optional, backend can ignore
+    };
+
+    const { ok, data } = await signup(userType, payload);
+
+    if (ok) {
+      alert("Account created! Please log in.");
+      navigate("/auth/login");
+    } else {
+      alert(data.msg || "Signup failed");
+    }
   }
 
   const handleInputChange = (field, value) => {
@@ -79,7 +103,7 @@ const SignupPage = () => {
         <form onSubmit={handleSubmit} className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
           {/* Full Name */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-[#00264D] mb-2">Full Name</label>
+            <label className="block text-sm font-medium text-[#00264D] mb-2">username</label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
@@ -91,7 +115,7 @@ const SignupPage = () => {
                 required
               />
             </div>
-          </div>
+          </div>Full
 
           {/* Contact Method Toggle */}
           <div className="mb-4">
@@ -198,11 +222,11 @@ const SignupPage = () => {
               />
               <span className="text-sm text-gray-600">
                 I agree to SatSoko's{" "}
-                <Link to="/terms" className="text-[#FF8C1A] hover:underline">
+                <Link to="/auth/terms" className="text-[#FF8C1A] hover:underline">
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link to="/privacy" className="text-[#FF8C1A] hover:underline">
+                <Link to="/auth/privacy" className="text-[#FF8C1A] hover:underline">
                   Privacy Policy
                 </Link>
               </span>
