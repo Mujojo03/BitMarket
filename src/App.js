@@ -8,6 +8,7 @@ import LoginPage from "./pages/auth/LoginPage"
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage"
 import Terms from "./pages/auth/TermsPage"
 import Privacy from "./pages/auth/PrivacyPage"
+import CartPage from "./pages/CartPage"
 import "./App.css"
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
           <Route path="/auth/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/auth/terms" element={<Terms />} />
           <Route path="/auth/privacy" element={<Privacy />} />
+          <Route path="/cart" element={<CartPage />} />
+          {/* Add more routes as needed */}
 
         </Routes>
       </div>

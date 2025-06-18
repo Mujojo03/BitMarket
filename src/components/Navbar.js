@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { Zap } from "lucide-react"
+import { Zap, ShoppingCart } from "lucide-react"
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -68,6 +68,15 @@ const Navbar = () => {
             </div>
 
             <div className="flex items-center space-x-3">
+              <Link
+                to="/cart"
+                className={`text-white hover:text-[#FF8C1A] transition-colors px-4 py-2 ${
+                location.pathname === "/cart" ? "text-[#FF8C1A]" : ""
+            }`}
+              title="View Cart"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              </Link>
               <Link to="/auth/login" className="text-white hover:text-[#FF8C1A] transition-colors px-4 py-2">
                 Login
               </Link>
