@@ -2,6 +2,7 @@ import logging
 from server.models.order import Order
 from server.models import db
 from sqlalchemy.exc import SQLAlchemyError
+from flask_jwt_extended import get_jwt_identity
 
 logger = logging.getLogger(__name__)
 
@@ -39,11 +40,16 @@ def update_order(order_id, data):
 
 def get_all_orders():
     try:
-        orders = Order.query.all()
+        # Get current user ID from JWT
+        user_id = get_jwt_identity()
+        
+        # Filter orders by current user
+        orders = Order.query.filter_by(buyer_id=user_id).all()
         return [o.to_dict() for o in orders]
     except Exception as e:
         logger.error(f"Error fetching all orders: {e}")
         return {"message": "Failed to fetch orders"}, 500
+
 
 def create_order(data):
     try:

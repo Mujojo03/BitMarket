@@ -1,5 +1,14 @@
 import { useState, useEffect } from "react"
-import { Search, Filter, Heart, Star, MapPin, Zap, CheckCircle } from 'lucide-react'
+import { Link } from "react-router-dom"  
+import {
+  Search,
+  Filter,
+  Heart,
+  Star,
+  MapPin,
+  Zap,
+  CheckCircle,
+} from "lucide-react"
 import Navbar from "../components/Navbar"
 
 const MarketplacePage = () => {
@@ -24,7 +33,7 @@ const MarketplacePage = () => {
       id: 1,
       name: "Traditional Ankara Dress",
       price: { usd: 65, sats: 65000 },
-      image: "https://via.placeholder.com/250x250?text=Ankara+Dress",
+      image: "https://imgs.search.brave.com/IgEh8oWakkF_VcAOp9P8WmuQ2ofkU4-2EPz0dp0rZVU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFPRnVhbWtoaUwu/anBn",
       seller: "Adunni Fashion",
       rating: 4.9,
       verified: true,
@@ -35,7 +44,7 @@ const MarketplacePage = () => {
       id: 2,
       name: "Hand-carved Wooden Mask",
       price: { usd: 85, sats: 85000 },
-      image: "https://via.placeholder.com/250x250?text=Wooden+Mask",
+      image: "https://www.retourdevoyage.com/6686-facebook_image/djimini-ligbi-masq.jpg",
       seller: "Tribal Arts Co",
       rating: 4.8,
       verified: true,
@@ -46,7 +55,7 @@ const MarketplacePage = () => {
       id: 3,
       name: "Solar Power Bank",
       price: { usd: 45, sats: 45000 },
-      image: "https://via.placeholder.com/250x250?text=Solar+Power+Bank",
+      image: "https://skalhuset.dk/images/zoom/8227768_3.jpg",
       seller: "GreenTech Africa",
       rating: 4.7,
       verified: true,
@@ -57,7 +66,7 @@ const MarketplacePage = () => {
       id: 4,
       name: "Baobab Seed Oil",
       price: { usd: 28, sats: 28000 },
-      image: "https://via.placeholder.com/250x250?text=Baobab+Oil",
+      image: "https://imgs.search.brave.com/uIr7Kmj9YIs7yaZB8KS6eFN_9j3hYnGju_rLE8REvG8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL1Mv/YXBsdXMtbWVkaWEt/bGlicmFyeS1zZXJ2/aWNlLW1lZGlhL2Y4/ZDZhMDgwLTRmNTkt/NGUxNC1iNTNmLTIw/NTFjMjEwOTQyMi5f/X0NSMCwwLDk3MCw2/MDBfUFQwX1NYOTcw/X1YxX19fLnBuZw",
       seller: "Natural Remedies",
       rating: 4.6,
       verified: false,
@@ -68,7 +77,7 @@ const MarketplacePage = () => {
       id: 5,
       name: "Woven Basket Set",
       price: { usd: 35, sats: 35000 },
-      image: "https://via.placeholder.com/250x250?text=Woven+Baskets",
+      image: "https://imgs.search.brave.com/w_B40qRgcDknYdSRSA1deC03_euGFYIZkMjHFYwSeKM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/ODFaVXJDOUhqRVMu/anBn",
       seller: "Rwandan Crafts",
       rating: 4.8,
       verified: true,
@@ -79,7 +88,7 @@ const MarketplacePage = () => {
       id: 6,
       name: "Shea Butter Soap",
       price: { usd: 15, sats: 15000 },
-      image: "https://via.placeholder.com/250x250?text=Shea+Soap",
+      image: "https://imgs.search.brave.com/vHbQvRdn3ZEENQUyfSn1ZgmzKw8GlFbGFtkJJn-ffEY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFzK1pkaXpUSEwu/anBn",
       seller: "Pure Naturals",
       rating: 4.5,
       verified: true,
@@ -287,12 +296,13 @@ const MarketplacePage = () => {
                   </div>
 
                   <div className="flex space-x-2">
-                    <button
-                      onClick={() => alert(`View details for ${product.name} coming soon! 👀`)}
+                  <Link
+                      to={`/product/${product.id}`}
+                      state={{ product }}
                       className="flex-1 bg-gradient-to-r from-[#FF8C1A] to-[#FFB347] text-white py-3 rounded-lg text-center hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-                    >
-                      View Details
-                    </button>
+                >
+                    View Details
+                  </Link>
                     <button
                       onClick={() => alert("Lightning payment coming soon! ⚡")}
                       className="px-4 py-3 border-2 border-[#FF8C1A] text-[#FF8C1A] rounded-lg hover:bg-[#FF8C1A] hover:text-white transition-all duration-300"

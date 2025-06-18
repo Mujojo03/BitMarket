@@ -4,35 +4,25 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { signup } from '../../api/auth';
-import { Eye, EyeOff, Zap, User, Mail, Phone, Lock, ArrowRight, CheckCircle } from "lucide-react"
+import { Eye, EyeOff, Zap, User, Mail, Lock, ArrowRight, CheckCircle } from "lucide-react"
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false)
   const [userType, setUserType] = useState("buyer")
   const [formData, setFormData] = useState({
-    fullName: "",
+    username: "",
     email: "",
-    phone: "",
     password: "",
     lightningAddress: "",
-    contactMethod: "email",
   })
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // const payload = {
-    //   fullName: formData.fullName,
-    //   email:    formData.email,
-    //   phone:    formData.phone,
-    //   password: formData.password,
-    //   lightningAddress: formData.lightningAddress || undefined,
-    // };
     const payload = {
-      username:  formData.fullName,   // backend needs 'username'
-      email:     formData.email,      // **never leave blank**
+      username:  formData.username,
+      email:     formData.email,
       password:  formData.password,
-      phone:     formData.phone || undefined  // optional, backend can ignore
     };
 
     const { ok, data } = await signup(userType, payload);
@@ -51,7 +41,7 @@ const SignupPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#00264D] to-blue-900 flex items-center justify-center p-4">
-      {/* Background Elements */}
+
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 animate-bounce">
           <Zap className="w-8 h-8 text-[#FF8C1A] opacity-30" />
@@ -65,7 +55,7 @@ const SignupPage = () => {
       </div>
 
       <div className="w-full max-w-md relative z-10">
-        {/* Header */}
+
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-2 mb-6">
             <div className="w-12 h-12 bg-gradient-to-r from-[#FF8C1A] to-[#FFB347] rounded-full flex items-center justify-center">
@@ -77,7 +67,7 @@ const SignupPage = () => {
           <p className="text-gray-300">Start your Bitcoin Lightning journey</p>
         </div>
 
-        {/* User Type Toggle */}
+
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-1 mb-6">
           <div className="grid grid-cols-2 gap-1">
             <button
@@ -108,62 +98,27 @@ const SignupPage = () => {
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
-                value={formData.fullName}
-                onChange={(e) => handleInputChange("fullName", e.target.value)}
-                placeholder="Enter your full name"
+                value={formData.username}
+                onChange={(e) => handleInputChange("username", e.target.value)}
+                placeholder="Enter your username"
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF8C1A] focus:border-transparent transition-all duration-300"
                 required
               />
             </div>
-          </div>Full
-
-          {/* Contact Method Toggle */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-[#00264D] mb-2">How would you like to be contacted?</label>
-            <div className="grid grid-cols-2 gap-2 mb-4">
-              <button
-                type="button"
-                onClick={() => handleInputChange("contactMethod", "email")}
-                className={`py-2 px-4 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  formData.contactMethod === "email"
-                    ? "bg-[#FF8C1A] text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                📧 Email
-              </button>
-              <button
-                type="button"
-                onClick={() => handleInputChange("contactMethod", "phone")}
-                className={`py-2 px-4 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  formData.contactMethod === "phone"
-                    ? "bg-[#FF8C1A] text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                📱 Phone
-              </button>
-            </div>
           </div>
 
-          {/* Email or Phone */}
+          {/* Email Address */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-[#00264D] mb-2">
-              {formData.contactMethod === "email" ? "Email Address" : "Phone Number"}
+              Email Address
             </label>
             <div className="relative">
-              {formData.contactMethod === "email" ? (
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              ) : (
-                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              )}
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
-                type={formData.contactMethod === "email" ? "email" : "tel"}
-                value={formData.contactMethod === "email" ? formData.email : formData.phone}
-                onChange={(e) => handleInputChange(formData.contactMethod, e.target.value)}
-                placeholder={
-                  formData.contactMethod === "email" ? "Enter your email address" : "Enter your phone number"
-                }
+                type="email"
+                value={formData.email}
+                onChange={(e) => handleInputChange("email", e.target.value)}
+                placeholder="Enter your email address"
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF8C1A] focus:border-transparent transition-all duration-300"
                 required
               />
@@ -253,7 +208,7 @@ const SignupPage = () => {
           </div>
         </form>
 
-        {/* Benefits */}
+        {/* Benefits - Remains unchanged */}
         <div className="mt-8 bg-white/10 backdrop-blur-sm rounded-2xl p-6">
           <h3 className="text-white font-semibold mb-4 flex items-center">
             <CheckCircle className="w-5 h-5 mr-2 text-[#FF8C1A]" />
