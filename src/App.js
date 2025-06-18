@@ -4,10 +4,9 @@ import MarketplacePage from "./pages/MarketplacePage"
 import AboutPage from "./pages/AboutPage"
 import OrdersPage from "./pages/OrdersPage"
 import CartPage from "./pages/CartPage"
-import SignUpPage from "./pages/auth/SignUpPage"
+import SignupPage from "./pages/auth/SignupPage"
 import LoginPage from "./pages/auth/LoginPage"
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage"
-import CartPage from "./pages/CartPage"
 import AddProductPage from "./pages/AddProductPage"
 import "./App.css"
 
@@ -21,7 +20,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/auth/signup" element={<SignUpPage />} />
+          <Route path="/auth/signup" element={<SignupPage />} />
           <Route path="/auth/login" element={<LoginPage />} />
           <Route path="/auth/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/cart" element={<CartPage />} />
