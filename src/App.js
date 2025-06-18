@@ -6,6 +6,8 @@ import OrdersPage from "./pages/OrdersPage"
 import SignupPage from "./pages/auth/SignupPage"
 import LoginPage from "./pages/auth/LoginPage"
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage"
+import CartPage from "./pages/CartPage"
+import AddProductPage from "./pages/AddProductPage"
 import "./App.css"
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
           <Route path="/auth/signup" element={<SignupPage />} />
           <Route path="/auth/login" element={<LoginPage />} />
           <Route path="/auth/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/add-product" element={<AddProductPage />} />
         </Routes>
       </div>
     </Router>
