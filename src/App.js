@@ -3,7 +3,8 @@ import HomePage from "./pages/HomePage"
 import MarketplacePage from "./pages/MarketplacePage"
 import AboutPage from "./pages/AboutPage"
 import OrdersPage from "./pages/OrdersPage"
-import SignupPage from "./pages/auth/SignupPage"
+import CartPage from "./pages/CartPage"
+import SignUpPage from "./pages/auth/SignUpPage"
 import LoginPage from "./pages/auth/LoginPage"
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage"
 import "./App.css"
@@ -17,7 +18,8 @@ function App() {
           <Route path="/marketplace" element={<MarketplacePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/orders" element={<OrdersPage />} />
-          <Route path="/auth/signup" element={<SignupPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/auth/signup" element={<SignUpPage />} />
           <Route path="/auth/login" element={<LoginPage />} />
           <Route path="/auth/forgot-password" element={<ForgotPasswordPage />} />
         </Routes>
