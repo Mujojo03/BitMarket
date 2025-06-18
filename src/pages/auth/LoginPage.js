@@ -25,7 +25,7 @@ const LoginPage = () => {
     if (ok) {
       localStorage.setItem("token", data.access_token);
       localStorage.setItem("user",  JSON.stringify(data.user));
-      navigate("/orders");
+      navigate("/add-product");
     } else {
       alert(data.msg || "Login failed");
     }
