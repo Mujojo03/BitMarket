@@ -5,6 +5,8 @@ import { Link } from "react-router-dom"
 import { ArrowRight, Zap, Shield, Star, CheckCircle, MapPin, Heart, Search } from "lucide-react"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
+import { useNavigate } from "react-router-dom";
+
 
 const HomePage = () => {
   return (
@@ -70,9 +72,8 @@ const HeroSection = () => {
           {/* Animated Taglines */}
           <div className="mb-8 min-h-[200px] md:min-h-[240px] flex flex-col justify-center">
             <div
-              className={`transition-all duration-500 ${
-                isVisible ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-4"
-              }`}
+              className={`transition-all duration-500 ${isVisible ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-4"
+                }`}
             >
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
                 {taglines[currentTaglineIndex].main}
@@ -114,9 +115,8 @@ const HeroSection = () => {
                     setIsVisible(true)
                   }, 250)
                 }}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentTaglineIndex ? "bg-[#FF8C1A] scale-125" : "bg-white/40 hover:bg-white/60"
-                }`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentTaglineIndex ? "bg-[#FF8C1A] scale-125" : "bg-white/40 hover:bg-white/60"
+                  }`}
               />
             ))}
           </div>
@@ -129,6 +129,7 @@ const HeroSection = () => {
 const FeaturedProducts = () => {
   const [favorites, setFavorites] = useState([])
   const [showSats, setShowSats] = useState(false)
+  const navigate = useNavigate();
 
   const products = [
     {
@@ -187,14 +188,12 @@ const FeaturedProducts = () => {
             <span className="text-[#00264D]">USD</span>
             <button
               onClick={() => setShowSats(!showSats)}
-              className={`relative w-12 h-6 rounded-full transition-colors duration-300 ${
-                showSats ? "bg-[#FF8C1A]" : "bg-gray-300"
-              }`}
+              className={`relative w-12 h-6 rounded-full transition-colors duration-300 ${showSats ? "bg-[#FF8C1A]" : "bg-gray-300"
+                }`}
             >
               <div
-                className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 ${
-                  showSats ? "translate-x-7" : "translate-x-1"
-                }`}
+                className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 ${showSats ? "translate-x-7" : "translate-x-1"
+                  }`}
               ></div>
             </button>
             <span className="text-[#00264D] flex items-center">
@@ -226,9 +225,8 @@ const FeaturedProducts = () => {
                   className="absolute top-2 right-2 p-2 bg-white/80 rounded-full hover:bg-white transition-colors"
                 >
                   <Heart
-                    className={`w-4 h-4 ${
-                      favorites.includes(product.id) ? "text-red-500 fill-current" : "text-gray-600"
-                    } transition-colors`}
+                    className={`w-4 h-4 ${favorites.includes(product.id) ? "text-red-500 fill-current" : "text-gray-600"
+                      } transition-colors`}
                   />
                 </button>
               </div>
@@ -258,7 +256,19 @@ const FeaturedProducts = () => {
                 </div>
 
                 <button
-                  onClick={() => alert("Quick Buy feature coming soon! ⚡")}
+                  onClick={() => {
+                    const cart = JSON.parse(localStorage.getItem("satsoko-cart")) || [];
+                    const exists = cart.find((item) => item.id === product.id);
+
+                    const updatedCart = exists
+                      ? cart.map((item) =>
+                        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+                      )
+                      : [...cart, { ...product, quantity: 1 }];
+
+                    localStorage.setItem("satsoko-cart", JSON.stringify(updatedCart));
+                    navigate("/cart");
+                  }}
                   className="w-full bg-gradient-to-r from-[#FF8C1A] to-[#FFB347] text-white py-2 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
                 >
                   Quick Buy
