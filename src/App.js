@@ -11,17 +11,19 @@ import Privacy from "./pages/auth/PrivacyPage";
 import CartPage from "./pages/CartPage";
 import AddProductPage from "./pages/AddProductPage";
 import ProfilePage from "./pages/ProfilePage";
-import Navbar from "./components/Navbar"; // ✅ Optional but recommended
+import Navbar from "./components/Navbar";
+import ProductDetailPage from "./pages/ProductDetailPage";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <Navbar /> {/* ✅ Keep this outside Routes so it appears everywhere */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/marketplace" element={<MarketplacePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/orders" element={<OrdersPage />} />
         <Route path="/auth/signup" element={<SignupPage />} />
         <Route path="/auth/login" element={<LoginPage />} />

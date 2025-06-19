@@ -97,6 +97,12 @@ const MarketplacePage = () => {
     },
   ]
 
+  useEffect(() => {
+  // Save products once on mount
+  localStorage.setItem("satsoko-products", JSON.stringify(products));
+  }, []);
+
+
   const toggleFavorite = (id) => {
     setFavorites((prev) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]))
   }
@@ -298,10 +304,9 @@ const MarketplacePage = () => {
                   <div className="flex space-x-2">
                   <Link
                       to={`/product/${product.id}`}
-                      state={{ product }}
                       className="flex-1 bg-gradient-to-r from-[#FF8C1A] to-[#FFB347] text-white py-3 rounded-lg text-center hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-                >
-                    View Details
+            >
+                      View Details
                   </Link>
                     <button
                       onClick={() => alert("Lightning payment coming soon! ⚡")}
