@@ -194,12 +194,21 @@ const CartPage = () => {
                   </div>
                 </div>
 
+                {/* Lightning Checkout Button */}
                 <button
                   onClick={() => alert("Lightning checkout coming soon! ⚡")}
                   className="w-full bg-gradient-to-r from-[#FF8C1A] to-[#FFB347] text-white py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center mb-4"
                 >
                   <Zap className="w-5 h-5 mr-2" />
                   Pay with Lightning
+                </button>
+
+                {/* M-Pesa Button */}
+                <button
+                  onClick={() => alert("M-Pesa checkout coming soon! 📲")}
+                  className="w-full bg-green-600 text-white py-4 rounded-lg font-semibold hover:bg-green-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center mb-4"
+                >
+                  Pay with M-Pesa
                 </button>
 
                 <Link
