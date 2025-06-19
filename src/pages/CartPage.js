@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { Minus, Plus, Trash2, ShoppingBag, Zap, ArrowRight, ShoppingCart } from "lucide-react"
+import { Minus, Plus, Trash2, ShoppingBag, Zap, ArrowLeft, ShoppingCart } from "lucide-react"
 import Navbar from "../components/Navbar"
 
 const CartPage = () => {
@@ -60,13 +60,23 @@ const CartPage = () => {
               <p className="text-gray-600 mb-8 max-w-md mx-auto">
                 Looks like you haven't added any items to your cart yet. Start shopping to fill it up!
               </p>
-              <Link
-                to="/marketplace"
-                className="bg-gradient-to-r from-[#FF8C1A] to-[#FFB347] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center"
-              >
-                <ShoppingBag className="w-5 h-5 mr-2" />
-                Continue Shopping
-              </Link>
+<div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mt-2">
+  <Link
+    to="/marketplace"
+    className="w-full sm:w-1/2 border-2 border-[#FF8C1A] text-[#FF8C1A] py-3 rounded-lg font-medium hover:bg-[#FF8C1A] hover:text-white transition-all duration-300 flex items-center justify-center"
+  >
+    Continue Shopping
+    <ArrowLeft className="w-4 h-4 ml-2" />
+  </Link>
+
+  <Link
+    to="/checkout"
+    className="w-full sm:w-1/2 bg-[#00264D] text-white py-3 rounded-lg font-medium hover:bg-[#001f3a] transition-all duration-300 flex items-center justify-center"
+  >
+    Proceed to Checkout
+  </Link>
+</div>
+
             </div>
           </div>
         </div>
@@ -207,7 +217,7 @@ const CartPage = () => {
                   className="w-full border-2 border-[#FF8C1A] text-[#FF8C1A] py-3 rounded-lg font-medium hover:bg-[#FF8C1A] hover:text-white transition-all duration-300 flex items-center justify-center"
                 >
                   Continue Shopping
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowLeft className="w-4 h-4 ml-2" />
                 </Link>
 
                 {/* Security Notice */}
