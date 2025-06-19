@@ -18,36 +18,64 @@ const ImageUpload = ({ onImagesChange, maxImages = 5 }) => {
   const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
 
   const validateImage = (file) => {
-    return new Promise((resolve) => {
-      const img = new Image()
+  return new Promise((resolve) => {
+    const img = new Image()
+    const reader = new FileReader()
+
+    reader.onload = (e) => {
       img.onload = () => {
         const errors = []
-
-        // Check dimensions
-        if (img.width !== REQUIRED_DIMENSIONS.width || img.height !== REQUIRED_DIMENSIONS.height) {
-          errors.push(`Image must be exactly ${REQUIRED_DIMENSIONS.width}x${REQUIRED_DIMENSIONS.height} pixels`)
-        }
-
-        // Check file size
-        if (file.size > MAX_FILE_SIZE) {
-          errors.push("Image must be less than 2MB")
-        }
 
         // Check file type
         if (!file.type.startsWith("image/")) {
           errors.push("File must be an image")
+          return resolve({ valid: false, errors, file })
         }
 
-        resolve({ valid: errors.length === 0, errors, file, preview: img.src })
+        // Always resize to 800x600
+        const canvas = document.createElement("canvas")
+        canvas.width = REQUIRED_DIMENSIONS.width
+        canvas.height = REQUIRED_DIMENSIONS.height
+
+        const ctx = canvas.getContext("2d")
+
+        // Stretch image to exactly 800x600 (no aspect ratio preserved)
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+
+        canvas.toBlob(
+          (blob) => {
+            const resizedFile = new File([blob], file.name, {
+              type: "image/jpeg",
+            })
+
+            // Check final file size
+            if (resizedFile.size > MAX_FILE_SIZE) {
+              errors.push("Resized image is larger than 2MB")
+            }
+
+            const preview = canvas.toDataURL("image/jpeg")
+            resolve({
+              valid: errors.length === 0,
+              errors,
+              file: resizedFile,
+              preview,
+            })
+          },
+          "image/jpeg",
+          0.9 // JPEG quality (0–1)
+        )
       }
 
       img.onerror = () => {
         resolve({ valid: false, errors: ["Invalid image file"], file })
       }
 
-      img.src = URL.createObjectURL(file)
-    })
-  }
+      img.src = e.target.result
+    }
+
+    reader.readAsDataURL(file)
+  })
+}
 
   const handleFiles = async (files) => {
     const fileArray = Array.from(files)
@@ -119,7 +147,7 @@ const ImageUpload = ({ onImagesChange, maxImages = 5 }) => {
         </h4>
         <ul className="text-blue-700 text-sm space-y-1">
           <li>
-            • Dimensions: {REQUIRED_DIMENSIONS.width}x{REQUIRED_DIMENSIONS.height} pixels (4:3 aspect ratio)
+            • Maximum dimensions: {REQUIRED_DIMENSIONS.width}x{REQUIRED_DIMENSIONS.height} pixels (4:3 aspect ratio)
           </li>
           <li>• File size: Maximum 2MB</li>
           <li>• Format: JPG, PNG, or WebP</li>
