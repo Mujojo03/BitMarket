@@ -49,7 +49,7 @@ const ProductDetailPage = () => {
     );
   }
 
-  /* ----------------------------- page layout ------------------------------ */
+
   return (
     <>
       <Navbar />

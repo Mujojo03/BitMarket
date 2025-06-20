@@ -125,6 +125,13 @@ const AddProductPage = () => {
                     <Zap className="w-5 h-5 mr-2" />
                     Create Product Listing
                   </button>
+                  <Link
+                    to="/seller-dashboard"
+                    className="w-full block text-center mt-4 bg-white border border-[#FF8C1A] text-[#FF8C1A] py-4 rounded-lg font-semibold hover:bg-[#FF8C1A] hover:text-white transition-all duration-300 transform hover:scale-105"
+                  >
+                    Go to Seller Dashboard
+                  </Link>
+
                 </div>
               </div>
             </div>

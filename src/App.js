@@ -13,6 +13,7 @@ import AddProductPage from "./pages/AddProductPage";
 import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/Navbar";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import SellerDashboard from "./pages/SellerDashboard";
 import "./App.css";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/add-product" element={<AddProductPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/seller-dashboard" element={<SellerDashboard />} />
       </Routes>
     </div>
   );
