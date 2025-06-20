@@ -4,10 +4,12 @@ import MarketplacePage from "./pages/MarketplacePage"
 import AboutPage from "./pages/AboutPage"
 import OrdersPage from "./pages/OrdersPage"
 import CartPage from "./pages/CartPage"
+import CheckoutPage from "./pages/CheckoutPage"
+import AddProductPage from "./pages/AddProductPage"
+import SellerDashboard from "./pages/SellerDashboard"
 import SignupPage from "./pages/auth/SignupPage"
 import LoginPage from "./pages/auth/LoginPage"
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage"
-import AddProductPage from "./pages/AddProductPage"
 import "./App.css"
 
 function App() {
@@ -20,11 +22,12 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/add-product" element={<AddProductPage />} />
+          <Route path="/seller/dashboard" element={<SellerDashboard />} />
           <Route path="/auth/signup" element={<SignupPage />} />
           <Route path="/auth/login" element={<LoginPage />} />
           <Route path="/auth/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/add-product" element={<AddProductPage />} />
         </Routes>
       </div>
     </Router>
@@ -32,3 +35,4 @@ function App() {
 }
 
 export default App
+
