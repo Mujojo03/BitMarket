@@ -135,7 +135,7 @@ const FeaturedProducts = () => {
     {
       id: 1,
       name: "Handwoven Kente Cloth",
-      price: { usd: 45, sats: 45000 },
+      price: { usd: 45, sats: 450 },
       image: "https://i.etsystatic.com/6171992/r/il/25e478/6423691903/il_fullxfull.6423691903_lz4x.jpg",
       seller: "Akosua Crafts",
       rating: 4.8,
@@ -145,7 +145,7 @@ const FeaturedProducts = () => {
     {
       id: 2,
       name: "Wooden Sculpture Set",
-      price: { usd: 32, sats: 32000 },
+      price: { usd: 32, sats: 320 },
       image: "https://5.imimg.com/data5/WHATSAPP/Default/2024/2/393429358/HX/RQ/EU/2943039/wooden-fine-carving-elephant-set-of-4-pcs-500x500.jpeg",
       seller: "Mbeki Arts",
       rating: 4.9,
@@ -155,7 +155,7 @@ const FeaturedProducts = () => {
     {
       id: 3,
       name: "Organic Coffee Beans",
-      price: { usd: 18, sats: 18000 },
+      price: { usd: 18, sats: 180 },
       image: "https://dewerstone.com/cdn/shop/files/single-origin-speciality-peru-alta-montana-dawn-roasters-coffee-co-848230.jpg?v=1743545483&width=1080",
       seller: "Ethiopian Highlands",
       rating: 4.7,
@@ -165,7 +165,7 @@ const FeaturedProducts = () => {
     {
       id: 4,
       name: "Beaded Jewelry Set",
-      price: { usd: 28, sats: 28000 },
+      price: { usd: 28, sats: 280 },
       image: "https://i.etsystatic.com/23657601/r/il/60707b/2557679548/il_570xN.2557679548_e3xs.jpg",
       seller: "Zulu Beads Co",
       rating: 4.6,

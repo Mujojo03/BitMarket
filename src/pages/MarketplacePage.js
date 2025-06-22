@@ -32,7 +32,7 @@ const MarketplacePage = () => {
     {
       id: 1,
       name: "Traditional Ankara Dress",
-      price: { usd: 65, sats: 65000 },
+      price: { usd: 6, sats: 65 },
       image: "https://imgs.search.brave.com/IgEh8oWakkF_VcAOp9P8WmuQ2ofkU4-2EPz0dp0rZVU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFPRnVhbWtoaUwu/anBn",
       seller: "Adunni Fashion",
       rating: 4.9,
@@ -43,7 +43,7 @@ const MarketplacePage = () => {
     {
       id: 2,
       name: "Hand-carved Wooden Mask",
-      price: { usd: 85, sats: 85000 },
+      price: { usd: 8, sats: 85 },
       image: "https://www.retourdevoyage.com/6686-facebook_image/djimini-ligbi-masq.jpg",
       seller: "Tribal Arts Co",
       rating: 4.8,
@@ -54,7 +54,7 @@ const MarketplacePage = () => {
     {
       id: 3,
       name: "Solar Power Bank",
-      price: { usd: 45, sats: 45000 },
+      price: { usd: 4, sats: 45 },
       image: "https://skalhuset.dk/images/zoom/8227768_3.jpg",
       seller: "GreenTech Africa",
       rating: 4.7,
@@ -65,7 +65,7 @@ const MarketplacePage = () => {
     {
       id: 4,
       name: "Baobab Seed Oil",
-      price: { usd: 28, sats: 28000 },
+      price: { usd: 3, sats: 31 },
       image: "https://imgs.search.brave.com/uIr7Kmj9YIs7yaZB8KS6eFN_9j3hYnGju_rLE8REvG8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL1Mv/YXBsdXMtbWVkaWEt/bGlicmFyeS1zZXJ2/aWNlLW1lZGlhL2Y4/ZDZhMDgwLTRmNTkt/NGUxNC1iNTNmLTIw/NTFjMjEwOTQyMi5f/X0NSMCwwLDk3MCw2/MDBfUFQwX1NYOTcw/X1YxX19fLnBuZw",
       seller: "Natural Remedies",
       rating: 4.6,
@@ -76,7 +76,7 @@ const MarketplacePage = () => {
     {
       id: 5,
       name: "Woven Basket Set",
-      price: { usd: 35, sats: 35000 },
+      price: { usd: 5, sats: 50},
       image: "https://imgs.search.brave.com/w_B40qRgcDknYdSRSA1deC03_euGFYIZkMjHFYwSeKM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/ODFaVXJDOUhqRVMu/anBn",
       seller: "Rwandan Crafts",
       rating: 4.8,
@@ -87,7 +87,7 @@ const MarketplacePage = () => {
     {
       id: 6,
       name: "Shea Butter Soap",
-      price: { usd: 15, sats: 15000 },
+      price: { usd: 15, sats: 150 },
       image: "https://imgs.search.brave.com/vHbQvRdn3ZEENQUyfSn1ZgmzKw8GlFbGFtkJJn-ffEY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFzK1pkaXpUSEwu/anBn",
       seller: "Pure Naturals",
       rating: 4.5,
@@ -114,7 +114,7 @@ const MarketplacePage = () => {
       product.category.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesCategory = selectedCategory === "all" || product.category === selectedCategory
     const matchesPrice = showSats
-      ? product.price.sats >= priceRange[0] * 1000 && product.price.sats <= priceRange[1] * 1000
+      ? product.price.sats >= priceRange[0] * 1000 && product.price.sats <= priceRange[1] * 10
       : product.price.usd >= priceRange[0] && product.price.usd <= priceRange[1]
 
     return matchesSearch && matchesCategory && matchesPrice

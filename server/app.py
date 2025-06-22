@@ -55,6 +55,10 @@ def create_app():
 
     # Register API routes
     initialize_routes(api)
+    #Register bitnob invoice route
+    from routers.bitnob_router import bitnob_bp
+    app.register_blueprint(bitnob_bp, url_prefix="/")
+
 
     # Initialize SocketIO with app
     socketio.init_app(app)

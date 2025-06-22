@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import { QRCodeCanvas } from "qrcode.react"
+// import { createLightningInvoice } from "../api/payment";
+
 
 import {
   Minus,
@@ -60,20 +62,31 @@ const CartPage = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0)
   }
 
-  const handleLightningCheckout = async () => {
-    try {
-      const satoshis = getTotalPrice()
-      const res = await axios.post("http://localhost:5000/invoices/create", {
-        satoshis,
-        customerEmail: "guest@example.com",
-        description: `Checkout – ${getTotalItems()} item(s)`,
-      })
-      setInvoice(res.data)
-    } catch (err) {
-      console.error(err)
-      alert("Failed to create invoice. See console for details.")
-    }
+const handleLightningCheckout = async () => {
+  try {
+    const satoshis = cartItems.reduce(
+      (t, item) => t + item.price.sats * item.quantity,
+      0
+    );
+
+    // 🔥 THIS is your own backend, not Bitnob
+    const res = await axios.post("http://localhost:5000/invoices/create", {
+      satoshis,
+      customerEmail: "guest@example.com",
+      description: `Checkout – ${getTotalItems()} item(s)`,
+    });
+
+    const { request } = res.data.data;        // Bitnob’s payload forwarded by Flask
+    setInvoice({
+      paymentRequest: request,
+      invoiceUrl: `lightning:${request}`,
+    });
+  } catch (err) {
+    console.error("Lightning error:", err);
+    alert("Failed to create Lightning invoice – check console for details.");
   }
+};
+
 
   if (cartItems.length === 0) {
     return (
