@@ -21,19 +21,62 @@ def create_product(seller_id, category_id, name, description, price_sats, img_ur
 
 def get_all_products():
     try:
-        return Product.query.all()
+        return Product.query.filter_by(deleted=False).all()
     except Exception as e:
         raise Exception(f"Error retrieving all products: {str(e)}")
 
 def get_product_by_id(product_id):
     try:
+<<<<<<< HEAD
         return Product.query.get(product_id)
+=======
+        return Product.query.filter_by(id=product_id, deleted=False).first()
+>>>>>>> implement
     except Exception as e:
         raise Exception(f"Error retrieving product by ID: {str(e)}")
 
 def get_products_by_category(category_id):
     try:
+<<<<<<< HEAD
         return Product.query.filter_by(category_id=category_id).all()
     except Exception as e:
         raise Exception(f"Error retrieving products by category: {str(e)}")
 
+=======
+        return Product.query.filter_by(category_id=category_id, deleted=False).all()
+    except Exception as e:
+        raise Exception(f"Error retrieving products by category: {str(e)}")
+
+def get_products_by_seller(seller_id):
+    try:
+        return Product.query.filter_by(seller_id=seller_id, deleted=False).all()
+    except Exception as e:
+        raise Exception(f"Error retrieving products by seller: {str(e)}")
+
+def update_product(product_id, updates):
+    try:
+        product = Product.query.filter_by(id=product_id, deleted=False).first()
+        if not product:
+            return None
+
+        for key, value in updates.items():
+            if hasattr(product, key):
+                setattr(product, key, value)
+
+        db.session.commit()
+        return product
+    except Exception as e:
+        raise Exception(f"Error updating product: {str(e)}")
+
+def delete_product(product_id):
+    try:
+        product = Product.query.filter_by(id=product_id, deleted=False).first()
+        if not product:
+            return None
+
+        product.deleted = True
+        db.session.commit()
+        return True
+    except Exception as e:
+        raise Exception(f"Error deleting product: {str(e)}")
+>>>>>>> implement

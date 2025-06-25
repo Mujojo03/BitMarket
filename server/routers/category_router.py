@@ -8,19 +8,8 @@ from services.category_service import (
 )
 from dtos.category_dto import CategoryResponseDTO
 
-
-class CategoryList(Resource):
-    """GET all categories or POST new category (admin only)."""
-
-    def get(self):
-        try:
-            categories = get_all_categories()
-            if not categories:
-                return {"message": "No categories found"}, 404
-            category_data = CategoryResponseDTO(many=True).dump(categories)
-            return category_data, 200
-        except Exception as e:
-            return {"message": f"Error retrieving categories: {str(e)}"}, 400
+class CategoryCreate(Resource):
+    """POST new category (admin only)"""
 
     @jwt_required()
     def post(self):
@@ -40,9 +29,27 @@ class CategoryList(Resource):
         except Exception as e:
             return {"message": f"Error creating category: {str(e)}"}, 400
 
+<<<<<<< HEAD
 
 class CategoryByID(Resource):
     """GET, PATCH or DELETE category by ID (edit/delete are admin-only)."""
+=======
+class CategoryList(Resource):
+    """GET all categories"""
+
+    def get(self):
+        try:
+            categories = get_all_categories()
+            if not categories:
+                return {"message": "No categories found"}, 404
+            category_data = CategoryResponseDTO(many=True).dump(categories)
+            return category_data, 200
+        except Exception as e:
+            return {"message": f"Error retrieving categories: {str(e)}"}, 400
+
+class CategoryByID(Resource):
+    """GET category by ID"""
+>>>>>>> implement
 
     def get(self, id):
         try:
@@ -54,6 +61,12 @@ class CategoryByID(Resource):
         except Exception as e:
             return {"message": f"Error retrieving category by ID: {str(e)}"}, 400
 
+<<<<<<< HEAD
+=======
+class CategoryEdit(Resource):
+    """PATCH category by ID (admin only)"""
+
+>>>>>>> implement
     @jwt_required()
     def patch(self, id):
         try:
@@ -76,6 +89,13 @@ class CategoryByID(Resource):
         except Exception as e:
             return {"message": f"Error updating category: {str(e)}"}, 400
 
+<<<<<<< HEAD
+=======
+
+class CategoryDelete(Resource):
+    """DELETE category by ID (admin only)"""
+
+>>>>>>> implement
     @jwt_required()
     def delete(self, id):
         try:
@@ -103,8 +123,19 @@ class CategoryByID(Resource):
                 "success": False,
                 "message": f"Error deleting category: {str(e)}"
             }, 400
+<<<<<<< HEAD
 
 
 def init_category_routes(api):
     api.add_resource(CategoryList, '/categories')
     api.add_resource(CategoryByID, '/categories/<int:id>')
+=======
+        
+def init_category_routes(api):
+    api.add_resource(CategoryCreate, '/categories/create')
+    api.add_resource(CategoryList, '/categories')
+    api.add_resource(CategoryByID, '/categories/<int:id>')
+    api.add_resource(CategoryEdit, '/categories/<int:id>/edit')
+    api.add_resource(CategoryDelete, '/categories/<int:id>/delete')
+
+>>>>>>> implement
