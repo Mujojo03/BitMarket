@@ -29,11 +29,6 @@ class CategoryCreate(Resource):
         except Exception as e:
             return {"message": f"Error creating category: {str(e)}"}, 400
 
-<<<<<<< HEAD
-
-class CategoryByID(Resource):
-    """GET, PATCH or DELETE category by ID (edit/delete are admin-only)."""
-=======
 class CategoryList(Resource):
     """GET all categories"""
 
@@ -49,7 +44,6 @@ class CategoryList(Resource):
 
 class CategoryByID(Resource):
     """GET category by ID"""
->>>>>>> implement
 
     def get(self, id):
         try:
@@ -61,12 +55,9 @@ class CategoryByID(Resource):
         except Exception as e:
             return {"message": f"Error retrieving category by ID: {str(e)}"}, 400
 
-<<<<<<< HEAD
-=======
 class CategoryEdit(Resource):
     """PATCH category by ID (admin only)"""
 
->>>>>>> implement
     @jwt_required()
     def patch(self, id):
         try:
@@ -89,13 +80,10 @@ class CategoryEdit(Resource):
         except Exception as e:
             return {"message": f"Error updating category: {str(e)}"}, 400
 
-<<<<<<< HEAD
-=======
 
 class CategoryDelete(Resource):
     """DELETE category by ID (admin only)"""
 
->>>>>>> implement
     @jwt_required()
     def delete(self, id):
         try:
@@ -123,13 +111,6 @@ class CategoryDelete(Resource):
                 "success": False,
                 "message": f"Error deleting category: {str(e)}"
             }, 400
-<<<<<<< HEAD
-
-
-def init_category_routes(api):
-    api.add_resource(CategoryList, '/categories')
-    api.add_resource(CategoryByID, '/categories/<int:id>')
-=======
         
 def init_category_routes(api):
     api.add_resource(CategoryCreate, '/categories/create')
@@ -138,4 +119,3 @@ def init_category_routes(api):
     api.add_resource(CategoryEdit, '/categories/<int:id>/edit')
     api.add_resource(CategoryDelete, '/categories/<int:id>/delete')
 
->>>>>>> implement

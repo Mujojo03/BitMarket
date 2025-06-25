@@ -39,9 +39,6 @@ def register_user(data, role_title):
     }
 
 def login_user(data):
-<<<<<<< HEAD
-    user = User.query.filter_by(email=data['email']).first()
-=======
     # DEBUG: Print what was sent from frontend
     print("LOGIN DEBUG:", data['email'], data['password'])
 
@@ -59,7 +56,6 @@ def login_user(data):
         return {"message": "Invalid email or password"}, 401
 
     # user = User.query.filter_by(email=data['email']).first()
->>>>>>> implement
     if not user or not user.check_password(data['password']):
         return {"message": "Invalid email or password"}, 401
 

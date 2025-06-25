@@ -89,8 +89,6 @@ class ProductByCategory(Resource):
             return {"message": f"Database error: {str(e)}"}, 500
         except Exception as e:
             return {"message": f"Error retrieving products by category: {str(e)}"}, 400
-<<<<<<< HEAD
-=======
         
 class ProductEdit(Resource):
     @jwt_required()
@@ -144,18 +142,13 @@ class SellerProductList(Resource):
             return product_data, 200
         except Exception as e:
             return {"message": f"Error retrieving seller products: {str(e)}"}, 400
->>>>>>> implement
 
 
 def init_product_routes(api):
     api.add_resource(ProductCreate, '/products/create')
     api.add_resource(ProductList, '/products')
     api.add_resource(ProductByID, '/products/<int:id>')
-<<<<<<< HEAD
-    api.add_resource(ProductByCategory, '/products/category/<int:category_id>')
-=======
     api.add_resource(ProductByCategory, '/products/category/<int:category_id>')
     api.add_resource(ProductEdit, '/products/<int:id>/edit')
     api.add_resource(ProductDelete, '/products/<int:id>/delete')
     api.add_resource(SellerProductList, '/products/mine')
->>>>>>> implement
