@@ -28,7 +28,6 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    /* 1️⃣ CREATE ACCOUNT ------------------------------------ */
     const payload = {
       username: formData.username,
       email:    formData.email,
@@ -42,9 +41,6 @@ const SignupPage = () => {
       return
     }
 
-    /* 2️⃣ AUTO‑LOGIN --------------------------------------- */
-    // If your signup endpoint already returns a token & user object,
-    // you can skip this block and just use those values instead.
     const creds = { email: formData.email, password: formData.password }
     const { ok: loginOk, data: loginData } = await login(creds)
 
@@ -59,13 +55,11 @@ const SignupPage = () => {
     localStorage.setItem("token", loginData.access_token)
     localStorage.setItem("user",  JSON.stringify(loginData.user))
 
-    /* 3️⃣ REDIRECT ----------------------------------------- */
     navigate(userType === "seller" ? "/seller-dashboard" : "/cart")
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#00264D] to-blue-900 flex items-center justify-center p-4">
-      {/* -------------- decorative background omitted for brevity -------------- */}
 
       <div className="w-full max-w-md relative z-10">
         {/* Header */}
