@@ -22,7 +22,7 @@ const AddProductPage = () => {
       alert("Please upload at least one product image")
       return
     }
-    alert("Product listing created! 🎉 (This is just a demo)")
+    alert("Product created! Proceed to Seller Dashboard to View it")
   }
 
   return (

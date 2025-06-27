@@ -172,6 +172,46 @@ const FeaturedProducts = () => {
       verified: true,
       location: "South Africa",
     },
+    {
+      id: 5,
+      name: "Handcrafted Pottery",
+      price: { usd: 22, sats: 220 },
+      image: "https://cdn.pixabay.com/photo/2017/03/27/14/33/ancient-2179091_1280.jpg",
+      seller: "Pottery by Jane",
+      rating: 4.8,
+      verified: true,
+      location: "Morocco",
+    },
+    {
+      id: 6,
+      name: "Traditional Maasai Shuka",
+      price: { usd: 35, sats: 350 },
+      image: "https://m.media-amazon.com/images/I/71YwJpyumrS._AC_SX679_.jpg",
+      seller: "Maasai Heritage",
+      rating: 4.9,
+      verified: true,
+      location: "Tanzania",
+    },
+    {
+      id: 7,
+      name: "African Print Tote Bag",
+      price: { usd: 15, sats: 150 },
+      image: "https://nkeoma.com/cdn/shop/products/IMG_4773_jpg_1024x.jpg?v=1669320184",
+      seller: "Kente Creations",
+      rating: 4.5,
+      verified: true,
+      location: "Ghana",
+    },
+    {
+      id: 8,
+      name: "Handmade Leather Sandals",
+      price: { usd: 40, sats: 400 },
+      image: "https://greek-sandals.com/wp-content/uploads/2019/07/IMG_20190324_120310.jpg",
+      seller: "Sahara Footwear",
+      rating: 4.7,
+      verified: true,
+      location: "Egypt",
+    },
   ]
 
   const toggleFavorite = (id) => {
@@ -294,11 +334,11 @@ const HowItWorksSection = () => {
       title: "Pay via Lightning",
       description: "Fast, secure Bitcoin Lightning payments",
     },
-    {
-      icon: Shield,
-      title: "Escrow Holds Funds",
-      description: "Your payment is safely held until delivery",
-    },
+    // {
+    //   icon: Shield,
+    //   title: "Escrow Holds Funds",
+    //   description: "Your payment is safely held until delivery",
+    // },
     {
       icon: CheckCircle,
       title: "Receive & Confirm",
