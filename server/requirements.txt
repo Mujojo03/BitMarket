@@ -10,6 +10,7 @@ charset-normalizer==3.4.2
 click==8.1.8
 colorama==0.4.6
 distlib==0.3.9
+Faker==37.4.0
 filelock==3.18.0
 Flask==3.1.0
 Flask-Bcrypt==1.0.1
@@ -40,13 +41,13 @@ python-engineio==4.12.1
 python-socketio==5.13.0
 pytz==2024.1
 requests==2.32.3
-setuptools==70.3.0
 simple-websocket==1.1.0
 six==1.17.0
 SQLAlchemy==2.0.29
 sqlalchemy-serializer==1.4.22
 tomli==2.2.1
 typing_extensions==4.13.2
+tzdata==2025.2
 urllib3==2.4.0
 virtualenv==20.31.1
 Werkzeug==3.1.3

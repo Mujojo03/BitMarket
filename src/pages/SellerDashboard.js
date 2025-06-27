@@ -38,7 +38,7 @@ const SellerDashboard = () => {
       customer: "Sarah K.",
       amount: { usd: 65, sats: 65000 },
       status: "pending",
-      date: "2024-01-15",
+      date: "2025-05-15",
       image: "https://imgs.search.brave.com/IgEh8oWakkF_VcAOp9P8WmuQ2ofkU4-2EPz0dp0rZVU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFPRnVhbWtoaUwu/anBn",
     },
     {
@@ -47,7 +47,7 @@ const SellerDashboard = () => {
       customer: "John M.",
       amount: { usd: 85, sats: 85000 },
       status: "shipped",
-      date: "2024-01-14",
+      date: "2025-05-16",
       image: "https://www.retourdevoyage.com/6686-facebook_image/djimini-ligbi-masq.jpg",
     },
     {
@@ -56,7 +56,7 @@ const SellerDashboard = () => {
       customer: "Mary L.",
       amount: { usd: 35, sats: 35000 },
       status: "delivered",
-      date: "2024-01-13",
+      date: "2025-05-17",
       image: "https://imgs.search.brave.com/w_B40qRgcDknYdSRSA1deC03_euGFYIZkMjHFYwSeKM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/ODFaVXJDOUhqRVMu/anBn",
     },
   ]

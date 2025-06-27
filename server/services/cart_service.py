@@ -1,65 +1,146 @@
-from flask_restful import Resource
-from flask_jwt_extended import jwt_required, get_jwt_identity
-from models import db, Cart, Transaction, Payment,Product
-from lnd_service import create_invoice# your existing invoice creator helper
+from models.db import db
+from sqlalchemy.exc import SQLAlchemyError
+from models.cart import Cart
+from models.transaction import Transaction
+from models.product import Product
+from models.product_order import ProductOrder
+from models.order import Order
+from models.payment import Payment
 
-class CartBuyNowResource(Resource):
-    @jwt_required()
-    def post(self):
-        user_id = get_jwt_identity()
-        
-        # For simplicity, assume 1 cart item per user
-        cart_item = Cart.query.filter_by(user_id=user_id).first()
-        if not cart_item:
-            return {"message": "Cart is empty"}, 400
-        
-         # TODO: Replace with real product price lookup logic
-        # price_sats = 1000  # fixed or lookup price of cart_item.product_id
-        product = Product.query.filter_by(id=cart_item.product_id).first()
+import traceback
+
+
+def add_to_cart(user_id, product_id, quantity):
+    """
+    Adds a product to the user's cart.
+
+    If the product already exists in the cart, increments the quantity.
+    Otherwise, adds it as a new item.
+
+    Args:
+        user_id (int): ID of the user adding the item.
+        product_id (int): ID of the product to add.
+        quantity (int): Quantity of the product to add.
+
+    Returns:
+        tuple: A JSON response with status code.
+    """
+    try:
+        existing_item = Cart.query.filter_by(user_id=user_id, product_id=product_id).first()
+        if existing_item:
+            existing_item.quantity += quantity
+        else:
+            new_item = Cart(user_id=user_id, product_id=product_id, quantity=quantity)
+            db.session.add(new_item)
+        db.session.commit()
+        return {"message": "Item added to cart"}, 200
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        return {"message": "Failed to add to cart", "error": str(e)}, 500
+    
+# from services.lnd_service import LNDService
+
+def buy_now(user_id, product_id, quantity):
+    """
+    Processes an instant purchase of a single product.
+
+    Creates an order, associates it with a product and payment,
+    generates a Lightning invoice using LND, and logs the transaction.
+
+    Args:
+        user_id (int): ID of the buyer.
+        product_id (int): ID of the product to purchase.
+        quantity (int): Quantity of the product to buy.
+
+    Returns:
+        dict: Invoice details if successful.
+        tuple: Error message and status code if failed.
+    """
+    try:
+        order = Order(buyer_id=user_id)
+        db.session.add(order)
+        db.session.flush()
+
+        product = Product.query.get(product_id)
         if not product:
             return {"message": "Product not found"}, 404
-        
-        if product.price_sats <= 0:
-            return {"message": "Invalid product price"}, 400
 
-        price_sats = product.price_sats
+        subtotal = product.price_sats * quantity
+        order_product = ProductOrder(
+            order=order,
+            product=product,
+            quantity=quantity,
+            subtotal=subtotal
+        )
+        db.session.add(order_product)
 
-        # Create a pending transaction
-        txn = Transaction(user_id=user_id, amount_sats=price_sats, status="pending")
-        db.session.add(txn)
-        db.session.flush()  # flush to get txn.id for Payment foreign key
-
-        # Create a Lightning invoice linked to this transaction
-        invoice_data = create_invoice(amount=price_sats, memo=f"Buy Now txn {txn.id}", order_id=txn.id)
-
-        # Create Payment record with invoice info
         payment = Payment(
-            order_id=txn.id,
-            invoice=invoice_data["payment_request"],
-            payment_hash=invoice_data["payment_hash"],
-            amount_sats=price_sats,
-            status="pending"
+            order=order,
+            amount_sats=subtotal,
+            status="pending",
+            # provider="lnd"
         )
         db.session.add(payment)
+        db.session.flush()  # Needed to get payment.id
+
+        txn = Transaction(
+            payment=payment,
+            event_type="invoice-generated",
+            transaction_metadata="{'source': 'buy_now'}"
+        )
+        db.session.add(txn)
+
         db.session.commit()
+
+        # Create Lightning invoice with LND
+        # lnd_service = LNDService()
+        # invoice = lnd_service.create_invoice(
+        #     amount=subtotal,
+        #     memo=f"Buy Now Order #{order.id}",
+        #     order_id=order.id
+        # )
 
         return {
-            "payment_request": invoice_data["payment_request"],
-            "payment_id": payment.id,
-            "transaction_id": txn.id
-        }, 200
-    
-class CartCheckoutCompleteResource(Resource):
-    @jwt_required()
-    def post(self):
-        user_id = get_jwt_identity()
-        
-        # Clear the cart for this user
+            "payment_request": invoice["payment_request"],
+            "payment_hash": invoice["payment_hash"],
+            "payment_id": invoice["payment_id"],
+            "amount_sats": subtotal
+        }
+
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        print(traceback.format_exc())
+        return {"message": "Buy now failed", "error": str(e)}, 500
+
+
+def checkout_complete(user_id):
+
+    """
+    Finalizes the checkout process for a user's cart.
+
+    - Decreases product stock based on quantities in the cart.
+    - Clears the user's cart after successful stock update.
+
+    Args:
+        user_id (int): ID of the user checking out.
+
+    Returns:
+        tuple: A JSON response with status code.
+    """
+    try:
         cart_items = Cart.query.filter_by(user_id=user_id).all()
+        if not cart_items:
+            return {"message": "No items to checkout."}, 400
+
         for item in cart_items:
+            product = Product.query.get(item.product_id)
+            if product:
+                product.stock_quantity = max(0, product.stock_quantity - item.quantity)
             db.session.delete(item)
-        
+
         db.session.commit()
-        
         return {"message": "Checkout complete. Thank you!"}, 200
 
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        return {"message": "Failed to finalize checkout", "error": str(e)}, 500

@@ -7,6 +7,7 @@ import {
   Eye, EyeOff, Zap, User, Mail, Lock,
   ArrowRight, CheckCircle
 } from "lucide-react"
+import { SellerDashboard } from '../SellerDashboard';
 
 const SignupPage = () => {
   const navigate = useNavigate()
@@ -59,12 +60,9 @@ const SignupPage = () => {
     localStorage.setItem("user",  JSON.stringify(loginData.user))
 
     /* 3️⃣ REDIRECT ----------------------------------------- */
-    navigate(userType === "seller" ? "/dashboard" : "/cart")
+    navigate(userType === "seller" ? "/seller-dashboard" : "/cart")
   }
 
-  /*---------------------------------------
-   * Render
-   *-------------------------------------*/
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#00264D] to-blue-900 flex items-center justify-center p-4">
       {/* -------------- decorative background omitted for brevity -------------- */}

@@ -22,8 +22,8 @@ load_dotenv(dotenv_path=env_path)
 from config.config import DevelopmentConfig, ProductionConfig
 from routers import initialize_routes
 # from routers.invoice_router import invoice_bp
-import models
 
+import models 
 
 
 # Global SocketIO instance
@@ -41,12 +41,17 @@ def create_app():
     else:
         raise ValueError(f"Invalid FLASK_ENV value: {env}")
     
-    # print("JWT_SECRET_KEY =", app.config.get("JWT_SECRET_KEY"))
-    # print("SECRET_KEY =", app.config.get("SECRET_KEY"))
+    print("JWT_SECRET_KEY =", app.config.get("JWT_SECRET_KEY"))
+    print("SECRET_KEY =", app.config.get("SECRET_KEY"))
 
 
     # Initialize extensions
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": ["http://localhost:3000"]}})
+
+    # origins = ["http://localhost:3000"]
+    # CORS(app, resources={r"/*": {"origins": origins}})
+    
+    
     Bcrypt(app)
     models.db.init_app(app)
     Migrate(app, models.db)
@@ -55,10 +60,6 @@ def create_app():
 
     # Register API routes
     initialize_routes(api)
-    #Register bitnob invoice route
-    from routers.bitnob_router import bitnob_bp
-    app.register_blueprint(bitnob_bp, url_prefix="/")
-
 
     # Initialize SocketIO with app
     socketio.init_app(app)
@@ -72,33 +73,33 @@ def create_app():
 
 # from services.lnd_service import LNDService
 
-# Initialize LNDService dynamically, default to alice if no env var
+# # Initialize LNDService dynamically, default to alice if no env var
 # lnd_node = os.getenv("LND_NODE", "alice")
 # lnd_service = LNDService(node=lnd_node)
 
 
-# def invoice_callback(invoice, socketio=None):
-#     """Callback for settled invoices."""
-#     payment_hash = invoice.r_hash.hex()
+def invoice_callback(invoice, socketio=None):
+    """Callback for settled invoices."""
+    payment_hash = invoice.r_hash.hex()
 
-#     # Update payment status and notify clients
-#     lnd_service.mark_payment_settled(payment_hash, socketio)
+    # Update payment status and notify clients
+    # lnd_service.mark_payment_settled(payment_hash, socketio)
 
-#     socketio.emit("invoice_settled", {
-#         "payment_hash": payment_hash,
-#         "memo": invoice.memo,
-#         "amount": invoice.amt_paid_sat,
-#         "settled": True
-#     })
+    socketio.emit("invoice_settled", {
+        "payment_hash": payment_hash,
+        "memo": invoice.memo,
+        "amount": invoice.amt_paid_sat,
+        "settled": True
+    })
 
-# def start_invoice_stream():
-#     """Start LND invoice subscription in a background thread."""
-#     thread = threading.Thread(
-#         target=lnd_service.stream_invoices,
-#         kwargs={"callback": invoice_callback, "socketio": socketio}
-#     )
-#     thread.daemon = True
-#     thread.start()
+def start_invoice_stream():
+    # """Start LND invoice subscription in a background thread."""
+    thread = threading.Thread(
+        # target=lnd_service.stream_invoices,
+        kwargs={"callback": invoice_callback, "socketio": socketio}
+    )
+    thread.daemon = True
+    thread.start()
 
 # --------- WebSocket event handlers ---------
 @socketio.on('connect')
@@ -126,8 +127,5 @@ def on_leave(data):
 # --------- Run the App ---------
 if __name__ == '__main__':
     app = create_app()
-    # start_invoice_stream()
+    start_invoice_stream()
     socketio.run(app, host='0.0.0.0', port=5000)
-
-
-

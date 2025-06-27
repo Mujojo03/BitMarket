@@ -1,187 +1,187 @@
-import os
-from datetime import datetime
-from models.db import db
-from models.wallet import Wallet
-from models.payment import Payment
-from models.transaction import Transaction
-from lightning.lnd_client import LNDClient
-from dotenv import load_dotenv
-from pathlib import Path
+# import os
+# from datetime import datetime
+# from models.db import db
+# from models.wallet import Wallet
+# from models.payment import Payment
+# from models.transaction import Transaction
+# from lightning.lnd_client import LNDClient
+# from dotenv import load_dotenv
+# from pathlib import Path
 
-# Load environment variables from .env file
-env_path = Path(__file__).parent / '.env'
-load_dotenv(dotenv_path=env_path)
+# # Load environment variables from .env file
+# env_path = Path(__file__).parent / '.env'
+# load_dotenv(dotenv_path=env_path)
 
 
-class LNDService:
-    def __init__(self, node=None):
-        """
-        Initialize the LNDService with the specified node,
-        or fallback to environment variable LND_NODE or 'alice'.
-        """
-        self.node = node or os.getenv("LND_NODE", "alice")
-        self.client = self._get_client(self.node)
+# class LNDService:
+#     def __init__(self, node=None):
+#         """
+#         Initialize the LNDService with the specified node,
+#         or fallback to environment variable LND_NODE or 'alice'.
+#         """
+#         self.node = node or os.getenv("LND_NODE", "alice")
+#         self.client = self._get_client(self.node)
 
-    def _get_client(self, node):
-        """
-        Create LNDClient with environment variables per node.
-        """
-        node = node.lower()
-        if node == "alice":
-            host = os.getenv("LND_ALICE_HOST")
-            macaroon = os.getenv("LND_ALICE_MACAROON_PATH")
-            cert = os.getenv("LND_ALICE_CERT_PATH")
-        elif node == "bob":
-            host = os.getenv("LND_BOB_HOST")
-            macaroon = os.getenv("LND_BOB_MACAROON_PATH")
-            cert = os.getenv("LND_BOB_CERT_PATH")
-        else:
-            raise ValueError(f"Unsupported node: {node}")
+#     def _get_client(self, node):
+#         """
+#         Create LNDClient with environment variables per node.
+#         """
+#         node = node.lower()
+#         if node == "alice":
+#             host = os.getenv("LND_ALICE_HOST")
+#             macaroon = os.getenv("LND_ALICE_MACAROON_PATH")
+#             cert = os.getenv("LND_ALICE_CERT_PATH")
+#         elif node == "bob":
+#             host = os.getenv("LND_BOB_HOST")
+#             macaroon = os.getenv("LND_BOB_MACAROON_PATH")
+#             cert = os.getenv("LND_BOB_CERT_PATH")
+#         else:
+#             raise ValueError(f"Unsupported node: {node}")
 
-        if not all([host, macaroon, cert]):
-            raise EnvironmentError(f"Missing LND config for node {node}")
+#         if not all([host, macaroon, cert]):
+#             raise EnvironmentError(f"Missing LND config for node {node}")
 
-        return LNDClient(host, macaroon, cert)
+#         return LNDClient(host, macaroon, cert)
     
     
 
-    def create_invoice(self, amount, memo="Invoice", order_id=None, provider="lnd"):
-        """
-        Create a Lightning invoice using the configured LND node.
+#     def create_invoice(self, amount, memo="Invoice", order_id=None, provider="lnd"):
+#         """
+#         Create a Lightning invoice using the configured LND node.
 
-        Args:
-            amount (int): Amount in satoshis for the invoice.
-            memo (str): Optional description/memo for the invoice.
-            order_id (str): Optional reference to an order.
-            provider (str): Name of the Lightning provider (default is "lnd").
+#         Args:
+#             amount (int): Amount in satoshis for the invoice.
+#             memo (str): Optional description/memo for the invoice.
+#             order_id (str): Optional reference to an order.
+#             provider (str): Name of the Lightning provider (default is "lnd").
 
-        Returns:
-            dict: Contains the payment_request, payment_id, and payment_hash.
-        """
-        invoice = self.client.add_invoice(value=amount, memo=memo)
+#         Returns:
+#             dict: Contains the payment_request, payment_id, and payment_hash.
+#         """
+#         invoice = self.client.add_invoice(value=amount, memo=memo)
 
-        payment = Payment(
-            order_id=order_id,
-            invoice=invoice.payment_request,
-            payment_hash=invoice.r_hash.hex(),
-            amount_sats=amount,
-            provider=provider,
-            status="pending"
-        )
-        db.session.add(payment)
-        db.session.commit()
+#         payment = Payment(
+#             order_id=order_id,
+#             invoice=invoice.payment_request,
+#             payment_hash=invoice.r_hash.hex(),
+#             amount_sats=amount,
+#             provider=provider,
+#             status="pending"
+#         )
+#         db.session.add(payment)
+#         db.session.commit()
 
-        return {
-            "payment_request": invoice.payment_request,
-            "payment_id": payment.id,
-            "payment_hash": invoice.r_hash.hex()
-        }
+#         return {
+#             "payment_request": invoice.payment_request,
+#             "payment_id": payment.id,
+#             "payment_hash": invoice.r_hash.hex()
+#         }
 
-    def pay_invoice(self, payment_request):
-        """
-        Pay a Lightning invoice using the current LND node.
+#     def pay_invoice(self, payment_request):
+#         """
+#         Pay a Lightning invoice using the current LND node.
 
-        Args:
-            payment_request (str): The BOLT11 encoded invoice.
+#         Args:
+#             payment_request (str): The BOLT11 encoded invoice.
 
-        Returns:
-            dict: Contains payment_hash, payment_preimage, and status.
+#         Returns:
+#             dict: Contains payment_hash, payment_preimage, and status.
 
-        Raises:
-            Exception: If the payment fails.
-        """
-        response = self.client.send_payment_sync(payment_request=payment_request)
+#         Raises:
+#             Exception: If the payment fails.
+#         """
+#         response = self.client.send_payment_sync(payment_request=payment_request)
 
-        if response.payment_error:
-            raise Exception(response.payment_error)
+#         if response.payment_error:
+#             raise Exception(response.payment_error)
 
-        return {
-            "payment_hash": response.payment_hash.hex(),
-            "payment_preimage": response.payment_preimage.hex(),
-            "status": "paid"
-        }
+#         return {
+#             "payment_hash": response.payment_hash.hex(),
+#             "payment_preimage": response.payment_preimage.hex(),
+#             "status": "paid"
+#         }
 
-    def stream_invoices(self, callback=None, socketio=None):
-        """
-        Subscribe to incoming invoices and handle settlements in real-time.
+#     def stream_invoices(self, callback=None, socketio=None):
+#         """
+#         Subscribe to incoming invoices and handle settlements in real-time.
 
-        Args:
-            callback (function): Optional callback function to invoke on settlement.
-            socketio (SocketIO): Optional SocketIO instance to emit events.
-        """
-        for invoice in self.client.subscribe_invoices():
-            if invoice.settled:
-                payment_hash = invoice.r_hash.hex()
-                self.mark_payment_settled(payment_hash, socketio)
+#         Args:
+#             callback (function): Optional callback function to invoke on settlement.
+#             socketio (SocketIO): Optional SocketIO instance to emit events.
+#         """
+#         for invoice in self.client.subscribe_invoices():
+#             if invoice.settled:
+#                 payment_hash = invoice.r_hash.hex()
+#                 self.mark_payment_settled(payment_hash, socketio)
 
-                if callback:
-                    callback(invoice, socketio=socketio)
+#                 if callback:
+#                     callback(invoice, socketio=socketio)
 
-    def mark_payment_settled(self, payment_hash: str, socketio):
-        """
-        Mark a payment as settled in the database and notify via WebSocket.
+#     def mark_payment_settled(self, payment_hash: str, socketio):
+#         """
+#         Mark a payment as settled in the database and notify via WebSocket.
 
-        Args:
-            payment_hash (str): Hash identifying the payment.
-            socketio (SocketIO): SocketIO instance used to emit real-time events.
+#         Args:
+#             payment_hash (str): Hash identifying the payment.
+#             socketio (SocketIO): SocketIO instance used to emit real-time events.
 
-        Returns:
-            Payment: Updated Payment object if found, otherwise None.
-        """
-        payment = Payment.query.filter_by(payment_hash=payment_hash).first()
-        if not payment:
-            print(f"[mark_payment_settled] Payment not found for hash: {payment_hash}")
-            return None
+#         Returns:
+#             Payment: Updated Payment object if found, otherwise None.
+#         """
+#         payment = Payment.query.filter_by(payment_hash=payment_hash).first()
+#         if not payment:
+#             print(f"[mark_payment_settled] Payment not found for hash: {payment_hash}")
+#             return None
 
-        payment.status = 'settled'
-        payment.settled_at = datetime.utcnow()
-        db.session.add(payment)
+#         payment.status = 'settled'
+#         payment.settled_at = datetime.utcnow()
+#         db.session.add(payment)
 
-        txn = Transaction(
-            payment_id=payment.id,
-            event_type='payment-settled',
-            transaction_metadata=f"Payment settled on {datetime.utcnow().isoformat()}"
-        )
-        db.session.add(txn)
+#         txn = Transaction(
+#             payment_id=payment.id,
+#             event_type='payment-settled',
+#             transaction_metadata=f"Payment settled on {datetime.utcnow().isoformat()}"
+#         )
+#         db.session.add(txn)
 
-        # Update wallet balance (assumes a default wallet exists)
-        wallet = Wallet.query.first()
-        if wallet:
-            wallet.balance_sats = (wallet.balance_sats or 0) + payment.amount_sats
-            db.session.add(wallet)
-        else:
-            print(f"[mark_payment_settled] No wallet found to update.")
+#         # Update wallet balance (assumes a default wallet exists)
+#         wallet = Wallet.query.first()
+#         if wallet:
+#             wallet.balance_sats = (wallet.balance_sats or 0) + payment.amount_sats
+#             db.session.add(wallet)
+#         else:
+#             print(f"[mark_payment_settled] No wallet found to update.")
 
-        db.session.commit()
+#         db.session.commit()
 
-        socketio.emit('payment_settled', {
-            'payment_id': payment.id,
-            'payment_hash': payment_hash,
-            'status': payment.status,
-            'settled_at': payment.settled_at.isoformat(),
-            'wallet_balance_sats': wallet.balance_sats if wallet else None
-        })
+#         socketio.emit('payment_settled', {
+#             'payment_id': payment.id,
+#             'payment_hash': payment_hash,
+#             'status': payment.status,
+#             'settled_at': payment.settled_at.isoformat(),
+#             'wallet_balance_sats': wallet.balance_sats if wallet else None
+#         })
 
-        print(f"[mark_payment_settled] Payment {payment.id} marked as settled.")
-        return payment
+#         print(f"[mark_payment_settled] Payment {payment.id} marked as settled.")
+#         return payment
 
-    def socketio_invoice_callback(self, invoice, socketio):
-        """
-        Emits a real-time SocketIO event when an invoice is settled.
+#     def socketio_invoice_callback(self, invoice, socketio):
+#         """
+#         Emits a real-time SocketIO event when an invoice is settled.
 
-        Args:
-            invoice: Invoice object from LND subscription.
-            socketio (SocketIO): SocketIO instance to emit the event.
-        """
-        payment_hash = invoice.r_hash.hex()
-        payment = Payment.query.filter_by(payment_hash=payment_hash).first()
-        if payment:
-            socketio.emit("invoice_settled", {
-                "payment_hash": payment_hash,
-                "memo": invoice.memo,
-                "amount": invoice.amt_paid_sat,
-                "settled": True
-            })
+#         Args:
+#             invoice: Invoice object from LND subscription.
+#             socketio (SocketIO): SocketIO instance to emit the event.
+#         """
+#         payment_hash = invoice.r_hash.hex()
+#         payment = Payment.query.filter_by(payment_hash=payment_hash).first()
+#         if payment:
+#             socketio.emit("invoice_settled", {
+#                 "payment_hash": payment_hash,
+#                 "memo": invoice.memo,
+#                 "amount": invoice.amt_paid_sat,
+#                 "settled": True
+#             })
 
 
 
